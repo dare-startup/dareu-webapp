@@ -15,7 +15,7 @@ public class DareuAccessDeniedHandler implements AccessDeniedHandler{
 
     @Override
     public void handle(HttpServletRequest hsr, HttpServletResponse hsr1, AccessDeniedException ade) throws IOException, ServletException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }
