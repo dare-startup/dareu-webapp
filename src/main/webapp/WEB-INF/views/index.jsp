@@ -3,6 +3,7 @@
     <head>
         <!-- scripts -->
         <script type="text/javascript" src="resources/js/jquery-2.2.3.min.js"></script>
+        <script type="text/javascript" sec="resources/js/tether.min.js"></script>
         <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="resources/js/mdb.min.js"></script>
 
