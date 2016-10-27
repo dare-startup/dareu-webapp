@@ -9,9 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-        <title>JSP Page</title>
+        <title>Signin</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Signin!</h1>
+        <form action="/security/authenticate" method="POST">
+            <input type="email" name="email" placeholder="Email"><br/>
+            <input type="password" name="password" placeholder="Password"><br/>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <button type="submit">Signin</button>
+        </form>
     </body>
 </html>

@@ -12,9 +12,8 @@
         <link rel="stylesheet" href="resources/css/mdb.min.css"/>
     </head>
     <body>
-        <%@include file="/shared/nav-bar.jsp" %>
-        <main>
-            <h2>DareU application in progress..</h2>
-        </main>
+        <h2>DareU application in progress..</h2>
+        <a href="signin">Signin to dareu from here</a>
+        <a href="signup">Signup to dareu from here</a>
     </body>
 </html>

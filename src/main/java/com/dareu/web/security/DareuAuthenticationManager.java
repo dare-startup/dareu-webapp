@@ -3,11 +3,13 @@ package com.dareu.web.security;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author jose.rubalcaba
  */
+@Component
 public class DareuAuthenticationManager implements AuthenticationManager{
 
     @Override

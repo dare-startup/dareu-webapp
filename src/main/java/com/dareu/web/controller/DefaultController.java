@@ -2,7 +2,9 @@ package com.dareu.web.controller;
 
 import com.dareu.data.request.SigninRequest;
 import com.dareu.data.request.SignupRequest;
+import com.dareu.web.service.DefaultAccountService;
 import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,14 +20,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class DefaultController {
     
-    @RequestMapping({ "/index", "/" })
+    @Autowired
+    private DefaultAccountService service; 
+    
+    @RequestMapping({ "index" })
     public ModelAndView defaultView(){
-        return new ModelAndView("index"); 
+        return service.defaultView();
     }
     
     @RequestMapping({ "signin", "login" })
     public ModelAndView signinView(){
-        return null; 
+        return service.signinView();
     }
     
     @RequestMapping(value = { "signin", "login" }, method = RequestMethod.POST)
@@ -36,7 +41,7 @@ public class DefaultController {
     
     @RequestMapping(value = { "signup", "register" })
     public ModelAndView signupView(){
-        return null; 
+        return service.signupView();
     }
     
     @RequestMapping(value = { "signup", "register" }, method = RequestMethod.POST)

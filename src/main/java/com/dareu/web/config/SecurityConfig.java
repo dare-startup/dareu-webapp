@@ -1,82 +1,81 @@
 package com.dareu.web.config;
 
 import com.dareu.data.security.SecurityRole;
-import com.dareu.web.security.DareuAuthenticationManager;
+import com.dareu.web.security.DareuAuthenticationProvider;
 import com.dareu.web.security.DareuUserDetailsService;
 import com.dareu.web.security.handler.DareuAccessDeniedHandler;
 import com.dareu.web.security.handler.DareuAuthenticationSuccessHandler;
-import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  *
  * @author jose.rubalcaba
  */
 @EnableWebSecurity(debug = true)
+@ComponentScan(basePackages = { "com.dareu.web", "com.dareu.web.service", 
+    "com.dareu.data.repository", "com.dareu.web.security"})
 public class SecurityConfig {
+
+    @Autowired
+    private DareuAuthenticationProvider provider;
+    
+    @Autowired
+    private DareuUserDetailsService service; 
 
     @Configuration
     @Order(1)
-    public static class UserHttpSecurityConfig extends WebSecurityConfigurerAdapter {
+    public class UserHttpSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
-                .authorizeRequests()
+                    .authorizeRequests()
                     .antMatchers("/user/**").hasRole(SecurityRole.USER.toString())
-                .and()
+                    .and()
                     .csrf()
-                .and()
-                .authenticationProvider((AuthenticationProvider)new DareuAuthenticationManager())
-                .formLogin()
+                    .and()
+                    .authenticationProvider(provider)
+                    .formLogin()
                     .loginPage("/signin")
                     .loginProcessingUrl("/security/authenticate")
                     .passwordParameter("password")
                     .usernameParameter("email")
-                    .failureUrl("signin?retry")
+                    .failureUrl("/signin?retry")
                     .successHandler(new DareuAuthenticationSuccessHandler())
-                .and()
+                    .and()
                     .userDetailsService(new DareuUserDetailsService())
                     .exceptionHandling()
-                    .accessDeniedHandler(new DareuAccessDeniedHandler())
-                    ;
+                    .accessDeniedHandler(new DareuAccessDeniedHandler());
         }
     }
 
     @Configuration
     @Order(2)
-    public static class AdminHttpSecurityConfig extends WebSecurityConfigurerAdapter {
-
+    public class AdminHttpSecurityConfig extends WebSecurityConfigurerAdapter {
+        
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
-                .authorizeRequests()
+                    .authorizeRequests()
                     .antMatchers("/admin/**").hasRole(SecurityRole.ADMIN.toString())
-                .and()
+                    .and()
                     .csrf()
-                .and()
-                .authenticationProvider((AuthenticationProvider)new DareuAuthenticationManager())
-                .formLogin()
+                    .and()
+                    .authenticationProvider(provider)
+                    .formLogin()
                     .loginPage("/signin")
                     .loginProcessingUrl("/security/authenticate")
                     .passwordParameter("password")
                     .usernameParameter("email")
-                    .failureUrl("signin?retry")
+                    .failureUrl("/signin?retry")
                     .successHandler(new DareuAuthenticationSuccessHandler())
-                .and()
+                    .and()
                     .userDetailsService(new DareuUserDetailsService())
                     .exceptionHandling()
                     .accessDeniedHandler(new DareuAccessDeniedHandler());
@@ -85,25 +84,25 @@ public class SecurityConfig {
 
     @Configuration
     @Order(3)
-    public static class SponsorHttpSecurityConfig extends WebSecurityConfigurerAdapter {
-
+    public class SponsorHttpSecurityConfig extends WebSecurityConfigurerAdapter {
+        
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http
-                .authorizeRequests()
+                    .authorizeRequests()
                     .antMatchers("/sponsor/**").hasRole(SecurityRole.SPONSOR.toString())
-                .and()
+                    .and()
                     .csrf()
-                .and()
-                .authenticationProvider((AuthenticationProvider)new DareuAuthenticationManager())
-                .formLogin()
+                    .and()
+                    .authenticationProvider(provider)
+                    .formLogin()
                     .loginPage("/signin")
                     .loginProcessingUrl("/security/authenticate")
                     .passwordParameter("password")
                     .usernameParameter("email")
-                    .failureUrl("signin?retry")
+                    .failureUrl("/signin?retry")
                     .successHandler(new DareuAuthenticationSuccessHandler())
-                .and()
+                    .and()
                     .userDetailsService(new DareuUserDetailsService())
                     .exceptionHandling()
                     .accessDeniedHandler(new DareuAccessDeniedHandler());

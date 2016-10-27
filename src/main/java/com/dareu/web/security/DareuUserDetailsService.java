@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,11 +21,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class DareuUserDetailsService implements UserDetailsService{
 
-    @Inject
+    @Autowired
     private DareUserRepository repository; 
     
-    @Inject
-    private Logger log; 
+    private static final Logger log = Logger.getLogger(DareuUserDetailsService.class.getName()); 
     
     @Override
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
