@@ -23,34 +23,34 @@ public class DefaultController {
     @Autowired
     private DefaultAccountService service; 
     
-    @RequestMapping({ "index" })
+    @RequestMapping({ "/index" })
     public ModelAndView defaultView(){
         return service.defaultView();
     }
     
-    @RequestMapping({ "signin", "login" })
+    @RequestMapping({ "/signin", "/login" })
     public ModelAndView signinView(){
         return service.signinView();
     }
     
-    @RequestMapping(value = { "signin", "login" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/signin", "/login" }, method = RequestMethod.POST)
     public ModelAndView signin(@ModelAttribute("signinModel")SigninRequest request, 
             RedirectAttributes redirect){
         return null; 
     }
     
-    @RequestMapping(value = { "signup", "register" })
+    @RequestMapping(value = { "/signup", "/register" })
     public ModelAndView signupView(){
         return service.signupView();
     }
     
-    @RequestMapping(value = { "signup", "register" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/signup", "/register" }, method = RequestMethod.POST)
     public ModelAndView signupView(@ModelAttribute("signupModel")SignupRequest request, 
             RedirectAttributes redirect){
         return null; 
     }
     
-    @RequestMapping(value = { "about", "aboutus" })
+    @RequestMapping(value = { "/about", "/aboutus" })
     public ModelAndView aboutView(){
         return null; 
     }

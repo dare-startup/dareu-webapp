@@ -1,14 +1,15 @@
 <%-- 
-    Document   : index
-    Created on : Oct 26, 2016, 1:57:13 PM
+    Document   : dares
+    Created on : Oct 27, 2016, 4:18:03 PM
     Author     : jose.rubalcaba
 --%>
 
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <%@include file="/shared/resources-import.jsp"%>
-        <title>DareÜ</title>
+        <title>Dares</title>
     </head>
     <body>
         <div class="mdl-js-layout mdl-layout">

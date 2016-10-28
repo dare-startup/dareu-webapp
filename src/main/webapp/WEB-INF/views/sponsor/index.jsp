@@ -3,15 +3,23 @@
     Created on : Oct 26, 2016, 2:02:58 PM
     Author     : jose.rubalcaba
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <%@include file="/shared/resources-import.jsp"%>
+        <title>Welcome</title>
     </head>
     <body>
-        <h1>Sponsor index page!</h1>
+        <div class="mdl-js-layout mdl-layout">
+            <%@include file="/shared/nav-bar.jsp" %>
+            <main class="mdl-layout__content">
+                <div class="page-content">
+
+                    <div class="container-fluid">
+                        
+                    </div>
+                </div>
+            </main>
+        </div>
     </body>
 </html>

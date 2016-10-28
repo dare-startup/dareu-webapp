@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : Oct 26, 2016, 1:57:13 PM
+    Document   : discover
+    Created on : Oct 27, 2016, 4:18:24 PM
     Author     : jose.rubalcaba
 --%>
 
@@ -8,7 +8,7 @@
 <html>
     <head>
         <%@include file="/shared/resources-import.jsp"%>
-        <title>Dare‹</title>
+        <title>Discover</title>
     </head>
     <body>
         <div class="mdl-js-layout mdl-layout">

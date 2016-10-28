@@ -26,39 +26,40 @@ import org.springframework.web.servlet.view.JstlView;
  * @author jose.rubalcaba
  */
 @Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = {"com.dareu.web", "com.dareu.web.service", "com.dareu.data.repository"})
+@EnableWebMvc()
+@ComponentScan(basePackages = {"com.dareu.web", "com.dareu.web.service", "com.dareu.data.repository", 
+                        "com.dareu.web.controller"})
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean
-    @Order(1)
     public ViewResolver viewResolver() {
         InternalResourceViewResolver vr = new InternalResourceViewResolver("/WEB-INF/views/", ".jsp");
         vr.setViewClass(JstlView.class);
+        vr.setOrder(0);
         return vr;
     }
     
     @Bean
-    @Order(2)
     public ViewResolver userViewResolver() {
         InternalResourceViewResolver vr = new InternalResourceViewResolver("/WEB-INF/views/user/", ".jsp");
+        vr.setOrder(1);
         vr.setViewClass(JstlView.class);
         return vr; 
    }
     
     @Bean
-    @Order(3)
     public ViewResolver adminViewResolver() {
         InternalResourceViewResolver vr = new InternalResourceViewResolver("/WEB-INF/views/admin/", ".jsp");
         vr.setViewClass(JstlView.class);
+        vr.setOrder(2);
         return vr;
     }
     
     @Bean
-    @Order(4)
     public ViewResolver sponsorViewResolver() {
         InternalResourceViewResolver vr = new InternalResourceViewResolver("/WEB-INF/views/sponsor/", ".jsp");
         vr.setViewClass(JstlView.class);
+        vr.setOrder(3);
         return vr;
     }
 
@@ -77,7 +78,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         factoryBean.setPackagesToScan(new String[]{"com.dareu.data.entity"});
 
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setShowSql(true);
+        vendorAdapter.setShowSql(false);
         //vendorAdapter.setGenerateDdl(generateDdl)
 
         factoryBean.setJpaVendorAdapter(vendorAdapter);

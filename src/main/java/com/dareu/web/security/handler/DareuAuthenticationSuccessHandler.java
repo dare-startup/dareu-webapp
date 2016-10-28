@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
@@ -18,6 +20,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
  */
 public class DareuAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 
+    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy(); 
+    
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication a) 
             throws IOException, ServletException {
@@ -34,18 +38,17 @@ public class DareuAuthenticationSuccessHandler implements AuthenticationSuccessH
         //check paths
         switch(securityRole){
             case USER: 
-                path = "/user/"; 
+                path = "/member/index"; 
                 break; 
             case ADMIN: 
-                path = "/admin/"; 
+                path = "/admin/index"; 
                 break; 
             case SPONSOR: 
-                path = "/sponsor/"; 
+                path = "/sponsor/index"; 
                 break; 
         }
         
-        response.sendRedirect(path);
-        //TODO: AFTER SUCCESS AUTHENTICATION
+        redirectStrategy.sendRedirect(request, response, path);
     }
     
 }

@@ -1,51 +1,46 @@
-    <!--Navbar-->
-    <nav class="navbar navbar-dark navbar-fixed-top scrolling-navbar mdb-gradient blue">
-
-        <!-- Collapse button-->
-        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx">
-            <i class="fa fa-bars"></i></button>
-
-        <div class="container">
-
-            <!--Collapse content-->
-            <div class="collapse navbar-toggleable-xs" id="collapseEx">
-                <!--Navbar Brand-->
-                <a class="navbar-brand">Navbar</a>
-                <!--Links-->
-                <ul class="nav navbar-nav">
-                    <!--<li class="nav-item">
-                        <a class="nav-link waves-effect waves-light" href="http://mdbootstrap.com/getting-started/"><i class="fa fa-download"></i>  Download</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light" href="http://mdbootstrap.com/live/_MDB/index/docs/presentation-free/lp-sections.html"> Sections</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light" href="http://mdbootstrap.com/live/_MDB/index/docs/presentation-free/lp-templates.html"> Templates</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light" href="http://mdbootstrap.com/bootstrap-tutorial/"> Tutorials</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light" href="http://mdbootstrap.com/material-design-for-bootstrap/"> Learn more</a>
-                    </li>-->
-                </ul>
-
-                <!--Navbar icons-->
-                <!--<ul class="nav navbar-nav nav-flex-icons">
-                    <li class="nav-item">
-                        <a href="https://www.facebook.com/mdbootstrap" class="nav-link waves-effect waves-light"><i class="fa fa-facebook"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="https://twitter.com/MDBootstrap" class="nav-link waves-effect waves-light"><i class="fa fa-twitter"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="https://plus.google.com/u/0/b/107863090883699620484/+Mdbootstrap/posts" class="nav-link waves-effect waves-light"><i class="fa fa-google-plus"></i></a>
-                    </li>
-                </ul>-->
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<header class="mdl-layout__header mdl-layout__header--waterfall">
+    <!-- Top row, always visible -->
+    <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">Dare‹</span>
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+             mdl-textfield--floating-label mdl-textfield--align-right">
+            <label class="mdl-button mdl-js-button mdl-button--icon"
+                   for="waterfall-exp">
+                <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+                <input class="mdl-textfield__input" type="text" name="sample"
+                       id="waterfall-exp">
             </div>
-            <!--/.Collapse content-->
-
         </div>
-
-    </nav>
+    </div>
+    <!-- Bottom row, not visible on scroll -->
+    <div class="mdl-layout__header-row">
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation -->
+        <nav class="mdl-navigation">
+            <!-- check roles -->
+            <sec:authorize access="hasAuthority('ADMIN')">
+                <a class="mdl-navigation__link" href="/admin/users">Users</a>
+                <a class="mdl-navigation__link" href="/admin/dares">Dares</a>
+                <a class="mdl-navigation__link" href="/admin/configuration">Configurations</a>
+            </sec:authorize>
+            <sec:authorize access="hasAuthority('USER')">
+                <a class="mdl-navigation__link" href="/member/dares">Dares</a>
+                <a class="mdl-navigation__link" href="/member/discover">Discover</a>
+                <a class="mdl-navigation__link" href="/member/profile">Profile</a>
+            </sec:authorize>
+            <sec:authorize access="hasAuthority('SPONSOR')">
+                <a class="mdl-navigation__link" href="/sponsor/dares">Dares</a>
+                <a class="mdl-navigation__link" href="/sponsor/souvenirs">Souvenirs</a>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <a class="mdl-navigation__link" href="/signin">Sign in</a>
+                <a class="mdl-navigation__link" href="/signup">Sign up</a>
+            </sec:authorize>
+        </nav>
+    </div>
+</header>

@@ -14,4 +14,9 @@ public class ErrorController {
     public String notFound() {
         return "not-found";
     }
+    
+    @RequestMapping(value = "unauthorized", method = RequestMethod.GET)
+    public String unauthorized() {
+        return "unauthorized";
+    }
 }

@@ -1,14 +1,13 @@
 <%-- 
-    Document   : index
-    Created on : Oct 26, 2016, 1:57:13 PM
+    Document   : souvenirs
+    Created on : Oct 27, 2016, 4:20:08 PM
     Author     : jose.rubalcaba
 --%>
-
 <!DOCTYPE html>
 <html>
     <head>
         <%@include file="/shared/resources-import.jsp"%>
-        <title>Dare‹</title>
+        <title>Souvenirs</title>
     </head>
     <body>
         <div class="mdl-js-layout mdl-layout">

@@ -1,1 +1,12 @@
-/* YOUR CUSTOM STYLES */
+.center{
+    margin: 0 auto; 
+    float: none;
+    display: block;
+}
+.full-button{
+    width: 100%;
+}
+
+.mdl-card{
+    width: 50%;
+}

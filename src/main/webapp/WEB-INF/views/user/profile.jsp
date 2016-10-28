@@ -1,14 +1,13 @@
 <%-- 
-    Document   : index
-    Created on : Oct 26, 2016, 1:57:13 PM
+    Document   : profile
+    Created on : Oct 27, 2016, 4:18:30 PM
     Author     : jose.rubalcaba
 --%>
-
 <!DOCTYPE html>
 <html>
     <head>
         <%@include file="/shared/resources-import.jsp"%>
-        <title>Dare‹</title>
+        <title>My profile</title>
     </head>
     <body>
         <div class="mdl-js-layout mdl-layout">

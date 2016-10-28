@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : Oct 26, 2016, 1:57:13 PM
+    Document   : configuration
+    Created on : Oct 27, 2016, 4:09:12 PM
     Author     : jose.rubalcaba
 --%>
 
@@ -8,7 +8,7 @@
 <html>
     <head>
         <%@include file="/shared/resources-import.jsp"%>
-        <title>Dare‹</title>
+        <title>Dare‹ Configurations</title>
     </head>
     <body>
         <div class="mdl-js-layout mdl-layout">
@@ -17,7 +17,10 @@
                 <div class="page-content">
 
                     <div class="container-fluid">
-                        
+                        <!-- Your content goes here -->
+                        <div class="mdl-card mdl-shadow--4dp center-block">
+                             <!-- TODO: create section to create and see categories here --> 
+                        </div>
                     </div>
                 </div>
             </main>
