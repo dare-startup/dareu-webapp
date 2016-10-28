@@ -3,6 +3,10 @@ package com.dareu.web.security;
 import com.dareu.data.entity.DareUser;
 import com.dareu.data.exception.DataAccessException;
 import com.dareu.data.repository.DareUserRepository;
+import com.dareu.web.conn.DareOperation;
+import com.dareu.web.service.ApacheConnectorService;
+import com.google.gson.reflect.TypeToken;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -22,23 +26,22 @@ import org.springframework.stereotype.Component;
 public class DareuUserDetailsService implements UserDetailsService{
 
     @Autowired
-    private DareUserRepository repository; 
+    private ApacheConnectorService service; 
+    
+    
     
     private static final Logger log = Logger.getLogger(DareuUserDetailsService.class.getName()); 
     
     @Override
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
-        if(repository == null){
-            log.severe("Repository is null");
-            return null; 
-        }
-        
         //load user by email 
         DareUser user = null;
         try{
-            user = repository.findUserByEmail(string); 
+            user =  service.performSuperAdminGetOperation(ApacheConnectorService.SuperAdminMethodType.USER_BY_EMAIL, 
+                    String.format(DareOperation.FIND_USER_BY_EMAIL.toString(), string), 
+                    new TypeToken<DareUser>(){}.getType()); 
             if(user == null)
-                return null; 
+                throw new UsernameNotFoundException("Username not found"); 
             //create a user details
             DareuUserDetails details = new DareuUserDetails(); 
             details.setUsername(string);
@@ -49,9 +52,9 @@ public class DareuUserDetailsService implements UserDetailsService{
             details.setIsEnabled(true);
             details.setIsCredentialsNonExpired(true);
             return details; 
-        }catch(DataAccessException ex){
-            log.severe("Could not find user by email: " + ex.getMessage());
-            return null; 
+        }catch(IOException ex){
+            log.severe("Could not get user: " + ex.getMessage());
+            throw new UsernameNotFoundException("Username not found"); 
         }
     }
 

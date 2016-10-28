@@ -17,9 +17,10 @@
                 <div class="page-content">
 
                     <div class="container-fluid">
-                        <!-- Your content goes here -->
+                        <!-- categories section -->
                         <div class="mdl-card mdl-shadow--4dp center-block">
-                             <!-- TODO: create section to create and see categories here --> 
+                             <!-- creates a table -->
+                             
                         </div>
                     </div>
                 </div>

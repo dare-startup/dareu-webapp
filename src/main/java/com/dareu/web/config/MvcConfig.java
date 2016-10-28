@@ -13,6 +13,7 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -62,53 +63,15 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         vr.setOrder(3);
         return vr;
     }
+    
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder(); 
+    }
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
-    }
-
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
-        LocalContainerEntityManagerFactoryBean factoryBean
-                = new LocalContainerEntityManagerFactoryBean();
-
-        factoryBean.setDataSource(dataSource());
-
-        factoryBean.setPackagesToScan(new String[]{"com.dareu.data.entity"});
-
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setShowSql(false);
-        //vendorAdapter.setGenerateDdl(generateDdl)
-
-        factoryBean.setJpaVendorAdapter(vendorAdapter);
-
-        Properties additionalProperties = new Properties();
-        additionalProperties.put("hibernate.hbm2ddl.auto", "update");
-
-        factoryBean.setJpaProperties(additionalProperties);
-
-        return factoryBean;
-    }
-
-    @Bean
-    public DataSource dataSource() {
-        DataSource src = null; 
-        try {
-            Context ctx = new InitialContext();
-            src = (DataSource) ctx.lookup("java:jboss/mysql/datasources/dareu");
-        } catch (NamingException ex) {
-            src = null; 
-        }
-        return src; 
-    }
-    
-     @Bean
-    public PlatformTransactionManager transactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getObject());
-
-        return transactionManager;
     }
 
     @Bean

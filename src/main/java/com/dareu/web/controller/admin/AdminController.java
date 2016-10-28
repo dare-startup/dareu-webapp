@@ -1,7 +1,9 @@
 package com.dareu.web.controller.admin;
 
+import com.dareu.web.security.DareuUserDetails;
 import com.dareu.web.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +35,7 @@ public class AdminController {
     }
     
     @RequestMapping(value = { "/configuration" })
-    public ModelAndView configurationView(){
-        return service.configurationView(); 
+    public ModelAndView configurationView(@AuthenticationPrincipal DareuUserDetails details){
+        return service.configurationView(details); 
     }
 }

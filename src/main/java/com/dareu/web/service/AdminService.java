@@ -1,5 +1,6 @@
 package com.dareu.web.service;
 
+import com.dareu.web.security.DareuUserDetails;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -18,7 +19,7 @@ public interface AdminService {
      * returns a configuration view 
      * @return 
      */
-    public ModelAndView configurationView(); 
+    public ModelAndView configurationView(DareuUserDetails details); 
     
     /**
      * returns a users view

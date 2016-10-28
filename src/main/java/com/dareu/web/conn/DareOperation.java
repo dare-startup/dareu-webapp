@@ -5,7 +5,9 @@ package com.dareu.web.conn;
  * @author jose.rubalcaba
  */
 public enum DareOperation {
-    SIGNIN("/rest/security/authenticate");
+    SIGNIN("/dareu/rest/security/authenticate"), 
+    CATEGORIES("/dareu/rest/dare/category"), 
+    FIND_USER_BY_EMAIL("/dareu/rest/admin/account/findUserByEmail/%s");
     
     String operationPath; 
     

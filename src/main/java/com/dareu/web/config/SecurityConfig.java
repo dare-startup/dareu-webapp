@@ -14,12 +14,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
+import org.springframework.security.web.bind.support.AuthenticationPrincipalArgumentResolver;
 
 /**
  *
  * @author jose.rubalcaba
  */
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = false)
 @ComponentScan(basePackages = { "com.dareu.web", "com.dareu.web.service", 
     "com.dareu.data.repository", "com.dareu.web.security"})
 public class SecurityConfig {
@@ -112,7 +113,12 @@ public class SecurityConfig {
     }
     
     @Bean
-    public DefaultWebSecurityExpressionHandler webSecurityExpressionHandler(){
+    public AuthenticationPrincipalArgumentResolver webSecurityExpressionHandler(){
+        return new AuthenticationPrincipalArgumentResolver(); 
+    }
+    
+    @Bean
+    public DefaultWebSecurityExpressionHandler handler(){
         return new DefaultWebSecurityExpressionHandler(); 
     }
 }
