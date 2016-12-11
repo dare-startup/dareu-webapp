@@ -10,30 +10,23 @@
         <title>Signin</title>
     </head>
     <body>
-        <div class="mdl-js-layout mdl-layout">
-            <%@include file="/shared/nav-bar.jsp"%>
-            <main class="mdl-layout__content">
-                <div class="page-content">
-
-                    <div class="container-fluid">
-                        <!-- Your content goes here -->
-                        <div class="mdl-card mdl-shadow--4dp center-block">
-                            <form action="/security/authenticate" method="POST">
-                                 <div class="mdl-textfield mdl-js-textfield center">
-                                    <input id="emailField" type="email" name="email" class="mdl-textfield__input">
-                                    <label class="mdl-textfield__label" for="emailField">Email</label>
-                                 </div><br/>
-                                 <div class="mdl-textfield mdl-js-textfield center">
-                                    <input id="passwordField" type="password" name="password" class="mdl-textfield__input">
-                                    <label class="mdl-textfield__label" for="passwordField">Password</label>
-                                 </div>
-                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                                <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect full-button">Signin</button>
-                            </form>
-                        </div>
+        <%@include file="/shared/nav-bar.jsp"%>
+        <div class="container">
+            <div class="mdl-card mdl-shadow--4dp center-block main-card">
+                <h3 class="text-center">Sign in to Dare‹</h3>
+                <form action="/security/authenticate" method="POST">
+                    <div class="form-group">
+                        <label for="emailInput">Email</label>
+                        <input class="form-control" id="nameInput" type="email" placeholder="Email" name="email">
                     </div>
-                </div>
-            </main>
+                    <div class="form-group">
+                        <label for="passwordInput">Email</label>
+                        <input class="form-control" id="passwordInput" type="password" placeholder="Password" name="password">
+                    </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign in</button>
+                </form>
+            </div>
         </div>
     </body>
 </html>

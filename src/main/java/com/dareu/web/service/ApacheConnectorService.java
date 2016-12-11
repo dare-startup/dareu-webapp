@@ -1,10 +1,7 @@
 package com.dareu.web.service;
 
-import com.dareu.web.conn.DareOperation;
-import com.dareu.web.service.ApacheConnectorService.SuperAdminMethodType;
-import com.google.gson.reflect.TypeToken;
+import com.dareu.web.conn.ApacheResponseWrapper;
 import java.io.IOException;
-import java.lang.reflect.Type;
 
 /**
  *
@@ -12,15 +9,55 @@ import java.lang.reflect.Type;
  */
 public interface ApacheConnectorService {
     
-    public <T> T performSuperAdminGetOperation(SuperAdminMethodType methodType, String operation, Type type)throws IOException;
+    /**
+     * admin get operation
+     * @param contextPath
+     * @return
+     * @throws IOException 
+     */
+    public ApacheResponseWrapper performSuperAdminGetOperation(String contextPath) throws IOException ;
     
+    /**
+     * admin post operation
+     * @param contextPath
+     * @param postEntity
+     * @return
+     * @throws IOException 
+     */
+    public ApacheResponseWrapper performSuperAdminPostOperation(String contextPath, Object postEntity) throws IOException ;
     
+    /**
+     * public get operation 
+     * @param contextPath
+     * @return
+     * @throws IOException 
+     */
+    public ApacheResponseWrapper performPublicGetOperation(String contextPath) throws IOException;
     
-    public static enum SuperAdminMethodType{
-        USER_BY_EMAIL
-    }        
-            
-    public static enum MethodType{
-        POST, GET;
-    }
+    /**
+     * public post operation
+     * @param methodName
+     * @param postEntity
+     * @return
+     * @throws IOException 
+     */
+    public ApacheResponseWrapper performPublicPostOperation(String methodName, Object postEntity) throws IOException;
+    
+    /**
+     * protected get operation
+     * @param methodName
+     * @return
+     * @throws IOException 
+     */
+    public ApacheResponseWrapper performProtectedGetOperation(String methodName) throws IOException;
+    
+    /**
+     * protected post operation
+     * @param methodName
+     * @param postEntity
+     * @return
+     * @throws IOException 
+     */
+    public ApacheResponseWrapper performProtectedPostOperation(String methodName, Object postEntity) throws IOException;
+    
 }

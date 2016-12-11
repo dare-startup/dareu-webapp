@@ -1,10 +1,11 @@
 package com.dareu.web.security.handler;
 
-import com.dareu.data.security.SecurityRole;
+import com.dareu.web.dto.security.SecurityRole;
 import com.dareu.web.security.UserRole;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,14 +14,17 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author jose.rubalcaba
  */
+@Component
 public class DareuAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy(); 
+    private static final Logger log = Logger.getLogger(DareuAuthenticationSuccessHandler.class.getName());
+    private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy(); 
     
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication a) 
@@ -47,7 +51,7 @@ public class DareuAuthenticationSuccessHandler implements AuthenticationSuccessH
                 path = "/sponsor/index"; 
                 break; 
         }
-        
+        log.info(String.format("Redirecting to %s after successful signin", path)); 
         redirectStrategy.sendRedirect(request, response, path);
     }
     

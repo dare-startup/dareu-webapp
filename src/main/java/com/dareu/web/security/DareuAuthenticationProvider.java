@@ -1,6 +1,7 @@
 package com.dareu.web.security;
 
-import com.dareu.data.entity.DareUser;
+import com.dareu.web.dto.security.PasswordEncryptor;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -17,14 +18,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class DareuAuthenticationProvider implements AuthenticationProvider {
 
+    private static final Logger log = Logger.getLogger(DareuAuthenticationProvider.class.getName()); 
     
     @Autowired
     private DareuUserDetailsService service; 
     
+    @Autowired
+    private PasswordEncryptor encryptor;
+    
     @Override
     public Authentication authenticate(Authentication a) throws AuthenticationException {
         String username = a.getName(); 
-        String pass = a.getCredentials().toString();
+        String pass = encryptor.encryptPassword(a.getCredentials().toString());
         
         UserDetails user = service.loadUserByUsername(username); 
         if(user == null)
@@ -32,6 +37,7 @@ public class DareuAuthenticationProvider implements AuthenticationProvider {
         if(! pass.equals(user.getPassword()))
             throw new BadCredentialsException("Username and/or password are incorrect"); 
         
+        log.info(String.format("Successful authentication"));
         return new UsernamePasswordAuthenticationToken(user, pass, user.getAuthorities()); 
     }
 

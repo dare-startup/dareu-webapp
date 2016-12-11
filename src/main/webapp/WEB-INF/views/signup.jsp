@@ -7,22 +7,37 @@
 <html>
     <head>
         <%@include file="/shared/resources-import.jsp"%>
-        <title>Signup</title>
+        <title>Sign up</title>
     </head>
     <body>
-        <div class="mdl-js-layout mdl-layout">
-            <%@include file="/shared/nav-bar.jsp" %>
-            <main class="mdl-layout__content">
-                <div class="page-content">
-
-                    <div class="container-fluid">
-                        <!-- Your content goes here -->
-                        <div class="mdl-card mdl-shadow--4dp center-block"
-                             <h1>Sign up from here</h1>
-                        </div>
+        <%@include file="/shared/nav-bar.jsp" %>
+        <div class="container">
+            <div class="mdl-card mdl-shadow--4dp center-block main-card">
+                <h3 class="text-center">Sign up to Dare‹</h3>
+                <form:form action="/signup" method="POST" commandName="signup">
+                    <div class="form-group">
+                        <form:label path="name">Name</form:label>
+                        <form:input cssClass="form-control" path="name" type="text"></form:input>
                     </div>
-                </div>
-            </main>
+                    <div class="form-group">
+                        <form:label path="email">Email</form:label>
+                        <form:input cssClass="form-control" path="email" type="email"></form:input>
+                    </div>
+                    <div class="form-group">
+                        <form:label path="password">Password</form:label>
+                        <form:input cssClass="form-control" path="password" type="password"></form:input>
+                    </div>
+                    <div class="form-group">
+                        <form:label path="birthday">Birthday</form:label>
+                        <form:input cssClass="form-control" path="birthday" type="date"></form:input>
+                    </div>
+                    <div class="form-group">
+                    <form:checkbox path="sponsor" label="I want to sign up as sponsor"></form:checkbox>
+                    </div>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign up</button>
+                </form:form>
+            </div>
         </div>
     </body>
 </html>

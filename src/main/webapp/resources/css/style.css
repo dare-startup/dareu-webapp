@@ -10,3 +10,15 @@
 .mdl-card{
     width: 50%;
 }
+
+.main-card{
+    padding-left: 5%; 
+    padding-right: 5%; 
+    padding-bottom: 5%;
+    width: 80%;
+    margin-bottom: 5%;
+}
+
+.element-padding-bottom{
+    padding-bottom: 5%;
+}

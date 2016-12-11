@@ -1,6 +1,9 @@
 package com.dareu.web.service;
 
+import com.dareu.web.dto.request.SignupRequest;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -22,7 +25,16 @@ public interface DefaultAccountService {
     
     /**
      * Get the signup view
+     * @param model
      * @return 
      */
-    public ModelAndView signupView(); 
+    public String signupView(Model model); 
+    
+    /**
+     * Register a user signup
+     * @param request
+     * @param atts
+     * @return 
+     */
+    public String signupRequest(SignupRequest request, RedirectAttributes atts);
 }

@@ -1,6 +1,5 @@
 package com.dareu.web.config;
 
-import com.dareu.data.repository.DareUserRepository;
 import java.util.logging.Logger;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -8,7 +7,6 @@ import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.DelegatingFilterProxy;

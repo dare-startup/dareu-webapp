@@ -5,20 +5,20 @@
         <%@include file="/shared/resources-import.jsp" %>
     </head>
     <body>
-
-        <div class="mdl-js-layout mdl-layout">
-            <%@include file="/shared/nav-bar.jsp" %>
-            <main class="mdl-layout__content">
-                <div class="page-content">
-
-                    <div class="container-fluid">
-                        <!-- Your content goes here -->
-                        <div class="mdl-card mdl-shadow--4dp center-block"
-                             <h1>Dare‹ application is in progress...</h1>
-                        </div>
-                    </div>
-                </div>
-            </main>
+        <sec:authorize access="hasAuthority('ADMIN')">
+            <c:redirect url="/admin/index"/>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('USER')">
+            <c:redirect url="/member/index"/>
+        </sec:authorize>
+        <sec:authorize access="hasAuthority('SPONSOR')">
+            <c:redirect url="/sponsor/index"/>
+        </sec:authorize>
+        <%@include file="/shared/nav-bar.jsp" %>
+        <div class="container">
+            <div class="mdl-card mdl-shadow--4dp center-block main-card">
+                <h3 class="text-center">This site is under construction right now :) </h3>
+            </div>
         </div>
     </body>
 </html>
