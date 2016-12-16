@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("sponsor")
 public class SponsorController {
     
-    @RequestMapping(value = { "/index", "/" })
+    @RequestMapping(value = { "/" })
     public ModelAndView defaultView(){
         return new ModelAndView("/sponsor/index"); 
     }

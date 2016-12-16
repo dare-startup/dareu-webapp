@@ -4,15 +4,21 @@
     Author     : jose.rubalcaba
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@include file="/shared/resources-import.jsp"%>
         <title>Unauthorized</title>
     </head>
     <body>
-        <h1>Unauthorized!</h1>
-        <a href="/">Return</a>
+        <%@include file="/shared/empty-nav-bar.jsp"%>
+        <div class="container">
+            <div class="card main-card">
+                <img src="/resources/img/unauthorized.png" width="300" height="300" class="img-thumbnail center">
+                <h4 class="text-center">Looks like you are not supposed to be here</h4>
+                <a href="/">Return to where you belong now</a>
+            </div>
+        </div>
     </body>
 </html>
+

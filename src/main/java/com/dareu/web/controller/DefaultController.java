@@ -21,7 +21,7 @@ public class DefaultController {
     @Autowired
     private DefaultAccountService service; 
     
-    @RequestMapping({ "/index" })
+    @RequestMapping({ "/index", "/" })
     public ModelAndView defaultView(){
         return service.defaultView();
     }

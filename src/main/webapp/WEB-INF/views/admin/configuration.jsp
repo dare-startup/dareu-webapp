@@ -14,6 +14,13 @@
     <body>
         <%@include file="/shared/nav-bar.jsp" %>
         <div class="mdl-card mdl-shadow--4dp center-block main-card">
+            <h5 class="text-center">Registered dares: <b>1,000,000</b></h5>
+            <h5 class="text-center">Registered users: <b>500,000</b></h5>
+            <h5 class="text-center">Registered categories: <b>10</b></h5>
+            <h5 class="text-center">Flagged dares: <b>17</b></h5>
+            
+        </div>
+        <div class="mdl-card mdl-shadow--4dp center-block main-card">
             <!-- creates a table -->
             <c:choose>
                 <c:when test="${not empty categories.items}">

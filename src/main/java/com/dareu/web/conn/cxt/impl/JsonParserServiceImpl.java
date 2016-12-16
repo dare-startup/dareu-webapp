@@ -1,6 +1,6 @@
-package com.dareu.web.service.impl;
+package com.dareu.web.conn.cxt.impl;
 
-import com.dareu.web.service.JsonParserService;
+import com.dareu.web.conn.cxt.JsonParserService;
 import com.google.gson.Gson;
 import java.lang.reflect.Type;
 import org.springframework.stereotype.Component;

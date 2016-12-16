@@ -1,4 +1,4 @@
-package com.dareu.web.service;
+package com.dareu.web.conn;
 
 import com.dareu.web.conn.ApacheResponseWrapper;
 import java.io.IOException;
@@ -46,18 +46,20 @@ public interface ApacheConnectorService {
     /**
      * protected get operation
      * @param methodName
+     * @param token
      * @return
      * @throws IOException 
      */
-    public ApacheResponseWrapper performProtectedGetOperation(String methodName) throws IOException;
+    public ApacheResponseWrapper performProtectedGetOperation(String methodName, String token) throws IOException;
     
     /**
      * protected post operation
      * @param methodName
      * @param postEntity
+     * @param token
      * @return
      * @throws IOException 
      */
-    public ApacheResponseWrapper performProtectedPostOperation(String methodName, Object postEntity) throws IOException;
+    public ApacheResponseWrapper performProtectedPostOperation(String methodName, Object postEntity, String token) throws IOException;
     
 }

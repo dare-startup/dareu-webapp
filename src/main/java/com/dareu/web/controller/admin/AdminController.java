@@ -26,24 +26,27 @@ public class AdminController {
     @Autowired
     private AdminService service; 
     
-    @RequestMapping(value = { "/index", "/" })
-    public ModelAndView defaultView(){
-        return service.defaultView(); 
+    @RequestMapping(value = { "/" })
+    public ModelAndView defaultView(RedirectAttributes atts){
+        return service.defaultView(atts); 
     }
     
     @RequestMapping(value = { "/users" })
-    public ModelAndView usersView(@RequestParam(required = false, name = "pageNumber", defaultValue = "1")int pageNumber){
-        return service.usersView(pageNumber); 
+    public ModelAndView usersView(@RequestParam(required = false, name = "pageNumber", defaultValue = "1")int pageNumber, 
+                            RedirectAttributes atts){
+        return service.usersView(pageNumber, atts); 
     }
     
     @RequestMapping(value = { "/dares" })
-    public ModelAndView daresView(){
-        return service.daresView();
+    public ModelAndView daresView(@RequestParam(required = false, defaultValue = "1", name = "pageNumber")int pageNumber, 
+            RedirectAttributes atts){
+        return service.daresView(pageNumber, atts);
     }
     
     @RequestMapping(value = { "/configuration" })
-    public ModelAndView configurationView(Model model){
-        return service.configurationView(model); 
+    public ModelAndView configurationView(Model model, @RequestParam(required=false, name="pageNumber", defaultValue="1")int pageNumber, 
+            RedirectAttributes atts){
+        return service.configurationView(model, pageNumber, atts); 
     }
     
     @RequestMapping(value = { "/dare/category" }, method = RequestMethod.POST)

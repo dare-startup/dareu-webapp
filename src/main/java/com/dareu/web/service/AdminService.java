@@ -17,25 +17,29 @@ public interface AdminService {
      * returns a default view
      * @return 
      */
-    public ModelAndView defaultView(); 
+    public ModelAndView defaultView(RedirectAttributes atts); 
     
     /**
      * returns a configuration view 
+     * @param model
+     * @param pageNumber
      * @return 
      */
-    public ModelAndView configurationView(Model model); 
+    public ModelAndView configurationView(Model model, int pageNumber, RedirectAttributes atts); 
     
     /**
      * returns a users view
+     * @param pageNumber
      * @return 
      */
-    public ModelAndView usersView(int pageNumber); 
+    public ModelAndView usersView(int pageNumber, RedirectAttributes atts); 
     
     /**
      * returns a dares view 
+     * @param pageNumber
      * @return 
      */
-    public ModelAndView daresView(); 
+    public ModelAndView daresView(int pageNumber, RedirectAttributes atts); 
 
     /**
      * creates a new category 

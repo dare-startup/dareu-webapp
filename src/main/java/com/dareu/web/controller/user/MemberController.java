@@ -12,23 +12,18 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("member")
 public class MemberController {
     
-    @RequestMapping(value = { "/index", "/" })
+    @RequestMapping(value = { "/" })
     public ModelAndView defaultView(){
-        return new ModelAndView("/user/index"); 
+        return new ModelAndView("user/index"); 
     }
     
-    @RequestMapping(value = { "/dares" })
+    @RequestMapping(value = { "/hot" })
     public ModelAndView daresView(){
-        return new ModelAndView("/user/dares"); 
+        return new ModelAndView("user/hot"); 
     }
     
-    @RequestMapping(value = { "/discover" })
-    public ModelAndView discoverView(){
-        return new ModelAndView("/user/discover"); 
-    }
-    
-    @RequestMapping(value = { "/profile" })
-    public ModelAndView profileView(){
-        return new ModelAndView("/user/profile"); 
+    @RequestMapping(value = { "/anchored" })
+    public ModelAndView anchoredView(){
+        return new ModelAndView("user/anchored"); 
     }
 }

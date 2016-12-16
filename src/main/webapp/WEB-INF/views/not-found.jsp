@@ -4,15 +4,20 @@
     Author     : jose.rubalcaba
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>404</title>
+        <%@include file="/shared/resources-import.jsp"%>
+        <title>Not found</title>
     </head>
     <body>
-        <h1>The resource you are looking for does not exists</h1>
-        <a href="/index">Return</a>
+        <%@include file="/shared/empty-nav-bar.jsp"%>
+        <div class="container">
+            <div class="card main-card">
+                <img src="/resources/img/notfound.png" width="300" height="300" class="img-thumbnail center">
+                <h4 class="text-center">The resource you are looking for does not exists</h4>
+                <a href="/">Return to home page</a>
+            </div>
+        </div>
     </body>
 </html>

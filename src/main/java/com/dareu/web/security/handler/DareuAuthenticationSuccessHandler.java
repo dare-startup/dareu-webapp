@@ -1,6 +1,7 @@
 package com.dareu.web.security.handler;
 
 import com.dareu.web.dto.security.SecurityRole;
+import com.dareu.web.security.DareuUserDetails;
 import com.dareu.web.security.UserRole;
 import java.io.IOException;
 import java.util.Collection;
@@ -39,16 +40,18 @@ public class DareuAuthenticationSuccessHandler implements AuthenticationSuccessH
         SecurityRole securityRole = SecurityRole.fromString(role); 
         //create path variable 
         String path = ""; 
+        //creates a session 
+        request.getSession(true).setAttribute("userToken", ((DareuUserDetails)a.getPrincipal()).getToken());
         //check paths
         switch(securityRole){
             case USER: 
-                path = "/member/index"; 
+                path = "/member/"; 
                 break; 
             case ADMIN: 
-                path = "/admin/index"; 
+                path = "/admin/"; 
                 break; 
             case SPONSOR: 
-                path = "/sponsor/index"; 
+                path = "/sponsor/"; 
                 break; 
         }
         log.info(String.format("Redirecting to %s after successful signin", path)); 

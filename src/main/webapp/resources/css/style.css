@@ -3,6 +3,11 @@
     float: none;
     display: block;
 }
+
+.center-text{
+    text-align: center;
+}
+
 .full-button{
     width: 100%;
 }
@@ -15,10 +20,15 @@
     padding-left: 5%; 
     padding-right: 5%; 
     padding-bottom: 5%;
-    width: 80%;
     margin-bottom: 5%;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .element-padding-bottom{
     padding-bottom: 5%;
+}
+
+#searchBox{
+    width: 40%; 
 }

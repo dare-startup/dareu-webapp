@@ -1,4 +1,4 @@
-package com.dareu.web.service;
+package com.dareu.web.conn.cxt;
 
 import java.lang.reflect.Type;
 

@@ -5,8 +5,8 @@ import com.dareu.web.conn.ApacheResponseWrapper;
 import com.dareu.web.dto.response.entity.UserAccount;
 import com.dareu.web.dto.security.PasswordEncryptor;
 import com.dareu.web.dto.security.SecurityRole;
-import com.dareu.web.service.ApacheConnectorService;
-import com.dareu.web.service.JsonParserService;
+import com.dareu.web.conn.ApacheConnectorService;
+import com.dareu.web.conn.cxt.JsonParserService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +76,7 @@ public class DareuUserDetailsService implements UserDetailsService {
                     details.setIsAccountNonLocked(true);
                     details.setIsEnabled(true);
                     details.setIsCredentialsNonExpired(true);
+                    details.setToken(account.getToken()); 
                     return details;
                 } else if(wrapper.getStatusCode() == 500){
                     log.severe(String.format("Could not fetch user:\n%s", wrapper.getJsonResponse()));

@@ -5,12 +5,16 @@ import com.dareu.web.conn.ApacheResponseWrapper;
 import com.dareu.web.dto.request.CreateCategoryRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.dto.response.entity.CategoryDescription;
+import com.dareu.web.dto.response.entity.DareDescription;
 import com.dareu.web.dto.response.entity.Page;
 import com.dareu.web.dto.response.entity.UserAccount;
 import com.dareu.web.security.DareuUserDetails;
 import com.dareu.web.service.AdminService;
-import com.dareu.web.service.ApacheConnectorService;
-import com.dareu.web.service.JsonParserService;
+import com.dareu.web.conn.ApacheConnectorService;
+import com.dareu.web.conn.cxt.JsonParserService;
+import com.dareu.web.exception.ApplicationError;
+import com.dareu.web.exception.ConnectorManagerException;
+import com.dareu.web.mgr.ConnectorManager;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -27,111 +31,79 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author jose.rubalcaba
  */
 @Component
-public class AdminServiceImpl implements AdminService{
-    
-    private Logger log = Logger.getLogger("AdminService"); 
-    
+public class AdminServiceImpl implements AdminService {
+
+    private Logger log = Logger.getLogger("AdminService");
+
     @Autowired
-    private ApacheConnectorService connector; 
-    
-    @Autowired
-    private JsonParserService jsonParser; 
-    
-    public AdminServiceImpl(){
-        
+    private ConnectorManager connectorManager;
+
+    public AdminServiceImpl() {
+
     }
 
     @Override
-    public ModelAndView defaultView() {
-        return new ModelAndView("admin/index"); 
+    public ModelAndView defaultView(RedirectAttributes atts) {
+        return new ModelAndView("admin/index");
     }
 
     @Override
-    public ModelAndView configurationView(Model model) {
+    public ModelAndView configurationView(Model model, int pageNumber, RedirectAttributes atts) {
         //creates a view model 
-        ModelAndView mav = new ModelAndView("admin/configuration"); 
-        try{
-            //get categories 
-            String categoriesContextPath = AdminMethodName.CATEGORIES.toString();
-            ApacheResponseWrapper wrapper = connector.performSuperAdminGetOperation(categoriesContextPath);
-            Type type = new TypeToken<Page<CategoryDescription>>(){}.getType(); 
-            switch(wrapper.getStatusCode()){
-                case 200: 
-                    Page<CategoryDescription> categories = jsonParser
-                            .<Page<CategoryDescription>>parseJson(wrapper.getJsonResponse(), type);
-                    mav.addObject("categories", categories); 
-                    model.addAttribute("category", new CreateCategoryRequest());
-                    break; 
-                case 404: 
-                    break; 
-                case 500: 
-                     break; 
-            }
-            
+        ModelAndView mav = new ModelAndView("admin/configuration");
+        try {
+            Page<CategoryDescription> categories = connectorManager.getCategories(pageNumber);
+            mav.addObject("categories", categories);
+            model.addAttribute("category", new CreateCategoryRequest());
             //create a new category 
             mav.addObject("category", new CreateCategoryRequest());
-            return mav; 
-        } catch(IOException ex){
-            log.severe("Could not connect to DareU api: " + ex.getMessage());
-        } catch(Exception ex){
+            return mav;
+        } catch (ConnectorManagerException ex) {
+            mav.setViewName("");
             log.severe("Exception: " + ex.getMessage());
         }
         return mav;
     }
 
     @Override
-    public ModelAndView usersView(int pageNumber) {
-        ModelAndView mav = new ModelAndView("admin/users"); 
-        String contextPath = String.format(AdminMethodName.USERS_BY_PAGE.toString(), pageNumber); 
-        //get a list of users
-        try{
-            ApacheResponseWrapper wrapper = connector.performSuperAdminGetOperation(contextPath);
-            switch(wrapper.getStatusCode()){
-                case 200: 
-                    //create a page 
-                    Page<UserAccount> account = jsonParser.parseJson(wrapper.getJsonResponse(), 
-                            new TypeToken<Page<UserAccount>>(){}.getType());
-                    mav.addObject("users", account);
-                    break;
-                case 404: 
-                    //log.info();
-                    break; 
-                case 500: 
-                    break;
-            }
-        }catch(IOException ex){
-            
+    public ModelAndView usersView(int pageNumber, RedirectAttributes atts) {
+        ModelAndView mav = new ModelAndView("admin/users");
+        try {
+            Page<UserAccount> page = connectorManager.getUsersByPage(pageNumber);
+            mav.addObject("users", page);
+        } catch (ConnectorManagerException ex) {
+
         }
-        return mav; 
+        return mav;
     }
 
     @Override
-    public ModelAndView daresView() {
-        return new ModelAndView("admin/dares"); 
+    public ModelAndView daresView(int pageNumber, RedirectAttributes atts) {
+        ModelAndView mav = new ModelAndView("admin/dares");
+        try {
+            Page<DareDescription> page = connectorManager.getUnapprovedDares(pageNumber);
+            mav.addObject("dares", page);
+        } catch (ConnectorManagerException ex) {
+            //redirect to error via attributes
+            atts.addFlashAttribute("error", 
+                    new ApplicationError("There has been an error, please try again", "/admin/dare/category")); 
+            mav.setViewName("/error/appError");
+        }
+        return mav;
     }
 
     @Override
     public String createCategory(CreateCategoryRequest category, RedirectAttributes atts) {
         //create the new category
-        //create a category description 
-        String newCategoryCxtPath = AdminMethodName.NEW_CATEGORY.toString();
         try{
-            ApacheResponseWrapper wrapper = connector.performSuperAdminPostOperation(newCategoryCxtPath, category);
-            switch(wrapper.getStatusCode()){
-                case 200: 
-                    EntityRegistrationResponse response = jsonParser
-                            .parseJson(wrapper.getJsonResponse(), EntityRegistrationResponse.class); 
-                    log.info(String.format("Registered a new %s with id %s", response.getRegistrationType(), response.getId()));
-                    break; 
-                case 500: 
-                    break; 
-                case 404: 
-                    break; 
-            }
-        }catch(IOException ex){
-            
+            EntityRegistrationResponse response = connectorManager.createCategory(category); 
+            return "redirect:/admin/configuration";
+        }catch(ConnectorManagerException ex){
+            //redirect to error via attributes
+            atts.addFlashAttribute("error", 
+                    new ApplicationError("There has been an error creating the category, please try again", "/admin/dare/category")); 
+            return "redirect:/error/appError"; 
         }
-        return "redirect:/admin/configuration";
     }
-    
+
 }

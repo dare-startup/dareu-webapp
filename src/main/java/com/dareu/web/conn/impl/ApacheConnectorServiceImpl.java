@@ -1,9 +1,9 @@
-package com.dareu.web.service.impl;
+package com.dareu.web.conn.impl;
 
 import com.dareu.web.conn.ApacheConnectionResponseHandler;
 import com.dareu.web.conn.ApacheResponseWrapper;
-import com.dareu.web.service.ApacheConnectorService;
-import com.dareu.web.service.JsonParserService;
+import com.dareu.web.conn.ApacheConnectorService;
+import com.dareu.web.conn.cxt.JsonParserService;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.logging.Logger;
@@ -58,11 +58,17 @@ public class ApacheConnectorServiceImpl implements ApacheConnectorService {
         return createPublicPostRequest(contextPath, postEntity); 
     }
 
-    public ApacheResponseWrapper performProtectedGetOperation(String methodName) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ApacheResponseWrapper performProtectedGetOperation(String methodName, String token) throws IOException {
+        String url = host + methodName; 
+        log.info(String.format("Creating GET request to %s", url));
+        HttpGet get = new HttpGet(url);
+        get.setHeader("Authorization", token);
+        get.setHeader("Accept", "Application/json");
+        //execute
+        return client.execute(get, new ApacheConnectionResponseHandler(methodName)); 
     }
 
-    public ApacheResponseWrapper performProtectedPostOperation(String methodName, Object postEntity) throws IOException {
+    public ApacheResponseWrapper performProtectedPostOperation(String methodName, Object postEntity, String token) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

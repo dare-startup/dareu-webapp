@@ -18,6 +18,7 @@ public class DareuUserDetails implements UserDetails{
     private boolean isAccountNonLocked; 
     private boolean isCredentialsNonExpired; 
     private boolean isEnabled; 
+    private String token; 
     
     public DareuUserDetails(){
         
@@ -101,6 +102,14 @@ public class DareuUserDetails implements UserDetails{
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
     
     

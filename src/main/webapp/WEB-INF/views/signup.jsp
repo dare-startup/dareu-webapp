@@ -12,7 +12,7 @@
     <body>
         <%@include file="/shared/nav-bar.jsp" %>
         <div class="container">
-            <div class="mdl-card mdl-shadow--4dp center-block main-card">
+            <div class="card main-card">
                 <h3 class="text-center">Sign up to Dare‹</h3>
                 <form:form action="/signup" method="POST" commandName="signup">
                     <div class="form-group">

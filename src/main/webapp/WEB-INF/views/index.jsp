@@ -6,18 +6,18 @@
     </head>
     <body>
         <sec:authorize access="hasAuthority('ADMIN')">
-            <c:redirect url="/admin/index"/>
+            <c:redirect url="/admin/"/>
         </sec:authorize>
         <sec:authorize access="hasAuthority('USER')">
-            <c:redirect url="/member/index"/>
+            <c:redirect url="/member/"/>
         </sec:authorize>
         <sec:authorize access="hasAuthority('SPONSOR')">
-            <c:redirect url="/sponsor/index"/>
+            <c:redirect url="/sponsor/"/>
         </sec:authorize>
         <%@include file="/shared/nav-bar.jsp" %>
         <div class="container">
-            <div class="mdl-card mdl-shadow--4dp center-block main-card">
-                <h3 class="text-center">This site is under construction right now :) </h3>
+            <div class="card main-card">
+                <h3 class="center-text">This site is under construction right now :) </h3>
             </div>
         </div>
     </body>
