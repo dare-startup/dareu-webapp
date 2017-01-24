@@ -13,6 +13,6 @@
     </welcome-file-list>
     <error-page>
         <error-code>404</error-code>
-        <location>/error/404</location>
+        <location>/dareu/error/404</location>
     </error-page>
 </web-app>

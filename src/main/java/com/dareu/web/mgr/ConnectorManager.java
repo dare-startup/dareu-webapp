@@ -5,6 +5,7 @@ import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
 import com.dareu.web.dto.response.entity.DiscoverUserAccount;
+import com.dareu.web.dto.response.entity.FriendSearchDescription;
 import com.dareu.web.dto.response.entity.Page;
 import com.dareu.web.dto.response.entity.UserAccount;
 import com.dareu.web.exception.ConnectorManagerException;
@@ -56,8 +57,49 @@ public interface ConnectorManager {
      * Get a discoverable page of users 
      * This operation must be executed by any authenticated user
      * @param pageNumber
+     * @param token
      * @return
      * @throws ConnectorManagerException 
      */
     public Page<DiscoverUserAccount> getDiscoverUsers(int pageNumber, String token)throws ConnectorManagerException;
+
+    /**
+     * Requests a new friendship
+     * This operation must be executed by any authenticated user
+     * @param requestedUserId
+     * @param token
+     * @return 
+     * @throws com.dareu.web.exception.ConnectorManagerException 
+     */
+    public EntityRegistrationResponse requestFriendship(String requestedUserId, String token)throws ConnectorManagerException;
+
+    /**
+     * Get a list of friends in a short description object
+     * This operation must be executed by any authenticated user
+     * @param i
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public Page<FriendSearchDescription> findAvailableFriends(int i, String token) throws ConnectorManagerException;
+    
+    /**
+     * Get a list of friends in a short description object
+     * This operation must be executed by any authenticated user
+     * @param pageNumber
+     * @param query
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public Page<FriendSearchDescription> findAvailableFriends(int pageNumber, String query, String token) throws ConnectorManagerException;
+
+    /**
+     * Updates a friendship request to the accepted value
+     * @param userId
+     * @param accepted
+     * @param token 
+     * @return  
+     */
+    public EntityRegistrationResponse updateFriendshipRequest(String userId, Boolean accepted, String token)throws ConnectorManagerException;
 }

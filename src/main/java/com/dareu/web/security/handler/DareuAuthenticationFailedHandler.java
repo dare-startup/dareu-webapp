@@ -20,7 +20,7 @@ public class DareuAuthenticationFailedHandler implements AuthenticationFailureHa
     
     public void onAuthenticationFailure(HttpServletRequest hsr, HttpServletResponse hsr1, AuthenticationException ae) throws IOException, ServletException {
         log.info(String.format("Authentication failed: %s", ae.getMessage()));
-        hsr1.sendRedirect("/signin?rety");
+        hsr1.sendRedirect(hsr.getContextPath() + "/signin?rety");
     }
     
 }

@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("member")
-public class MemberController {
+public class MemberController{
     
     @RequestMapping(value = { "/" })
     public ModelAndView defaultView(){

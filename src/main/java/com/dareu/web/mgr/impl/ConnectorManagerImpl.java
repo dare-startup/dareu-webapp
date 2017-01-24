@@ -3,12 +3,14 @@ package com.dareu.web.mgr.impl;
 import com.dareu.web.conn.AdminMethodName;
 import com.dareu.web.conn.ApacheConnectorService;
 import com.dareu.web.conn.ApacheResponseWrapper;
+import com.dareu.web.conn.ProtectedMethodName;
 import com.dareu.web.conn.cxt.JsonParserService;
 import com.dareu.web.dto.request.CreateCategoryRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
 import com.dareu.web.dto.response.entity.DiscoverUserAccount;
+import com.dareu.web.dto.response.entity.FriendSearchDescription;
 import com.dareu.web.dto.response.entity.Page;
 import com.dareu.web.dto.response.entity.UserAccount;
 import com.dareu.web.exception.ConnectorManagerException;
@@ -52,20 +54,7 @@ public class ConnectorManagerImpl implements ConnectorManager {
             ApacheResponseWrapper wrapper = connector.performSuperAdminGetOperation(categoriesContextPath);
             Type type = new TypeToken<Page<CategoryDescription>>() {
             }.getType();
-            switch (wrapper.getStatusCode()) {
-                case 200:
-                    Page<CategoryDescription> categories = jsonParser
-                            .<Page<CategoryDescription>>parseJson(wrapper.getJsonResponse(), type);
-                    return categories;
-                case 404:
-                    throw new ConnectorManagerException(String.format(NOT_FOUND, categoriesContextPath));
-                case 500:
-                    throw new ConnectorManagerException(String.format(SERVER_ERROR, wrapper.getJsonResponse()));
-                default:
-                    log.info(String.format(NOT_REGISTERED_STATUS_CODE,
-                            wrapper.getStatusCode(), wrapper.getJsonResponse(), wrapper.getContextPath()));
-                    throw new ConnectorManagerException(NOT_REGISTERED_EXCEPTION_MESSAGE);
-            }
+            return processResponse(wrapper, type, categoriesContextPath); 
         } catch (IOException ex) {
             throw new ConnectorManagerException(String.format(IOEXCEPTION_MESSAGE, ex.getMessage()), ex);
         }
@@ -76,22 +65,8 @@ public class ConnectorManagerImpl implements ConnectorManager {
         //get a list of users
         try {
             ApacheResponseWrapper wrapper = connector.performSuperAdminGetOperation(contextPath);
-            switch (wrapper.getStatusCode()) {
-                case 200:
-                    //create a page 
-                    Page<UserAccount> account = jsonParser.parseJson(wrapper.getJsonResponse(),
-                            new TypeToken<Page<UserAccount>>() {
-                            }.getType());
-                    return account;
-                case 404:
-                    throw new ConnectorManagerException(String.format(NOT_FOUND, contextPath));
-                case 500:
-                    throw new ConnectorManagerException(String.format(SERVER_ERROR, wrapper.getJsonResponse()));
-                default:
-                    log.info(String.format(NOT_REGISTERED_STATUS_CODE,
-                            wrapper.getStatusCode(), wrapper.getJsonResponse(), wrapper.getContextPath()));
-                    throw new ConnectorManagerException(NOT_REGISTERED_EXCEPTION_MESSAGE);
-            }
+            Type type = new TypeToken<Page<UserAccount>>(){}.getType(); 
+            return processResponse(wrapper, type, contextPath); 
         } catch (IOException ex) {
             throw new ConnectorManagerException(String.format(IOEXCEPTION_MESSAGE, ex.getMessage()), ex);
         }
@@ -105,20 +80,7 @@ public class ConnectorManagerImpl implements ConnectorManager {
             ApacheResponseWrapper wrapper = connector.performSuperAdminGetOperation(contextPath);
             Type type = new TypeToken<Page<DareDescription>>() {
             }.getType();
-            switch (wrapper.getStatusCode()) {
-                case 200:
-                    //get the list of dares
-                    Page<DareDescription> page = jsonParser.parseJson(wrapper.getJsonResponse(), type);
-                    return page; 
-                case 404:
-                    throw new ConnectorManagerException(String.format(NOT_FOUND, contextPath));
-                case 500:
-                    throw new ConnectorManagerException(String.format(SERVER_ERROR, wrapper.getJsonResponse()));
-                default:
-                    log.info(String.format(NOT_REGISTERED_STATUS_CODE,
-                            wrapper.getStatusCode(), wrapper.getJsonResponse(), wrapper.getContextPath()));
-                    throw new ConnectorManagerException(NOT_REGISTERED_EXCEPTION_MESSAGE);
-            }
+            return processResponse(wrapper, type, contextPath); 
         } catch (IOException ex) {
             throw new ConnectorManagerException(String.format(IOEXCEPTION_MESSAGE, ex.getMessage()), ex);
         }
@@ -129,21 +91,7 @@ public class ConnectorManagerImpl implements ConnectorManager {
         String newCategoryCxtPath = AdminMethodName.NEW_CATEGORY.toString();
         try {
             ApacheResponseWrapper wrapper = connector.performSuperAdminPostOperation(newCategoryCxtPath, request);
-            switch (wrapper.getStatusCode()) {
-                case 200:
-                    EntityRegistrationResponse response = jsonParser
-                            .parseJson(wrapper.getJsonResponse(), EntityRegistrationResponse.class);
-                    log.info(String.format("Registered a new %s with id %s", response.getRegistrationType(), response.getId()));
-                    return response; 
-                case 404:
-                    throw new ConnectorManagerException(String.format(NOT_FOUND, newCategoryCxtPath));
-                case 500:
-                    throw new ConnectorManagerException(String.format(SERVER_ERROR, wrapper.getJsonResponse()));
-                default:
-                    log.info(String.format(NOT_REGISTERED_STATUS_CODE,
-                            wrapper.getStatusCode(), wrapper.getJsonResponse(), wrapper.getContextPath()));
-                    throw new ConnectorManagerException(NOT_REGISTERED_EXCEPTION_MESSAGE);
-            }
+            return processResponse(wrapper, EntityRegistrationResponse.class, newCategoryCxtPath);
         } catch (IOException ex) {
             throw new ConnectorManagerException(String.format(IOEXCEPTION_MESSAGE, ex.getMessage()), ex);
         }
@@ -155,14 +103,42 @@ public class ConnectorManagerImpl implements ConnectorManager {
         try {
             ApacheResponseWrapper wrapper = connector.performProtectedGetOperation(contextPath, token);
             Type type = new TypeToken<Page<DiscoverUserAccount>>(){}.getType(); 
-            switch (wrapper.getStatusCode()) {
+            return processResponse(wrapper, type, contextPath);     
+        } catch (IOException ex) {
+            throw new ConnectorManagerException(String.format(IOEXCEPTION_MESSAGE, ex.getMessage()), ex);
+        }
+    }
+
+    @Override
+    public EntityRegistrationResponse requestFriendship(String requestUserId, String token) throws ConnectorManagerException{ 
+        String contextPath = String.format(ProtectedMethodName.REQUEST_FRIENDSHIP.toString(), requestUserId);
+        try {
+            ApacheResponseWrapper wrapper = connector.performProtectedPostOperation(contextPath, null, token);
+            
+            return processResponse(wrapper, EntityRegistrationResponse.class, contextPath); 
+        } catch (IOException ex) {
+            throw new ConnectorManagerException(String.format(IOEXCEPTION_MESSAGE, ex.getMessage()), ex);
+        }
+    }
+
+    public Page<FriendSearchDescription> findAvailableFriends(int pageNumber, String token) throws ConnectorManagerException {
+        String contextPath = String.format(ProtectedMethodName.FIND_FRIENDS.toString(), pageNumber);
+        try {
+            ApacheResponseWrapper wrapper = connector.performProtectedGetOperation(contextPath, token);
+            Type type = new TypeToken<Page<FriendSearchDescription>>(){}.getType(); 
+            return processResponse(wrapper, type, contextPath); 
+        } catch (IOException ex) {
+            throw new ConnectorManagerException(String.format(IOEXCEPTION_MESSAGE, ex.getMessage()), ex);
+        }
+    }
+    
+    private <T> T processResponse(ApacheResponseWrapper wrapper, Class<T> type, String cxtPath)throws ConnectorManagerException{
+        switch (wrapper.getStatusCode()) {
                 case 200:
-                    Page<DiscoverUserAccount> response = jsonParser
-                            .parseJson(wrapper.getJsonResponse(), type);
-                    
-                    return response; 
+                    T t = jsonParser.parseJson(wrapper.getJsonResponse(), type); 
+                    return t; 
                 case 404:
-                    throw new ConnectorManagerException(String.format(NOT_FOUND, contextPath));
+                    throw new ConnectorManagerException(String.format(NOT_FOUND, cxtPath));
                 case 500:
                     throw new ConnectorManagerException(String.format(SERVER_ERROR, wrapper.getJsonResponse()));
                 default:
@@ -170,9 +146,46 @@ public class ConnectorManagerImpl implements ConnectorManager {
                             wrapper.getStatusCode(), wrapper.getJsonResponse(), wrapper.getContextPath()));
                     throw new ConnectorManagerException(NOT_REGISTERED_EXCEPTION_MESSAGE);
             }
+    }
+    
+    private <T> T processResponse(ApacheResponseWrapper wrapper, Type type, String cxtPath)throws ConnectorManagerException{
+        switch (wrapper.getStatusCode()) {
+                case 200:
+                    T t = jsonParser.parseJson(wrapper.getJsonResponse(), type); 
+                    return t; 
+                case 404:
+                    throw new ConnectorManagerException(String.format(NOT_FOUND, cxtPath));
+                case 500:
+                    throw new ConnectorManagerException(String.format(SERVER_ERROR, wrapper.getJsonResponse()));
+                default:
+                    log.info(String.format(NOT_REGISTERED_STATUS_CODE,
+                            wrapper.getStatusCode(), wrapper.getJsonResponse(), wrapper.getContextPath()));
+                    throw new ConnectorManagerException(NOT_REGISTERED_EXCEPTION_MESSAGE);
+            }
+    }
+
+    public Page<FriendSearchDescription> findAvailableFriends(int pageNumber, String query, String token) throws ConnectorManagerException {
+        String contextPath = String.format(ProtectedMethodName.FIND_FRIENDS_BY_QUERY.toString(), query, pageNumber);
+        try {
+            ApacheResponseWrapper wrapper = connector.performProtectedGetOperation(contextPath, token);
+            Type type = new TypeToken<Page<FriendSearchDescription>>() {
+            }.getType();
+            return processResponse(wrapper, type, contextPath);
         } catch (IOException ex) {
             throw new ConnectorManagerException(String.format(IOEXCEPTION_MESSAGE, ex.getMessage()), ex);
         }
     }
+
+    @Override
+    public EntityRegistrationResponse updateFriendshipRequest(String userId, Boolean accepted, String token) throws ConnectorManagerException{
+        String contextPath = String.format(ProtectedMethodName.UPDATE_FRIENDSHIP.toString(), userId, accepted.toString());
+        try{
+            ApacheResponseWrapper wrapper = connector.performProtectedPostOperation(contextPath, null, token); 
+            return processResponse(wrapper, EntityRegistrationResponse.class, contextPath); 
+        }catch(IOException ex){
+            throw new ConnectorManagerException("Could not update friendship: " + ex.getMessage()); 
+        }
+    }
+    
 
 }

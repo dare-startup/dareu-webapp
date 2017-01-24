@@ -22,7 +22,7 @@ public class DareuAccessDeniedHandler implements AccessDeniedHandler{
     public void handle(HttpServletRequest req, HttpServletResponse res, AccessDeniedException ex) throws IOException, ServletException {
         log.info("AccessDenied: " + ex.getMessage());
         log.info(String.format("LocalizedMessage: %s", ex.getLocalizedMessage()));
-        res.sendRedirect("/error/unauthorized");
+        res.sendRedirect(req.getContextPath() + "/error/unauthorized");
     }
     
 }

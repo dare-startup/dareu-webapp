@@ -11,16 +11,11 @@
         <title>DareÜ</title>
     </head>
     <body>
-        <div class="mdl-js-layout mdl-layout">
-            <%@include file="/shared/nav-bar.jsp" %>
-            <main class="mdl-layout__content">
-                <div class="page-content">
-
-                    <div class="container-fluid">
-                        
-                    </div>
-                </div>
-            </main>
+        <%@include file="/shared/nav-bar.jsp" %>
+        <div class="container">
+            <div class="mdl-card mdl-shadow--4dp center-block main-card">
+                <h5>Admin index page (dashboard)</h5>
+            </div>
         </div>
     </body>
 </html>

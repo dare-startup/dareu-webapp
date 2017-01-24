@@ -6,6 +6,7 @@ import com.dareu.web.security.DareuUserDetailsService;
 import com.dareu.web.security.handler.DareuAccessDeniedHandler;
 import com.dareu.web.security.handler.DareuAuthenticationFailedHandler;
 import com.dareu.web.security.handler.DareuAuthenticationSuccessHandler;
+import com.dareu.web.security.handler.DareuSignoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -44,6 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     
     @Autowired
     private DareuAuthenticationFailedHandler failureHandler;
+    
+    @Autowired
+    private DareuSignoutHandler signoutHandler; 
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder builder)throws Exception{
@@ -54,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/signin", "signup", "/", "/about", "/contact").permitAll()
+                .antMatchers("/signin", "/signup", "/", "/about", "/contact").permitAll()
                 
                 .antMatchers("/error/**").authenticated()
                 .antMatchers("/member/**").hasAnyAuthority("USER", "SPONSOR", "ADMIN")
@@ -67,92 +71,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                     .failureHandler(failureHandler).defaultSuccessUrl("/", true)
                     .successHandler(successHandler)
                 .and()
+                .logout().logoutUrl("/security/signout").deleteCookies("JSESSIONID").clearAuthentication(true)
+                    //.addLogoutHandler(signoutHandler)
+                .and()
                 .csrf()
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
-                
                 ;
     }
-    /**@Configuration
-    @Order(1)
-    public class UserHttpSecurityConfig extends WebSecurityConfigurerAdapter {
-
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .authorizeRequests()
-                    .antMatchers("/member/**").hasRole(SecurityRole.USER.toString())
-                    .and()
-                    .csrf()
-                    .and()
-                    .authenticationProvider(provider)
-                    .formLogin()
-                    .loginPage("/signin")
-                    .loginProcessingUrl("/security/authenticate")
-                    .passwordParameter("password")
-                    .usernameParameter("email")
-                    .failureUrl("/signin?retry")
-                    .successHandler(new DareuAuthenticationSuccessHandler())
-                    .and()
-                    .userDetailsService(new DareuUserDetailsService())
-                    .exceptionHandling()
-                    .accessDeniedPage("/error/unauthorized");
-        }
-    }
-
-    @Configuration
-    @Order(2)
-    public class AdminHttpSecurityConfig extends WebSecurityConfigurerAdapter {
-        
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .authorizeRequests()
-                    .antMatchers("/admin/**").hasRole(SecurityRole.ADMIN.toString())
-                    .and()
-                    .csrf()
-                    .and()
-                    .authenticationProvider(provider)
-                    .formLogin()
-                    .loginPage("/signin")
-                    .loginProcessingUrl("/security/authenticate")
-                    .passwordParameter("password")
-                    .usernameParameter("email")
-                    .failureUrl("/signin?retry")
-                    .successHandler(new DareuAuthenticationSuccessHandler())
-                    .and()
-                    .userDetailsService(new DareuUserDetailsService())
-                    .exceptionHandling()
-                    .accessDeniedPage("/error/unauthorized");
-        }
-    }
-
-    @Configuration
-    @Order(3)
-    public class SponsorHttpSecurityConfig extends WebSecurityConfigurerAdapter {
-        
-        @Override
-        protected void configure(HttpSecurity http) throws Exception {
-            http
-                    .authorizeRequests()
-                    .antMatchers("/sponsor/**").hasRole(SecurityRole.SPONSOR.toString())
-                    .and()
-                    .csrf()
-                    .and()
-                    .authenticationProvider(provider)
-                    .formLogin()
-                    .loginPage("/signin")
-                    .loginProcessingUrl("/security/authenticate")
-                    .passwordParameter("password")
-                    .usernameParameter("email")
-                    .failureUrl("/signin?retry")
-                    .successHandler(new DareuAuthenticationSuccessHandler())
-                    .and()
-                    .userDetailsService(new DareuUserDetailsService())
-                    .exceptionHandling()
-                    .accessDeniedPage("/error/unauthorized");
-        }
-    }**/
     
     @Bean
     public AuthenticationPrincipalArgumentResolver webSecurityExpressionHandler(){

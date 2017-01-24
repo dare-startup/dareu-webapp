@@ -19,6 +19,7 @@ public class DareuUserDetails implements UserDetails{
     private boolean isCredentialsNonExpired; 
     private boolean isEnabled; 
     private String token; 
+    private String id; 
     
     public DareuUserDetails(){
         
@@ -111,6 +112,15 @@ public class DareuUserDetails implements UserDetails{
     public void setToken(String token) {
         this.token = token;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     
     
     

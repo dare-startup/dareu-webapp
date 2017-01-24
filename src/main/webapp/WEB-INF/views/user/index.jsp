@@ -13,7 +13,7 @@
         <%@include file="/shared/nav-bar.jsp"%>
         <div class="container">
             <div class="card main-card">
-                Dashboard
+                <h4 class="center-text">Welcome to your dashboard(Nothing here yet :P)</h4>
             </div>
         </div>
     </body>

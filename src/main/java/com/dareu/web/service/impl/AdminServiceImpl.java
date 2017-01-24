@@ -72,7 +72,10 @@ public class AdminServiceImpl implements AdminService {
             Page<UserAccount> page = connectorManager.getUsersByPage(pageNumber);
             mav.addObject("users", page);
         } catch (ConnectorManagerException ex) {
-
+            //redirect to error via attributes
+            atts.addFlashAttribute("error", 
+                    new ApplicationError(ex.getMessage(), "/admin/dare/category")); 
+            mav.setViewName("/error/appError");
         }
         return mav;
     }

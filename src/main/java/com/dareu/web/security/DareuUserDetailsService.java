@@ -45,9 +45,8 @@ public class DareuUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
-        DareuUserDetails details = null;
+        DareuUserDetails details = new DareuUserDetails();
         if (adminEmail.equals(string)) {
-            details = new DareuUserDetails();
             details.setUsername(string);
             details.setPassword(encryptor.encryptPassword(adminPassword));
             details.setAuthorities(getAdminAuthorities());
@@ -67,8 +66,7 @@ public class DareuUserDetailsService implements UserDetailsService {
                     //parse json 
                     UserAccount account = jsonParser.parseJson(wrapper.getJsonResponse(), UserAccount.class);
 
-                    //create a user details
-                    details = new DareuUserDetails();
+                    
                     details.setUsername(string);
                     details.setPassword(account.getPassword());
                     details.setAuthorities(getUserAuthorities(account));
@@ -77,6 +75,7 @@ public class DareuUserDetailsService implements UserDetailsService {
                     details.setIsEnabled(true);
                     details.setIsCredentialsNonExpired(true);
                     details.setToken(account.getToken()); 
+                    details.setId(account.getId());
                     return details;
                 } else if(wrapper.getStatusCode() == 500){
                     log.severe(String.format("Could not fetch user:\n%s", wrapper.getJsonResponse()));

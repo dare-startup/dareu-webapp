@@ -13,18 +13,18 @@
         <%@include file="/shared/nav-bar.jsp"%>
         <div class="container">
             <div class="card main-card">
-                <h3 class="text-center">Sign in to Dare‹</h3>
-                <form action="/security/authenticate" method="POST">
-                    <div class="form-group">
+                <h4 class="center-text">Sign in to Dare‹</h4>
+                <form action="/dareu/security/authenticate" method="POST">
+                    <div class="form-group short-form-group center">
                         <label for="emailInput">Email</label>
                         <input class="form-control" id="nameInput" type="email" placeholder="Email" name="email">
                     </div>
-                    <div class="form-group">
-                        <label for="passwordInput">Email</label>
+                    <div class="form-group short-form-group center">
+                        <label for="passwordInput">Password</label>
                         <input class="form-control" id="passwordInput" type="password" placeholder="Password" name="password">
                     </div>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Sign in</button>
+                    <button type="submit" class="btn btn-info btn-lg center short-form-button">Sign in</button>
                 </form>
             </div>
         </div>

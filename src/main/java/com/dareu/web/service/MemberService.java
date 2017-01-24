@@ -1,5 +1,6 @@
 package com.dareu.web.service;
 
+import com.dareu.web.dto.response.EntityRegistrationResponse;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -22,9 +23,11 @@ public interface MemberService {
      * get discover users view
      * @param pageNumber
      * @param atts
+     * @param model
      * @return 
      */
-    public ModelAndView discoverUsersView(int pageNumber, RedirectAttributes atts);
+    public ModelAndView discoverUsersView(int pageNumber, RedirectAttributes atts, 
+            Model model, EntityRegistrationResponse response);
 
     /**
      * get discover dares view 
@@ -57,5 +60,22 @@ public interface MemberService {
      * @return 
      */
     public ModelAndView discoverSponsorsView(int pageNumber, RedirectAttributes atts);
+
+    /**
+     * Requests a new friendship
+     * @param userId
+     * @param atts
+     * @return 
+     */
+    public String requestFriendship(String userId, RedirectAttributes atts);
+
+    /**
+     * Process a friendship request to the accepted parameter
+     * @param userId
+     * @param accepted
+     * @param atts
+     * @return 
+     */
+    public String processFriendshipRequest(String userId, Boolean accepted, RedirectAttributes atts);
     
 }

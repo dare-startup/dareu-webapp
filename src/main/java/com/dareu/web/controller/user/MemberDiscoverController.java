@@ -1,10 +1,14 @@
 package com.dareu.web.controller.user;
 
+import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,8 +28,8 @@ public class MemberDiscoverController {
     
     @RequestMapping("users")
     public ModelAndView discoverUsersView(@RequestParam(required = false, defaultValue = "1", name = "pageNumber")int pageNumber, 
-                                        RedirectAttributes atts){
-        return memberService.discoverUsersView(pageNumber, atts); 
+                                        RedirectAttributes atts, Model model, @ModelAttribute("registrationResponse")EntityRegistrationResponse response){
+        return memberService.discoverUsersView(pageNumber, atts, model, response); 
     }
     
     @RequestMapping("dares")
@@ -38,6 +42,16 @@ public class MemberDiscoverController {
     public ModelAndView discoverResponsesView(@RequestParam(required = false, defaultValue = "1", name = "pageNumber")int pageNumber, 
                                         RedirectAttributes atts){
         return memberService.discoverResponsesView(pageNumber, atts); 
+    }
+    
+    @RequestMapping(value = "users/request/{userId}", method = RequestMethod.POST)
+    public String requestFriendship(@PathVariable(name = "userId", required = true)String userId, RedirectAttributes atts){
+        return memberService.requestFriendship(userId, atts); 
+    }
+    
+    @RequestMapping(value = "users/request/{userId}")
+    public String friendshipRequestResponse(@RequestParam("accepted")Boolean accepted, @PathVariable(name = "userId", required = true)String userId, RedirectAttributes atts){
+        return memberService.processFriendshipRequest(userId, accepted, atts); 
     }
     
     @RequestMapping("trending")

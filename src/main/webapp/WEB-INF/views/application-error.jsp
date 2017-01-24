@@ -13,10 +13,10 @@
         <%@include file="/shared/empty-nav-bar.jsp"%>
         <div class="container">
             <div class="card main-card">
-                <img src="/resources/img/sad.png" width="300" height="300" class="img-thumbnail center">
-                <h4 class="text-center">There has been an error processing your request</h4>
-                <h5 class="text-center">${errorMessage}</h5>
-                <a href="${redirect}">Return and try again</a>
+                <img src="${pageContext.request.contextPath}/resources/img/sad.png" width="300" height="300" class="img-thumbnail center">
+                <h4 class="center-text">There has been an error processing your request</h4>
+                <h5 class="center-text">${errorMessage}</h5>
+                <a href="${redirect}" class="center">Return and try again</a>
             </div>
         </div>
     </body>

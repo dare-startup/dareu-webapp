@@ -23,6 +23,7 @@ public interface AdminService {
      * returns a configuration view 
      * @param model
      * @param pageNumber
+     * @param atts
      * @return 
      */
     public ModelAndView configurationView(Model model, int pageNumber, RedirectAttributes atts); 

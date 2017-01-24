@@ -8,6 +8,7 @@ import com.dareu.web.dto.security.PasswordEncryptor;
 import com.dareu.web.conn.ApacheConnectorService;
 import com.dareu.web.service.DefaultAccountService;
 import com.dareu.web.conn.cxt.JsonParserService;
+import com.dareu.web.service.AbstractService;
 import java.io.IOException;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author jose.rubalcaba
  */
 @Component
-public class DefaultAccountServiceImpl implements DefaultAccountService{
+public class DefaultAccountServiceImpl extends AbstractService implements DefaultAccountService{
     
     private static final Logger log = Logger.getLogger(DefaultAccountServiceImpl.class.getName()); 
     
@@ -40,12 +41,12 @@ public class DefaultAccountServiceImpl implements DefaultAccountService{
 
     @Override
     public ModelAndView defaultView() {
-        return new ModelAndView("index"); 
+        return new ModelAndView(getView(JspView.DEFAULT_INDEX)); 
     }
 
     @Override
     public ModelAndView signinView() {
-        return new ModelAndView("signin"); 
+        return new ModelAndView(getView(JspView.SIGNIN)); 
     }
 
     @Override

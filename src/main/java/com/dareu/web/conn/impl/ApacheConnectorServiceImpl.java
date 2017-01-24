@@ -68,8 +68,28 @@ public class ApacheConnectorServiceImpl implements ApacheConnectorService {
         return client.execute(get, new ApacheConnectionResponseHandler(methodName)); 
     }
 
-    public ApacheResponseWrapper performProtectedPostOperation(String methodName, Object postEntity, String token) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ApacheResponseWrapper performProtectedPostOperation(String contextPath, Object postEntity, String token) throws IOException {
+       String url = host + contextPath;
+        HttpPost post = new HttpPost(url);
+        post.setHeader("Content-Type", "application/json");
+        post.setHeader("Accept", "application/json");
+        post.setHeader("Authorization", token);
+        String json = jsonParser.serialize(postEntity);
+        HttpEntity entity = null; 
+        try{
+            if(postEntity != null){
+                entity = new StringEntity(json);
+                post.setEntity(entity);
+            }
+            log.info(String.format("Creating POST request to: %s\nEntity\n%s", contextPath, json));
+            return client.execute(post, new ApacheConnectionResponseHandler(contextPath));
+        }catch(UnsupportedEncodingException ex){
+            log.severe(String.format("UnsupportedEncondingException: %s", ex.getMessage()));
+            return null; 
+        }catch(IOException ex){
+            log.severe(String.format("IOException: %s", ex.getMessage()));
+            return null; 
+        }
     }
     
     private ApacheResponseWrapper createAdminGetRequest(String contextPath) throws IOException{
