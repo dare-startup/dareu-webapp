@@ -6,24 +6,18 @@ import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DiscoverUserAccount;
 import com.dareu.web.dto.response.entity.FriendSearchDescription;
 import com.dareu.web.dto.response.entity.Page;
-import com.dareu.web.dto.response.entity.UserAccount;
+import com.dareu.web.dto.response.entity.UnacceptedDare;
 import com.dareu.web.exception.ApplicationError;
 import com.dareu.web.exception.ConnectorManagerException;
 import com.dareu.web.mgr.ConnectorManager;
 import com.dareu.web.security.DareuUserDetails;
 import com.dareu.web.service.AbstractService;
 import com.dareu.web.service.MemberService;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -39,6 +33,8 @@ public class MemberServiceImpl  extends AbstractService implements MemberService
     
     @Value("#{servletContext.contextPath}")
     protected String contextPath; 
+    
+    private static final Logger log = Logger.getLogger(MemberService.class.getName());
     
     public MemberServiceImpl() {
     }
@@ -141,6 +137,50 @@ public class MemberServiceImpl  extends AbstractService implements MemberService
                             contextPath + "/member/discover/users"));
             return getRedirect(Redirect.ERROR_REDIRECT);
         }
+    }
+
+    public String createDare(CreateDareRequest request, RedirectAttributes atts) {
+        String token = getDetails().getToken();
+        try{
+            EntityRegistrationResponse response = connector.createDare(request, token);
+            atts.addFlashAttribute(MemberService.REGISTRATION_RESPONSE, response);
+            atts.addFlashAttribute(MemberService.SUCCESS_TYPE, token);
+            return getRedirect(Redirect.REDIRECT_MEMBER_SUCESS);
+        }catch(ConnectorManagerException ex){
+            atts.addFlashAttribute("error", new ApplicationError("Could not create dare",
+                            contextPath + "/member/"));
+            return getRedirect(Redirect.ERROR_REDIRECT);
+        }
+    }
+
+    public ModelAndView defaultView() {
+        String token = getDetails().getToken();
+        ModelAndView mav = new ModelAndView("user/index");
+        try{
+            UnacceptedDare unacceptedDare = connector.getUnacceptedDare(token); 
+            if(unacceptedDare != null)
+                mav.addObject("unacceptedDare", unacceptedDare);
+            
+        }catch(ConnectorManagerException ex){
+            log.severe("Error on defaultView: " + ex.getMessage());
+        }
+        return mav; 
+    }
+
+    public ModelAndView hotView() {
+        return new ModelAndView("user/hot");
+    }
+
+    public ModelAndView successView(String successType, EntityRegistrationResponse response) {
+        ModelAndView mav = new ModelAndView("success");
+        mav.addObject(MemberService.SUCCESS_TYPE, successType);
+        mav.addObject(MemberService.REGISTRATION_RESPONSE, response);
+        
+        return mav;
+    }
+
+    public ModelAndView anchoredView() {
+        return new ModelAndView("user/anchored"); 
     }
     
 }

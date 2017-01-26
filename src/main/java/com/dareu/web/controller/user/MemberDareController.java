@@ -1,6 +1,7 @@
 package com.dareu.web.controller.user;
 
 import com.dareu.web.dto.request.CreateDareRequest;
+import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,11 @@ public class MemberDareController {
     
     @RequestMapping(value="create", method = RequestMethod.POST)
     public String createDare(@ModelAttribute("dare") CreateDareRequest request, RedirectAttributes atts){
-        return "redirect:/"; 
+        return memberService.createDare(request, atts);
+    }
+    
+    @RequestMapping(value = "confirm", method = RequestMethod.POST)
+    public String confirmDareRequest(@ModelAttribute("dareConfirmation")DareConfirmationRequest coinfirmationRequest){
+        return "";
     }
 }

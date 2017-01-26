@@ -6,12 +6,14 @@ import com.dareu.web.conn.ApacheResponseWrapper;
 import com.dareu.web.conn.ProtectedMethodName;
 import com.dareu.web.conn.cxt.JsonParserService;
 import com.dareu.web.dto.request.CreateCategoryRequest;
+import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
 import com.dareu.web.dto.response.entity.DiscoverUserAccount;
 import com.dareu.web.dto.response.entity.FriendSearchDescription;
 import com.dareu.web.dto.response.entity.Page;
+import com.dareu.web.dto.response.entity.UnacceptedDare;
 import com.dareu.web.dto.response.entity.UserAccount;
 import com.dareu.web.exception.ConnectorManagerException;
 import com.dareu.web.mgr.ConnectorManager;
@@ -135,8 +137,9 @@ public class ConnectorManagerImpl implements ConnectorManager {
     private <T> T processResponse(ApacheResponseWrapper wrapper, Class<T> type, String cxtPath)throws ConnectorManagerException{
         switch (wrapper.getStatusCode()) {
                 case 200:
-                    T t = jsonParser.parseJson(wrapper.getJsonResponse(), type); 
-                    return t; 
+                    if(! wrapper.getJsonResponse().isEmpty())
+                        return jsonParser.parseJson(wrapper.getJsonResponse(), type); 
+                    else return null; 
                 case 404:
                     throw new ConnectorManagerException(String.format(NOT_FOUND, cxtPath));
                 case 500:
@@ -184,6 +187,26 @@ public class ConnectorManagerImpl implements ConnectorManager {
             return processResponse(wrapper, EntityRegistrationResponse.class, contextPath); 
         }catch(IOException ex){
             throw new ConnectorManagerException("Could not update friendship: " + ex.getMessage()); 
+        }
+    }
+
+    public EntityRegistrationResponse createDare(CreateDareRequest request, String token) throws ConnectorManagerException {
+        String contextPath = ProtectedMethodName.CREATE_DARE.toString();
+        try{
+            ApacheResponseWrapper wrapper = connector.performProtectedPostOperation(contextPath, request, token);
+            return processResponse(wrapper, EntityRegistrationResponse.class, contextPath);
+        }catch(IOException ex){
+            throw new ConnectorManagerException("Could not create new dare: " + ex.getMessage(), ex);
+        }
+    }
+
+    public UnacceptedDare getUnacceptedDare(String token) throws ConnectorManagerException {
+        String contextPath = ProtectedMethodName.UNACCEPTED_DARE.toString();
+        try{
+            ApacheResponseWrapper wrapper = connector.performProtectedGetOperation(contextPath, token);
+            return processResponse(wrapper, UnacceptedDare.class, contextPath);
+        }catch(IOException ex){
+            throw new ConnectorManagerException("Could not get unaccepted dare: " + ex.getMessage(), ex);
         }
     }
     

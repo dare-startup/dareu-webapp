@@ -25,6 +25,15 @@
     margin: 0 auto 2%;
 }
 
+.notification-card{
+    padding-left: 5%; 
+    padding-right: 5%; 
+    padding-bottom: 5%;
+    margin-bottom: 5%;
+    width: 50%;
+    margin: 0 auto 2%;
+}
+
 .element-padding-bottom{
     padding-bottom: 5%;
 }
@@ -58,4 +67,10 @@ a.button-link {
 
     text-decoration: none;
     color: initial;
+}
+
+.dare-description-list{
+    list-style-type: none;
+    width:100%;
+    margin: auto;
 }

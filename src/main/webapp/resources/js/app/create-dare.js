@@ -6,14 +6,30 @@ function CreateDareViewModel() {
     var self = this;
     self.friendDescriptions = ko.observableArray([]);
     self.loading = ko.observable(false);
+    self.selectedUser = ko.observable(false);
+    self.selectedUserName = ko.observable();
+    self.selectedUserId = ko.observable();
+    self.removeSelectedUser = function(){
+        //remove all selected user variables 
+        self.selectedUser(false);
+        self.selectedUserName('');
+        self.selectedUserId('');
+    }
+    
     self.selectUser = function(user){
-        console.log(user); 
+        self.selectedUser(true);
+        //select user 
+        self.selectedUserName(user.name);
+        self.selectedUserId(user.id);
+        //hides modal 
+        $('#findFriends').modal('hide'); 
     }; 
     self.searchText = ko.observable(''); 
     self.searchText.subscribe(function(){
+        if(self.searchText() === '')
+            self.friendDescriptions.removeAll(); 
         getFriendsList(self); 
     }); 
-    self.friendDescriptions = ko.observableArray([]); 
 }
 
 function getFriendsList(self) {
@@ -38,53 +54,16 @@ function getFriendsList(self) {
         method: 'GET',
         url: path,
         success: function (response) {
+            //remove all rows in search table 
+            self.friendDescriptions.removeAll(); 
             var items = response.items; 
-            for(var i = 0; i < items.length; i ++)
-                self.friendDescriptions.push(items[i]); 
-            //processResponse(response);
-            self.loading(false); 
+            $.each(items, function(key, value){
+                self.friendDescriptions.push(value); 
+            }); 
+            self.loading(false);  
         },
         error: function (response) {
             console.log(response);
         }
     });
-}
-function processResponse(response) {
-    //clear table 
-    $("#friendsTable tr").remove();
-
-    $("#friendsTable").append("<thead><td class='table-data'></td><td class='table-data'>Name</td><td class='table-data'></td></thead>")
-
-    var row = null;
-    var imageTd = null;
-    var nameTd = null;
-    var selectTd = null;
-    var image = null;
-    var form = null;
-    var button = null;
-    var csrfToken = $('#csrfToken').val();
-    if (response.items != null && response.items.length > 0) {
-        $.each(response.items, function (index, value) {
-            //create a new row 
-            row = $('<tr></tr>');
-            imageTd = $('<td></td>').addClass('table-data');
-            nameTd = $('<td></td>').addClass('table-data');
-            selectTd = $('<td></td>').addClass('table-data');
-
-            image = $('<img>').attr('src', value.imageUrl);
-            $(imageTd).append(image);
-            $(nameTd).append(value.name);
-            $(selectTd).append("<form action='' class='form-inline'>")
-                    .append("<button type='submit' class='btn btn-success'>Select</button>")
-                    .append("<input type='hidden' name='_csrf' value='" + csrfToken + "'>")
-                    .append("</form>");
-
-            row.append(imageTd);
-            row.append(nameTd);
-            row.append(selectTd);
-            $('#friendsTable').append(row);
-        });
-    } else {
-
-    }
 }

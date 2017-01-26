@@ -1,5 +1,6 @@
 package com.dareu.web.service;
 
+import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,7 +11,37 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author jose.rubalcaba
  */
 public interface MemberService {
-
+    
+    //constants
+    public static final String SUCCESS_TYPE = "successType";
+    public static final String REGISTRATION_RESPONSE = "registrationResponse"; 
+    
+    /**
+     * Returns a member success view
+     * @param successType
+     * @param response
+     * @return 
+     */
+    public ModelAndView successView(String successType, EntityRegistrationResponse response);
+    
+    /**
+     * Returns a member index view
+     * @return 
+     */
+    public ModelAndView defaultView();
+    
+    /**
+     * Returns a member hot view
+     * @return 
+     */
+    public ModelAndView hotView();
+    
+    /**
+     * Returns a member anchored view
+     * @return 
+     */
+    public ModelAndView anchoredView();
+    
     /**
      * creates a new dare for a member user
      * @param model
@@ -77,5 +108,14 @@ public interface MemberService {
      * @return 
      */
     public String processFriendshipRequest(String userId, Boolean accepted, RedirectAttributes atts);
+    
+    /**
+     * Creates a new dare 
+     * @param request
+     * @param atts
+     * @return 
+     */
+    public String createDare(CreateDareRequest request, RedirectAttributes atts);
+    
     
 }

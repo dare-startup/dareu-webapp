@@ -17,7 +17,7 @@
         <%@include file="/shared/nav-bar.jsp" %>
         <div class="container">
             <div class="card main-card">
-                <h3 class="center-text">This site is under construction right now :D</h3>
+                <h3 class="center-text">This site is under construction right now</h3>
             </div>
         </div>
     </body>

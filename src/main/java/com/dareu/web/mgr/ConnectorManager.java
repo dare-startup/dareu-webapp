@@ -1,12 +1,14 @@
 package com.dareu.web.mgr;
 
 import com.dareu.web.dto.request.CreateCategoryRequest;
+import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
 import com.dareu.web.dto.response.entity.DiscoverUserAccount;
 import com.dareu.web.dto.response.entity.FriendSearchDescription;
 import com.dareu.web.dto.response.entity.Page;
+import com.dareu.web.dto.response.entity.UnacceptedDare;
 import com.dareu.web.dto.response.entity.UserAccount;
 import com.dareu.web.exception.ConnectorManagerException;
 import org.springframework.stereotype.Component;
@@ -102,4 +104,21 @@ public interface ConnectorManager {
      * @return  
      */
     public EntityRegistrationResponse updateFriendshipRequest(String userId, Boolean accepted, String token)throws ConnectorManagerException;
+    
+    /**
+     * Creates a new dare
+     * @param request
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public EntityRegistrationResponse createDare(CreateDareRequest request, String token)throws ConnectorManagerException;
+    
+    /**
+     * Gets an unaccepted dare if exists
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public UnacceptedDare getUnacceptedDare(String token)throws ConnectorManagerException;
 }

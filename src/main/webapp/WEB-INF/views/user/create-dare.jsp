@@ -8,8 +8,8 @@
 <html>
     <head>
         <%@include file="/shared/resources-import.jsp"%>
-        <script src="${pageContext.request.contextPath}/resources/js/app/create-dare.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/resources/js/knockout.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/app/create-dare.js" type="text/javascript"></script>
         <title>Create dare</title>
     </head>
     <body>
@@ -18,7 +18,7 @@
             <div class="card main-card">
                 <h4 class="center-text">Create a new dare</h4>
 
-                <form:form action="/member/dare/create" method="POST" commandName="dare">
+                <form:form action="/dareu/member/dare/create" method="POST" commandName="dare">
                     <div class="form-group short-form-group center">
                         <form:label path="name">Dare name</form:label>
                         <form:input cssClass="form-control" path="name" type="text"></form:input>
@@ -39,7 +39,13 @@
                         <form:input path="timer" type="number" cssClass="form-control"></form:input>
                         </div>
                         <div class="form-group short-form-group center">
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#findFriends">Find friends</button>
+                            <button type="button" data-bind="visible: !selectedUser()" class="btn btn-secondary" data-toggle="modal" data-target="#findFriends">Find friends</button>
+                            <div class="alert alert-info" data-bind="visible: selectedUser()">
+                                <h5>Selected user</h5>
+                                <p data-bind="text: selectedUserName"></p>
+                                <button id="removeSelectedUserButton" data-bind="click: removeSelectedUser" type="button" class="btn btn-danger btn-sm">Remove</button>
+                            </div>
+                        <input name="friendId" type="hidden" data-bind="value: selectedUserId"/>
                         </div>
                         <input id="csrfToken" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <c:choose>
@@ -66,31 +72,31 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group center" style="width:70%;">
-                            <input placeholder="Search your friends by name" id="findFriendsSearch" class="form-control" data-bind="text: searchText, value: searchText,event: { valueUpdate: 'afterkeydown'}, text: searchText">
+                            <input placeholder="Search your friends by name" id="findFriendsSearch" class="form-control" data-bind="textInput: searchText, value: searchText,event: { valueUpdate: 'afterkeydown'}, text: searchText">
                         </div>
                         
-                        <table id="friendsTable" class="table table-hover" data-bind="visible: friendDescriptions.length > 0 ">
+                        <table id="friendsTable" class="table table-hover" data-bind="visible: friendDescriptions().length !== 0">
                                     <thead>
                                         <tr>
                                             <td class="table-data"></td>
-                                            <td class="table-data">Name</td>
+                                            <td class="table-data"></td>
                                             <td class="table-data"></td>
                                         </tr>
                                     </thead>
-                                    <tbody data-bind="foreach: {data: friendDescriptions, as 'desc'} ">
+                                    <tbody data-bind="foreach: friendDescriptions ">
                                         <tr>
-                                            <td>
-                                                <img data-bind="attr: { src: desc.imageUrl }" width="50" height="50">
+                                            <td class="table-data">
+                                                <img data-bind="attr: { src: imageUrl }" width="50" height="50">
                                             </td>
-                                            <td data-bind="text: desc.name"></td>
-                                            <td>
+                                            <td class="table-data" data-bind="text: name"></td>
+                                            <td class="table-data">
                                                 <button type="button" class="btn btn-success" data-bind="click: $parent.selectUser">Select</button>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                         
-                        <h5 class="center-text" data-bind="visible: friendDescriptions.length === 0">No results</h5>
+                        <h5 class="center-text" data-bind="visible: friendDescriptions().length === 0">Provide a search key</h5>
                     </div>
                 </div>
             </div>
