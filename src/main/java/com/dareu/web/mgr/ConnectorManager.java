@@ -2,7 +2,9 @@ package com.dareu.web.mgr;
 
 import com.dareu.web.dto.request.CreateCategoryRequest;
 import com.dareu.web.dto.request.CreateDareRequest;
+import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
+import com.dareu.web.dto.response.UpdatedEntityResponse;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
 import com.dareu.web.dto.response.entity.DiscoverUserAccount;
@@ -121,4 +123,22 @@ public interface ConnectorManager {
      * @throws ConnectorManagerException 
      */
     public UnacceptedDare getUnacceptedDare(String token)throws ConnectorManagerException;
+    
+    /**
+     * Confirms a dare request to the accepted value
+     * @param request
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public UpdatedEntityResponse confirmDareRequest(DareConfirmationRequest request, String token)throws ConnectorManagerException;
+    
+    /**
+     * 
+     * @param pageNumber
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public Page<DareDescription> discoverDares(int pageNumber, String token)throws ConnectorManagerException; 
 }

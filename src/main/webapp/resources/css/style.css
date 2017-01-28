@@ -26,9 +26,9 @@
 }
 
 .notification-card{
-    padding-left: 5%; 
-    padding-right: 5%; 
-    padding-bottom: 5%;
+    padding-left: 1%; 
+    padding-right: 1%; 
+    padding-bottom: 1%;
     margin-bottom: 5%;
     width: 50%;
     margin: 0 auto 2%;
@@ -41,6 +41,11 @@
 .table-data{
     vertical-align: middle !important;
     text-align: center;
+}
+
+.dareu-table{
+    width: 80%;
+    margin: auto; 
 }
 
 #searchBox{
@@ -73,4 +78,17 @@ a.button-link {
     list-style-type: none;
     width:100%;
     margin: auto;
+}
+
+table > thead > tr{
+    background-color: #373A3C;
+    color: white; 
+}
+
+table > thead > tr > td{
+    text-align: center; 
+}
+
+table > tbody > tr > td{
+    text-align: center; 
 }

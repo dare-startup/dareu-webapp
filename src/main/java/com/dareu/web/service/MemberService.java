@@ -1,6 +1,7 @@
 package com.dareu.web.service;
 
 import com.dareu.web.dto.request.CreateDareRequest;
+import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
@@ -116,6 +117,14 @@ public interface MemberService {
      * @return 
      */
     public String createDare(CreateDareRequest request, RedirectAttributes atts);
+
+    /**
+     * Confirms a dare request to an accepted value
+     * @param confirmationRequest
+     * @param atts
+     * @return 
+     */
+    public String confirmDareRequest(DareConfirmationRequest confirmationRequest, RedirectAttributes atts);
     
     
 }

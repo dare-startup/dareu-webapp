@@ -34,7 +34,8 @@ public class MemberDareController {
     }
     
     @RequestMapping(value = "confirm", method = RequestMethod.POST)
-    public String confirmDareRequest(@ModelAttribute("dareConfirmation")DareConfirmationRequest coinfirmationRequest){
-        return "";
+    public String confirmDareRequest(@ModelAttribute("dareConfirmation")DareConfirmationRequest confirmationRequest, 
+                                    RedirectAttributes atts){
+        return memberService.confirmDareRequest(confirmationRequest, atts);
     }
 }

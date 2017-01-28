@@ -97,6 +97,8 @@
                                 </c:forEach>
                             </tbody>
                         </table>
+                        <c:set var="pagination" value="${paginationData}" scope="request"/>
+                        <jsp:include page="/shared/pagination.jsp"/>
                     </c:otherwise>
                 </c:choose>
             </div>

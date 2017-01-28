@@ -22,17 +22,17 @@
                         <li><b>Dare Description:</b> ${unacceptedDare.description}</li>
                         <li><b>Creation date:</b> ${unacceptedDare.creationDate}</li>
                     </ul>
-                    <form style="width:80%; margin:auto; padding: 2%;">
+                    <form action="dare/confirm" method="POST" style="width:80%; margin:auto; padding: 2%;">
                         <input type="hidden" name="dareId" value="${unacceptedDare.id}">
                         <input id="csrfToken" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                         <input type="hidden" name="accepted" value="true">
-                        <button class="btn btn-success btn-lg" type="button" style="width: 90%;">Accept</button>
+                        <button class="btn btn-success btn-lg" type="submit" style="width: 90%;">Accept</button>
                     </form>
-                    <form action="/dareu/" style="width:80%; margin:auto; padding: 2%;">
+                    <form action="dare/confirm" method="POST" style="width:80%; margin:auto; padding: 2%;">
                         <input type="hidden" name="dareId" value="${unacceptedDare.id}">
                         <input id="csrfToken" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                         <input type="hidden" name="accepted" value="true">
-                        <button class="btn btn-danger btn-lg" type="button" style="width: 90%;">Decline</button>
+                        <button class="btn btn-danger btn-lg" type="submit" style="width: 90%;">Decline</button>
                     </form>
                 </div>
             </c:if> 

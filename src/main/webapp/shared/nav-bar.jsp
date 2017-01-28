@@ -57,7 +57,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/member/hot">Hot</a>
+                <a class="nav-link" href="/dareu/member/hot">Hot</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://dareu.com" id="discoverDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>

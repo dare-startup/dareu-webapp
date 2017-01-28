@@ -19,5 +19,6 @@
 <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
 <!-- tag libs -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  

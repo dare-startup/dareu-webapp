@@ -11,11 +11,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
  */
 public abstract class AbstractService {
     
-    
-    
     protected String getView(JspView view){
         return view.toString(); 
     }
+    
+    
     
     protected String getRedirect(Redirect redirect){
         return redirect.toString(); 
@@ -31,7 +31,8 @@ public abstract class AbstractService {
     protected enum Redirect{
         ERROR_REDIRECT("redirect:/error/appError"), 
         REDIRECT_DISCOVER_USERS("redirect:/member/discover/users"), 
-        REDIRECT_MEMBER_SUCESS("redirect:/member/success"); 
+        REDIRECT_MEMBER_SUCESS("redirect:/member/success"), 
+        REDIRECT_INDEX("redirect:/"); 
         
         String path; 
         Redirect(String value){

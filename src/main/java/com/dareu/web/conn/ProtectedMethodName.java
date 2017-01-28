@@ -10,7 +10,9 @@ public enum ProtectedMethodName {
     FIND_FRIENDS_BY_QUERY("/account/friends/find?q=%s&pageNumber=%d"), 
     UPDATE_FRIENDSHIP("/account/friendship/%s/update?accepted=%s"), 
     CREATE_DARE("/dare/create"), 
-    UNACCEPTED_DARE("/dare/unaccepted");
+    UNACCEPTED_DARE("/dare/unaccepted"), 
+    DARE_CONFIRMATION("/dare/confirm"), 
+    DISCOVER_DARES("/dare/discover?pageNumber=%d");
     String contextPath; 
     ProtectedMethodName(String value){
         this.contextPath = value; 

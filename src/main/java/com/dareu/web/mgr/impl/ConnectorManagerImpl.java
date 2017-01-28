@@ -7,7 +7,9 @@ import com.dareu.web.conn.ProtectedMethodName;
 import com.dareu.web.conn.cxt.JsonParserService;
 import com.dareu.web.dto.request.CreateCategoryRequest;
 import com.dareu.web.dto.request.CreateDareRequest;
+import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
+import com.dareu.web.dto.response.UpdatedEntityResponse;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
 import com.dareu.web.dto.response.entity.DiscoverUserAccount;
@@ -207,6 +209,27 @@ public class ConnectorManagerImpl implements ConnectorManager {
             return processResponse(wrapper, UnacceptedDare.class, contextPath);
         }catch(IOException ex){
             throw new ConnectorManagerException("Could not get unaccepted dare: " + ex.getMessage(), ex);
+        }
+    }
+
+    public UpdatedEntityResponse confirmDareRequest(DareConfirmationRequest request, String token) throws ConnectorManagerException {
+        String contextPath = ProtectedMethodName.DARE_CONFIRMATION.toString();
+        try{
+            ApacheResponseWrapper wrapper = connector.performProtectedPostOperation(contextPath, request, token);
+            return processResponse(wrapper, UpdatedEntityResponse.class, contextPath);
+        }catch(IOException ex){
+            throw new ConnectorManagerException("Could not confirm dare: " + ex.getMessage(), ex);
+        }
+    }
+
+    public Page<DareDescription> discoverDares(int pageNumber, String token) throws ConnectorManagerException {
+        String cxtPath = String.format(ProtectedMethodName.DISCOVER_DARES.toString(), pageNumber);
+        Type type = new TypeToken<Page<DareDescription>>(){}.getType();
+        try{
+            ApacheResponseWrapper wrapper = connector.performProtectedGetOperation(cxtPath, token);
+            return processResponse(wrapper, type, cxtPath);
+        }catch(IOException ex){
+            throw new ConnectorManagerException(cxtPath); 
         }
     }
     
