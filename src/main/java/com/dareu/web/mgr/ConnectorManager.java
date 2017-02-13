@@ -5,6 +5,7 @@ import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.dto.response.UpdatedEntityResponse;
+import com.dareu.web.dto.response.entity.AccountProfile;
 import com.dareu.web.dto.response.entity.ActiveDare;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
@@ -180,4 +181,12 @@ public interface ConnectorManager {
      * @throws ConnectorManagerException 
      */
     public EntityRegistrationResponse uploadDareResponse(InputStream stream, String dareId, String comment, String token) throws ConnectorManagerException; 
+
+    /**
+     * Get a logged in profile
+     * @param token
+     * @return 
+     * @throws ConnectorManagerException 
+     */
+    public AccountProfile currentUserProfile(String token)throws ConnectorManagerException;
 }

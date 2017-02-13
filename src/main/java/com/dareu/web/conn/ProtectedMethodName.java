@@ -16,7 +16,8 @@ public enum ProtectedMethodName {
     DISCOVER_DARES("/dare/discover?pageNumber=%d"),
     ACTIVE_DARE("/dare/active"), 
     GET_IMAGE_PROFILE("/account/profile/image"), 
-    UPLOAD_DARE_RESPONSE("/dare/response/create");
+    UPLOAD_DARE_RESPONSE("/dare/response/create"),
+    ME("/account/me");
     String contextPath; 
     ProtectedMethodName(String value){
         this.contextPath = value; 

@@ -4,6 +4,7 @@ import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.dto.response.UpdatedEntityResponse;
+import com.dareu.web.dto.response.entity.AccountProfile;
 import com.dareu.web.dto.response.entity.ActiveDare;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
@@ -319,13 +320,19 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
     public ModelAndView currentUserProfile() throws DareuWebApplicationException {
         ModelAndView mav = new ModelAndView("user/profile"); 
         try{
-            connector.
+            String token = getDetails().getToken();
+            AccountProfile profile = connector.currentUserProfile(token); 
+            mav.addObject("profile", profile); 
+            return mav; 
         }catch(ConnectorManagerException ex){
-            
+            throw new DareuWebApplicationException(
+                    new ApplicationError(ApplicationError.ErrorCode.NETWORK_CONNECTION, 
+                            ex.getMessage(), contextPath + "/"));
         }catch(Exception ex){
-            
+            throw new DareuWebApplicationException(
+                    new ApplicationError(ApplicationError.ErrorCode.IO_ERROR, 
+                            ex.getMessage(), contextPath + "/"));
         }
-        return mav; 
     }
 
     public ModelAndView settingsView() throws DareuWebApplicationException {

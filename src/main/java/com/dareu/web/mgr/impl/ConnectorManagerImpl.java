@@ -10,6 +10,7 @@ import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.dto.response.UpdatedEntityResponse;
+import com.dareu.web.dto.response.entity.AccountProfile;
 import com.dareu.web.dto.response.entity.ActiveDare;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
@@ -316,6 +317,17 @@ public class ConnectorManagerImpl implements ConnectorManager {
         } catch (IOException ex) {
             throw new ConnectorManagerException(ex.getMessage());
 
+        }
+    }
+
+    @Override
+    public AccountProfile currentUserProfile(String token) throws ConnectorManagerException {
+        String path = ProtectedMethodName.ME.toString();
+        try{
+            ApacheResponseWrapper wrapper = connector.performProtectedGetOperation(path, token); 
+            return processResponse(wrapper, AccountProfile.class, path);
+        }catch(IOException ex){
+            throw new ConnectorManagerException(ex.getMessage()); 
         }
     }
 
