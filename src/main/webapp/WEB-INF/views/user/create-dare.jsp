@@ -15,7 +15,7 @@
     <body>
         <%@include file="/shared/nav-bar.jsp"%>
         <div class="container">
-            <div class="card main-card">
+            <div class="card notification-card elevated">
                 <h4 class="center-text">Create a new dare</h4>
 
                 <form:form action="/dareu/member/dare/create" method="POST" commandName="dare">
@@ -39,8 +39,8 @@
                         <form:input path="timer" type="number" cssClass="form-control"></form:input>
                         </div>
                         <div class="form-group short-form-group center">
-                            <button type="button" data-bind="visible: !selectedUser()" class="btn btn-secondary" data-toggle="modal" data-target="#findFriends">Find friends</button>
-                            <div class="alert alert-info" data-bind="visible: selectedUser()">
+                            <button type="button" data-bind="visible: !selectedUser()" class="btn btn-secondary elevated" data-toggle="modal" data-target="#findFriends">Find friends</button>
+                            <div class="alert alert-info" data-bind="visible: selectedUser()"> 
                                 <h5>Selected user</h5>
                                 <p data-bind="text: selectedUserName"></p>
                                 <button id="removeSelectedUserButton" data-bind="click: removeSelectedUser" type="button" class="btn btn-danger btn-sm">Remove</button>
@@ -50,10 +50,10 @@
                         <input id="csrfToken" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                     <c:choose>
                         <c:when test="${not empty friends.items}">
-                            <button type="submit" class="btn btn-info btn-lg short-form-button center">Create</button>
+                            <button type="submit" class="btn btn-info btn-lg short-form-button center elevated">Create</button>
                         </c:when>
                         <c:otherwise>
-                            <button type="submit" class="btn btn-info btn-lg short-form-button center" disabled>Create</button>
+                            <button type="submit" class="btn btn-info btn-lg short-form-button center elevated" disabled>Create</button>
                         </c:otherwise>
                     </c:choose>
                 </form:form>
@@ -86,7 +86,7 @@
                                     <tbody data-bind="foreach: friendDescriptions ">
                                         <tr>
                                             <td class="table-data">
-                                                <img data-bind="attr: { src: imageUrl }" width="50" height="50">
+                                                <img class="image-profile" data-bind="attr: { src: imageUrl, id: id}" width="50" height="50">
                                             </td>
                                             <td class="table-data" data-bind="text: name"></td>
                                             <td class="table-data">

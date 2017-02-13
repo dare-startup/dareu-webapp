@@ -13,7 +13,7 @@
     <body>
         <%@include file="/shared/empty-nav-bar.jsp"%>
         <div class="container">
-            <div class="card main-card">
+            <div class="card notification-card elevated">
                 <img src="/dareu/resources/img/unauthorized.png" width="300" height="300" class="img-thumbnail center">
                 <h4 class="center-text">Looks like you are not supposed to be here</h4>
                 <a href="${request.getContextPath()}/" class="center-text">Return to where you belong now</a>

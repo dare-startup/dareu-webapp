@@ -3,7 +3,10 @@ package com.dareu.web.service;
 import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
+import com.dareu.web.exception.DareuWebApplicationException;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -12,10 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author jose.rubalcaba
  */
 public interface MemberService {
-    
-    //constants
-    public static final String SUCCESS_TYPE = "successType";
-    public static final String REGISTRATION_RESPONSE = "registrationResponse"; 
     
     /**
      * Returns a member success view
@@ -28,20 +27,23 @@ public interface MemberService {
     /**
      * Returns a member index view
      * @return 
+     * @throws com.dareu.web.exception.DareuWebApplicationException 
      */
-    public ModelAndView defaultView();
+    public ModelAndView defaultView()throws DareuWebApplicationException;
     
     /**
      * Returns a member hot view
      * @return 
+     * @throws com.dareu.web.exception.DareuWebApplicationException 
      */
-    public ModelAndView hotView();
+    public ModelAndView hotView()throws DareuWebApplicationException;
     
     /**
      * Returns a member anchored view
      * @return 
+     * @throws com.dareu.web.exception.DareuWebApplicationException 
      */
-    public ModelAndView anchoredView();
+    public ModelAndView anchoredView()throws DareuWebApplicationException;
     
     /**
      * creates a new dare for a member user
@@ -49,17 +51,18 @@ public interface MemberService {
      * @param atts
      * @return 
      */
-    public ModelAndView createDareView(Model model, RedirectAttributes atts);
+    public ModelAndView createDareView(Model model, RedirectAttributes atts)throws DareuWebApplicationException;
 
     /**
      * get discover users view
      * @param pageNumber
      * @param atts
      * @param model
+     * @param response
      * @return 
      */
     public ModelAndView discoverUsersView(int pageNumber, RedirectAttributes atts, 
-            Model model, EntityRegistrationResponse response);
+            Model model, EntityRegistrationResponse response)throws DareuWebApplicationException;
 
     /**
      * get discover dares view 
@@ -67,7 +70,7 @@ public interface MemberService {
      * @param atts
      * @return 
      */
-    public ModelAndView discoverDaresView(int pageNumber, RedirectAttributes atts);
+    public ModelAndView discoverDaresView(int pageNumber, RedirectAttributes atts)throws DareuWebApplicationException;
 
     /**
      * get discover responses view
@@ -75,7 +78,7 @@ public interface MemberService {
      * @param atts
      * @return 
      */
-    public ModelAndView discoverResponsesView(int pageNumber, RedirectAttributes atts);
+    public ModelAndView discoverResponsesView(int pageNumber, RedirectAttributes atts)throws DareuWebApplicationException;
 
     /**
      * get a discover trending view
@@ -83,7 +86,7 @@ public interface MemberService {
      * @param atts
      * @return 
      */
-    public ModelAndView discoverTrendingView(int pageNumber, RedirectAttributes atts);
+    public ModelAndView discoverTrendingView(int pageNumber, RedirectAttributes atts)throws DareuWebApplicationException;
 
     /**
      * get a discover sponsors view
@@ -91,7 +94,7 @@ public interface MemberService {
      * @param atts
      * @return 
      */
-    public ModelAndView discoverSponsorsView(int pageNumber, RedirectAttributes atts);
+    public ModelAndView discoverSponsorsView(int pageNumber, RedirectAttributes atts)throws DareuWebApplicationException;
 
     /**
      * Requests a new friendship
@@ -99,7 +102,7 @@ public interface MemberService {
      * @param atts
      * @return 
      */
-    public String requestFriendship(String userId, RedirectAttributes atts);
+    public String requestFriendship(String userId, RedirectAttributes atts)throws DareuWebApplicationException;
 
     /**
      * Process a friendship request to the accepted parameter
@@ -108,7 +111,7 @@ public interface MemberService {
      * @param atts
      * @return 
      */
-    public String processFriendshipRequest(String userId, Boolean accepted, RedirectAttributes atts);
+    public String processFriendshipRequest(String userId, Boolean accepted, RedirectAttributes atts)throws DareuWebApplicationException;
     
     /**
      * Creates a new dare 
@@ -116,7 +119,7 @@ public interface MemberService {
      * @param atts
      * @return 
      */
-    public String createDare(CreateDareRequest request, RedirectAttributes atts);
+    public String createDare(CreateDareRequest request, RedirectAttributes atts)throws DareuWebApplicationException;
 
     /**
      * Confirms a dare request to an accepted value
@@ -124,7 +127,61 @@ public interface MemberService {
      * @param atts
      * @return 
      */
-    public String confirmDareRequest(DareConfirmationRequest confirmationRequest, RedirectAttributes atts);
+    public String confirmDareRequest(DareConfirmationRequest confirmationRequest, RedirectAttributes atts)throws DareuWebApplicationException;
+
+    /**
+     * Returns a currently active dare
+     * @param atts
+     * @return 
+     */
+    public ModelAndView currentActiveDare(RedirectAttributes atts)throws DareuWebApplicationException;
+
+    /**
+     * Uploads a new file response
+     * @param file
+     * @param comment
+     * @param dareId
+     * @param atts
+     * @return 
+     */
+    public String uploadDareResponse(MultipartFile file, String comment, String dareId, RedirectAttributes atts)throws DareuWebApplicationException;
+
+    /**
+     * get the upload response view 
+     * @param dareId
+     * @return 
+     */
+    public ModelAndView uploadDareResponseView(String dareId)throws DareuWebApplicationException;
+    
+    /**
+     * Handles an exception
+     * @param ex
+     * @param req
+     * @return 
+     */
+    public String handleException(DareuWebApplicationException ex, HttpServletRequest req); 
+
+    /**
+     * Returns a user profile
+     * @param userId
+     * @return
+     * @throws DareuWebApplicationException 
+     */
+    public ModelAndView userProfile(String userId)throws DareuWebApplicationException;
+
+    /**
+     * Get current logged in user profile page
+     * @return
+     * @throws DareuWebApplicationException 
+     */
+    public ModelAndView currentUserProfile() throws DareuWebApplicationException;
+
+    /**
+     * returns a member settings page
+     * @return
+     * @throws DareuWebApplicationException 
+     */
+    public ModelAndView settingsView() throws DareuWebApplicationException;
     
     
 }

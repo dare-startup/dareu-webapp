@@ -3,6 +3,7 @@ package com.dareu.web.controller;
 import com.dareu.web.dto.response.entity.FriendSearchDescription;
 import com.dareu.web.dto.response.entity.Page;
 import com.dareu.web.service.RestClientService;
+import java.io.InputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,5 +26,10 @@ public class ClientController {
     public @ResponseBody Page<FriendSearchDescription> findFriends(@RequestParam("pageNumber")int pageNumber, 
                         @RequestParam("query")String query){
         return restService.findFriends(pageNumber, query);
+    }
+    
+    @RequestMapping(value = "profile/image", produces = { "image/jpeg" })
+    public @ResponseBody byte[] getProfileImage(@RequestParam("userId")String userId){
+        return restService.getProfileImage(userId); 
     }
 }

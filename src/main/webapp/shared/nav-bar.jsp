@@ -39,30 +39,35 @@
         </sec:authorize>
         <sec:authorize access="hasAuthority('USER')">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://dareu.com" id="createDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Create</a>
-                <div class="dropdown-menu" aria-labelledby="createDropdown">
-                    <a class="dropdown-item" href="/dareu/member/dare/create">Dare</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/dareu/member/anchored">Anchored</a>
-            </li>
-            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://dareu.com" id="discoverDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Discover</a>
                 <div class="dropdown-menu" aria-labelledby="discoverDropdown">
                     <a class="dropdown-item" href="/dareu/member/discover/users">Users</a>
                     <a class="dropdown-item" href="/dareu/member/discover/dares">Dares</a>
-                    <a class="dropdown-item" href="/dareu/member/discover/responses">Responses</a>
-                    <a class="dropdown-item" href="/dareu/member/discover/trending">Trending</a>
+                    <!--<a class="dropdown-item" href="/dareu/member/discover/responses">Responses</a>-->
+                    <!--<a class="dropdown-item" href="/dareu/member/discover/trending">Trending</a>-->
                 </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/dareu/member/hot">Hot</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/dareu/member/anchored">Anchored</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://dareu.com" id="createDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dares</a>
+                <div class="dropdown-menu" aria-labelledby="createDropdown">
+                    <a class="dropdown-item" href="/dareu/member/dare/create">Create Dare</a>
+                    <a class="dropdown-item" href="/dareu/member/dare/active">Currently active dare</a>
+                    <!--<a class="dropdown-item" href="/dareu/member/dare/unacceptedDares">Unaccepted dares</a>-->
+                    <!--<a class="dropdown-item" href="/dareu/member/dare/createdDares">Created Dares</a>-->
+                </div>
+            </li>
+            
+            
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="http://dareu.com" id="discoverDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
                 <div class="dropdown-menu" aria-labelledby="discoverDropdown">
-                    <a class="dropdown-item" href="/dareu/member/discover/users">Settings</a>
+                    <a class="dropdown-item" href="/dareu/member/settings">Settings</a>
                     <a class="dropdown-item" href="/dareu/member/profile/">Profile</a>
                     <form action="/dareu/security/signout" method="POST">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

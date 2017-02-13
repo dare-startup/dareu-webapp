@@ -14,11 +14,12 @@
     <body>
         <%@include file="/shared/nav-bar.jsp" %>
         <div class="container">
-            <div class="card main-card">
+            <div class="card notification-card elevated">
+                
+                <img src="${pageContext.request.contextPath}/resources/img/success.png" width="100" height="100" class="img img-circle center">
                 <c:choose>
                     <c:when test="${not empty registrationResponse}">
-                        <p class="center-text">${registrationResponse.registrationType}</p>
-                        <p class="center-text">${registrationResponse.message}</p>
+                        <h5 class="center-text">${registrationResponse.message}</h5>
                     </c:when>
                     <c:otherwise>
                         <p class="center-text">Could not retrieve success data</p>

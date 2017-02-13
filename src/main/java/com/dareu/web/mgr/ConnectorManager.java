@@ -5,6 +5,7 @@ import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.dto.response.UpdatedEntityResponse;
+import com.dareu.web.dto.response.entity.ActiveDare;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
 import com.dareu.web.dto.response.entity.DiscoverUserAccount;
@@ -13,6 +14,7 @@ import com.dareu.web.dto.response.entity.Page;
 import com.dareu.web.dto.response.entity.UnacceptedDare;
 import com.dareu.web.dto.response.entity.UserAccount;
 import com.dareu.web.exception.ConnectorManagerException;
+import java.io.InputStream;
 import org.springframework.stereotype.Component;
 
 /**
@@ -141,4 +143,41 @@ public interface ConnectorManager {
      * @throws ConnectorManagerException 
      */
     public Page<DareDescription> discoverDares(int pageNumber, String token)throws ConnectorManagerException; 
+    
+    /**
+     * Get a currently active dare from a specified token
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public ActiveDare getCurrentActiveDare(String token)throws ConnectorManagerException; 
+    
+    /**
+     * Get an image profile
+     * @param userId
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public byte[] getProfileImage(String userId, String token) throws ConnectorManagerException; 
+    
+    /**
+     * Finds a dare description
+     * @param dareId
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public DareDescription findDareDescription(String dareId, String token)throws ConnectorManagerException; 
+    
+    /**
+     * Upload a new dare video response
+     * @param stream
+     * @param dareId
+     * @param comment
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public EntityRegistrationResponse uploadDareResponse(InputStream stream, String dareId, String comment, String token) throws ConnectorManagerException; 
 }

@@ -12,7 +12,7 @@
     <body>
         <%@include file="/shared/nav-bar.jsp"%>
         <div class="container">
-            <div class="mdl-card mdl-shadow--4dp center-block main-card">
+            <div class="card notification-card elevated">
                 
             </div>
         </div>

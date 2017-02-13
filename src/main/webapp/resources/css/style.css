@@ -1,7 +1,22 @@
+body > nav > ul > li{
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+body > nav > ul > li > div > a{
+    padding-bottom: 12px !important; 
+    padding-top: 12px !important; 
+    font-size: 16px; 
+}
 .center{
     margin: 0 auto; 
     float: none;
     display: block;
+}
+
+.vcenter{
+    display: flex;
+    align-items: center;
 }
 
 .center-text{
@@ -22,16 +37,17 @@
     padding-bottom: 5%;
     margin-bottom: 5%;
     width: 90%;
-    margin: 0 auto 2%;
+    margin: 1% auto 2%;
 }
 
 .notification-card{
+    padding-top: 1%;
     padding-left: 1%; 
     padding-right: 1%; 
     padding-bottom: 1%;
     margin-bottom: 5%;
-    width: 50%;
-    margin: 0 auto 2%;
+    width: 60%;
+    margin: 1% auto 2%;
 }
 
 .element-padding-bottom{
@@ -57,11 +73,11 @@
     text-align: center;
 }
 .short-form-button{
-    width: 50%;
+    width: 70%;
     margin-top: 1rem;
 }
 .short-form-group{
-    width: 50%; 
+    width: 70%; 
     margin-bottom: 1rem;
 }
 
@@ -91,4 +107,39 @@ table > thead > tr > td{
 
 table > tbody > tr > td{
     text-align: center; 
+}
+
+.material-icons.red{
+    color: red; 
+}
+
+.material-button{
+    padding: 0px;
+    border-color: white; 
+    width: 24px; 
+    height: 24px;
+}
+
+.elevated{
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }

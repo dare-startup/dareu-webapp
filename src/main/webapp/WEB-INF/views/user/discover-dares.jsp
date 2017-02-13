@@ -14,41 +14,41 @@
     <body>
         <%@include file="/shared/nav-bar.jsp"%>
         <div class="container">
-            <div class="card main-card">
-                <c:choose>
-                    <c:when test="${empty dares}">
-                        <h5 class="center-text">There are no available dares right now :( Come back later</h5>
-                    </c:when>
-                    <c:otherwise>
-                        <h5 class="center-text">Discover some dares</h5>
-                        <table class="table table-hovered dareu-table">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Description</td>
-                                    <td>Category</td>
-                                    <td>Creation date</td>
-                                    <td>Challenger</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${dares.items}" var="dare">
-                                    <tr>
-                                        <td>${dare.name}</td>
-                                        <td>${dare.description}</td>
-                                        <td>${dare.category}</td>
-                                        <td>${dare.creationDate}</td>
-                                        <td>${dare.challenger.name}</td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                       </table>
-                        
-                        <c:set var="pagination" value="${paginationData}" scope="request"/>
-                        <jsp:include page="/shared/pagination.jsp" flush="false"/>
-                    </c:otherwise>
-                </c:choose>
-            </div>
+            <c:choose>
+                <c:when test="${not empty dares}">
+                    <c:forEach items="${dares.items}" var="dare">
+                        <div class="card notification-card center elevated">
+                            <div class="row">
+                                <div class="col-xs-2 col-md-2 col-lg-2" style="padding: 1.25rem;">
+                                    <c:choose>
+                                        <c:when test="${dare.challenger.profileImageAvailable}">
+                                            <img class="card-img-top" width="50" height="50" src="${pageContext.request.contextPath}/dare/rest/client/profile/image?userId=${dare.challenger.id}">
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img class="card-img-top" width="50" height="50" src="${pageContext.request.contextPath}/resources/img/account.png">
+                                        </c:otherwise>
+                                    </c:choose>
+
+                                </div>
+                                <div class="col-xs-8 col-md-8 col-lg-8" style="padding:1.25rem;">
+                                    <h4 class="card-title" style="margin:0;"><a ref="#">${dare.challenger.name}</a>  ${dare.name}</h4>
+                                    <p data-toggle="tooltip" data-placement="right" title="Dare description" class="card-text">${dare.description}</p>
+                                    <a href="#" class="btn btn-primary">Check challenged user response</a>
+                                </div>
+
+                                <div class="col-xs-2 col-md-2 col-lg-2" style="padding:1.25rem;">
+                                    ${dare.creationDate}
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <h4>No discoverable dares available, try again later</h4>
+                </c:otherwise>
+            </c:choose>
         </div>
     </body>
 </html>

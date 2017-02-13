@@ -2,6 +2,7 @@ package com.dareu.web.service;
 
 import com.dareu.web.dto.response.entity.FriendSearchDescription;
 import com.dareu.web.dto.response.entity.Page;
+import java.io.InputStream;
 
 /**
  *
@@ -16,5 +17,12 @@ public interface RestClientService {
      * @return 
      */
     public Page<FriendSearchDescription> findFriends(int pageNumber, String query);
+
+    /**
+     * 
+     * @param userId
+     * @return 
+     */
+    public byte[] getProfileImage(String userId);
     
 }

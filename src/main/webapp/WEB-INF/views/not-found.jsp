@@ -13,7 +13,7 @@
     <body>
         <%@include file="/shared/empty-nav-bar.jsp"%>
         <div class="container">
-            <div class="card main-card">
+            <div class="card notification-card elevated">
                 <img src="/dareu/resources/img/notfound.png" width="300" height="300" class="img-thumbnail center">
                 <h4 class="center-text">The resource you are looking for does not exists</h4>
                 <a href="${request.getContextPath()}/" class="center-text">Return to home page</a>

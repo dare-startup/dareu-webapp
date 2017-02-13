@@ -12,7 +12,7 @@
     <body>
         <%@include file="/shared/nav-bar.jsp"%>
         <div class="container">
-            <div class="card main-card">
+            <div class="card main-card elevated">
                 <h5 class="center-text">Anchored content</h5>
             </div>
         </div>

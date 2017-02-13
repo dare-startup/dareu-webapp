@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -19,7 +22,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @EnableWebMvc()
 @ComponentScan(basePackages = {"com.dareu.web", "com.dareu.web.service", "com.dareu.data.repository", 
-                        "com.dareu.web.controller"})
+                        "com.dareu.web.controller" })
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean
@@ -69,6 +72,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         configurer.enable();
     }
 
+    /**@Bean(name = "filterMultipartResolver")
+    public MultipartResolver multipartResolver(){
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver(); 
+        resolver.setMaxUploadSize(20971520);//20MB
+        resolver.setMaxInMemorySize(1048576);//1MB
+        
+        return resolver; 
+    }**/
     /**@Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
         return new PersistenceExceptionTranslationPostProcessor();

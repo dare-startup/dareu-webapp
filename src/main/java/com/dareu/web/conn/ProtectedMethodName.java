@@ -9,10 +9,14 @@ public enum ProtectedMethodName {
     FIND_FRIENDS("/account/friends/find?pageNumber=%d"), 
     FIND_FRIENDS_BY_QUERY("/account/friends/find?q=%s&pageNumber=%d"), 
     UPDATE_FRIENDSHIP("/account/friendship/%s/update?accepted=%s"), 
+    FIND_DARE_DESCRIPTION("/dare/find?dareId="),
     CREATE_DARE("/dare/create"), 
     UNACCEPTED_DARE("/dare/unaccepted"), 
     DARE_CONFIRMATION("/dare/confirm"), 
-    DISCOVER_DARES("/dare/discover?pageNumber=%d");
+    DISCOVER_DARES("/dare/discover?pageNumber=%d"),
+    ACTIVE_DARE("/dare/active"), 
+    GET_IMAGE_PROFILE("/account/profile/image"), 
+    UPLOAD_DARE_RESPONSE("/dare/response/create");
     String contextPath; 
     ProtectedMethodName(String value){
         this.contextPath = value; 

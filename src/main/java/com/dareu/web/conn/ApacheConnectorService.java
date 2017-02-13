@@ -2,6 +2,8 @@ package com.dareu.web.conn;
 
 import com.dareu.web.conn.ApacheResponseWrapper;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
 /**
  *
@@ -61,5 +63,25 @@ public interface ApacheConnectorService {
      * @throws IOException 
      */
     public ApacheResponseWrapper performProtectedPostOperation(String methodName, Object postEntity, String token) throws IOException;
+    
+    /**
+     * Load an image usign an input stream
+     * @param methodName
+     * @param token
+     * @return
+     * @throws IOException 
+     */
+    public byte[] loadImageProfile(String methodName, String token)throws IOException; 
+    
+    /**
+     * Performs a multipart/form-data request to a protected resource
+     * @param path
+     * @param filePath
+     * @param params
+     * @param token
+     * @return
+     * @throws IOException 
+     */
+    public ApacheResponseWrapper performProtectedMultipartPostOperation(String path, String filePath, Map<String, String> params, String token)throws IOException; 
     
 }

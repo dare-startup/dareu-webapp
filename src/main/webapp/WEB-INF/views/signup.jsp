@@ -12,7 +12,7 @@
     <body>
         <%@include file="/shared/nav-bar.jsp" %>
         <div class="container">
-            <div class="card main-card">
+            <div class="card notification-card elevated">
                 <h4 class="center-text">Sign up to Dare‹</h4>
                 <form:form action="${pageContext.request.contextPath}/signup" method="POST" commandName="signup">
                     <div class="form-group short-form-group center">
@@ -35,7 +35,7 @@
                     <form:checkbox path="sponsor" label="I want to sign up as sponsor"></form:checkbox>
                     </div>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                    <button type="submit" class="btn btn-info btn-lg short-form-button center">Sign up</button>
+                    <button type="submit" class="btn btn-info btn-lg short-form-button center elevated">Sign up</button>
                 </form:form>
             </div>
         </div>
