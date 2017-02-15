@@ -1,5 +1,6 @@
 package com.dareu.web.service;
 
+import com.dareu.web.dto.request.ChangeEmailAddressRequest;
 import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
@@ -171,10 +172,11 @@ public interface MemberService {
 
     /**
      * Get current logged in user profile page
+     * @param message
      * @return
      * @throws DareuWebApplicationException 
      */
-    public ModelAndView currentUserProfile() throws DareuWebApplicationException;
+    public ModelAndView currentUserProfile(String message) throws DareuWebApplicationException;
 
     /**
      * returns a member settings page
@@ -182,6 +184,16 @@ public interface MemberService {
      * @throws DareuWebApplicationException 
      */
     public ModelAndView settingsView() throws DareuWebApplicationException;
+
+    
+    /**
+     * Change an email address to a new one
+     * @param request
+     * @param atts
+     * @return
+     * @throws DareuWebApplicationException 
+     */
+    public String changeEmailAddress(ChangeEmailAddressRequest request, RedirectAttributes atts)throws DareuWebApplicationException;
     
     
 }

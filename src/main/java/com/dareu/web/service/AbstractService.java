@@ -15,6 +15,20 @@ public abstract class AbstractService {
     //constants
     public static final String SUCCESS_TYPE = "successType";
     public static final String REGISTRATION_RESPONSE = "registrationResponse"; 
+    public static final String CHANGE_EMAIL_ADDRESS_MODEL = "changeEmailAddressRequest"; 
+    public static final String MESSAGE_REQUEST_PARAMETER = "requestMessage"; 
+    public static final String CATEGORIES_REQUEST_ATTRIBUTE = "categories"; 
+    public static final String FRIENDS_REQUEST_ATTRIBUTE = "friends"; 
+    public static final String USERS_REQUEST_ATTRIBUTE = "users"; 
+    public static final String FRIENDSHIHP_REGISTRATION_REQUEST_ATTRIBUTE = "friendshipRegistration";
+    public static final String PAGINATION_DATA_REQUEST_ATTRIBUTE = "paginationData"; 
+    public static final String DARES_REQUEST_ATTRIBUTE = "dares"; 
+    public static final String REGISTRATION_RESPONSE_REQUEST_ATTRIBUTE = "registrationResponse"; 
+    public static final String ERROR_REQUEST_ATTRIBUTE = "error"; 
+    public static final String UNACCEPTED_DARE_REQUEST_ATTRIBUTE = "unacceptedDare"; 
+    public static final String DARE_ID_REQUEST_PARAMETER = "dareId";
+    public static final String ACTIVE_DARE_REQUEST_ATTRIBUTE = "activeDare"; 
+    public static final String CATEGORY_REQUEST_ATTRIBUTE = "category"; 
     
     protected String getView(JspView view){
         return view.toString(); 
@@ -72,7 +86,8 @@ public abstract class AbstractService {
         REDIRECT_DISCOVER_USERS("redirect:/member/discover/users"), 
         REDIRECT_MEMBER_SUCESS("redirect:/member/success"), 
         REDIRECT_INDEX("redirect:/"), 
-        REDIRECT_UPLOAD_RESPONSE("redirect:/member/dare/response/upload"); 
+        REDIRECT_UPLOAD_RESPONSE("redirect:/member/dare/response/upload"), 
+        REDIRECT_PROFILE("redirect:/member/profile"); 
         
         String path; 
         Redirect(String value){

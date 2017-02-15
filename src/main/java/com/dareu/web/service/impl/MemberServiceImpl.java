@@ -1,5 +1,6 @@
 package com.dareu.web.service.impl;
 
+import com.dareu.web.dto.request.ChangeEmailAddressRequest;
 import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.request.DareConfirmationRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
@@ -58,7 +59,7 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
 
     @Override
     public ModelAndView createDareView(Model model, RedirectAttributes atts) throws DareuWebApplicationException {
-        model.addAttribute("dare", new CreateDareRequest());
+        model.addAttribute(DARES_REQUEST_ATTRIBUTE, new CreateDareRequest());
         ModelAndView mav = new ModelAndView(getView(JspView.CREATE_DARE));
 
         //get auth
@@ -69,10 +70,10 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
         Page<FriendSearchDescription> friends = null;
         try {
             categories = connector.getCategories(1);
-            mav.addObject("categories", categories);
+            mav.addObject(CATEGORIES_REQUEST_ATTRIBUTE, categories);
             //get available friends 
             friends = connector.findAvailableFriends(1, details.getToken());
-            mav.addObject("friends", friends);
+            mav.addObject(FRIENDS_REQUEST_ATTRIBUTE, friends);
         } catch (ConnectorManagerException ex) {
             throw new DareuWebApplicationException(new ApplicationError("Could not get categories, try again",
                     contextPath + "/member/dare/create"));
@@ -88,14 +89,14 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
         ModelAndView mav = new ModelAndView(getView(JspView.DISCOVER_USERS));
         try {
             Page<DiscoverUserAccount> page = connector.getDiscoverUsers(pageNumber, details.getToken());
-            mav.addObject("users", page);
+            mav.addObject(USERS_REQUEST_ATTRIBUTE, page);
             if (registration != null && registration.getId() != null) {
-                mav.addObject("friendshipRegistration", registration);
+                mav.addObject(FRIENDSHIHP_REGISTRATION_REQUEST_ATTRIBUTE, registration);
             }
 
             //get pagination data 
             PaginationData paginationData = paginationService.getPaginationData(page);
-            mav.addObject("paginationData", paginationData);
+            mav.addObject(PAGINATION_DATA_REQUEST_ATTRIBUTE, paginationData);
         } catch (ConnectorManagerException ex) {
             throw new DareuWebApplicationException(new ApplicationError("Could not get users, try again", contextPath + "/member/"));
         }
@@ -108,7 +109,7 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
         String token = getDetails().getToken();
         try {
             Page<DareDescription> dares = connector.discoverDares(pageNumber, token);
-            mav.addObject("dares", dares);
+            mav.addObject(DARES_REQUEST_ATTRIBUTE, dares);
             return mav;
         } catch (ConnectorManagerException ex) {
             throw new DareuWebApplicationException(new ApplicationError("Could not get discoverable dares, please try again",
@@ -142,7 +143,7 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
             String currentUserId = details.getId();
 
             EntityRegistrationResponse response = connector.requestFriendship(userId, token);
-            atts.addFlashAttribute("registrationResponse", response);
+            atts.addFlashAttribute(REGISTRATION_RESPONSE_REQUEST_ATTRIBUTE, response);
 
             return getRedirect(Redirect.REDIRECT_DISCOVER_USERS);
         } catch (ConnectorManagerException ex) {
@@ -156,11 +157,11 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
         String token = getDetails().getToken();
         try {
             EntityRegistrationResponse response = connector.updateFriendshipRequest(userId, accepted, token);
-            atts.addFlashAttribute("registrationResponse", response);
+            atts.addFlashAttribute(REGISTRATION_RESPONSE_REQUEST_ATTRIBUTE, response);
             //redirect to same member/discover/users
             return getRedirect(Redirect.REDIRECT_DISCOVER_USERS);
         } catch (ConnectorManagerException ex) {
-            atts.addFlashAttribute("error",
+            atts.addFlashAttribute(ERROR_REQUEST_ATTRIBUTE,
                     new ApplicationError("Could not process request",
                             contextPath + "/member/discover/users"));
             return getRedirect(Redirect.ERROR_REDIRECT);
@@ -188,7 +189,7 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
         try {
             UnacceptedDare unacceptedDare = connector.getUnacceptedDare(token);
             if (unacceptedDare != null) {
-                mav.addObject("unacceptedDare", unacceptedDare);
+                mav.addObject(UNACCEPTED_DARE_REQUEST_ATTRIBUTE, unacceptedDare);
             }
 
         } catch (ConnectorManagerException ex) {
@@ -227,7 +228,7 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
                 //check if the response is a success one 
                 if (response.isSuccess()) {
                     //success
-                    atts.addFlashAttribute("dareId", confirmationRequest.getDareId());
+                    atts.addFlashAttribute(DARE_ID_REQUEST_PARAMETER, confirmationRequest.getDareId());
                     return getRedirect(Redirect.REDIRECT_UPLOAD_RESPONSE);
                 } else {
                     throw new DareuWebApplicationException(new ApplicationError(String.format("Could not %s dare", confirmationValue),
@@ -252,7 +253,7 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
         try {
             ActiveDare activeDare = connector.getCurrentActiveDare(token);
             mav = new ModelAndView("user/active");
-            mav.addObject("activeDare", activeDare);
+            mav.addObject(ACTIVE_DARE_REQUEST_ATTRIBUTE, activeDare);
 
             return mav;
         } catch (ConnectorManagerException ex) {
@@ -289,8 +290,8 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
         //get dare 
         try {
             DareDescription description = connector.findDareDescription(dareId, getDetails().getToken());
-            mav.addObject("dare", description);
-            mav.addObject("dareId", dareId);
+            mav.addObject(DARES_REQUEST_ATTRIBUTE, description);
+            mav.addObject(DARE_ID_REQUEST_PARAMETER, dareId);
             return mav;
         } catch (ConnectorManagerException ex) {
             throw new DareuWebApplicationException(
@@ -305,24 +306,29 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
                 + exception.getApplicationError().getErrorMessage());
         FlashMap flashMap = RequestContextUtils.getOutputFlashMap(req);
         if (flashMap != null) {
-            flashMap.put("error", new ApplicationError(exception.getApplicationError().getCode(),
+            flashMap.put(ERROR_REQUEST_ATTRIBUTE, new ApplicationError(exception.getApplicationError().getCode(),
                     getFriendlyMessage(exception.getApplicationError().getCode()),
                     exception.getApplicationError().getRedirect()));
         }
         return "redirect:/error/appError";
     }
 
+    @Override
     public ModelAndView userProfile(String userId) throws DareuWebApplicationException {
         ModelAndView mav = new ModelAndView("user/user-profile"); 
         return mav; 
     }
 
-    public ModelAndView currentUserProfile() throws DareuWebApplicationException {
+    @Override
+    public ModelAndView currentUserProfile(String message) throws DareuWebApplicationException {
         ModelAndView mav = new ModelAndView("user/profile"); 
         try{
+            if(message != null && ! message.isEmpty())
+                mav.addObject("", message);
             String token = getDetails().getToken();
             AccountProfile profile = connector.currentUserProfile(token); 
             mav.addObject("profile", profile); 
+            mav.addObject(CHANGE_EMAIL_ADDRESS_MODEL, new ChangeEmailAddressRequest()); 
             return mav; 
         }catch(ConnectorManagerException ex){
             throw new DareuWebApplicationException(
@@ -335,9 +341,27 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
         }
     }
 
+    @Override
     public ModelAndView settingsView() throws DareuWebApplicationException {
         ModelAndView mav = new ModelAndView("user/settings"); 
         return mav; 
+    }
+
+    @Override
+    public String changeEmailAddress(ChangeEmailAddressRequest request, RedirectAttributes atts) throws DareuWebApplicationException {
+        try{
+            String token = getDetails().getToken(); 
+            UpdatedEntityResponse response = connector.updateEmailAddress(request, token); 
+            if(response.isSuccess()){
+                //sends a message to same page 
+                atts.addFlashAttribute(MESSAGE_REQUEST_PARAMETER, "Your email has been updated"); 
+            }
+            return getRedirect(Redirect.REDIRECT_PROFILE); 
+        }catch(ConnectorManagerException ex){
+            throw new DareuWebApplicationException(
+                    new ApplicationError(ApplicationError.ErrorCode.NETWORK_CONNECTION, 
+                            ex.getMessage(), contextPath + "/member/profile")); 
+        }
     }
 
 }

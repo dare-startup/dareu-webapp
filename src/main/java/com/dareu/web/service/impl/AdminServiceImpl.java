@@ -15,6 +15,7 @@ import com.dareu.web.conn.cxt.JsonParserService;
 import com.dareu.web.exception.ApplicationError;
 import com.dareu.web.exception.ConnectorManagerException;
 import com.dareu.web.mgr.ConnectorManager;
+import com.dareu.web.service.AbstractService;
 import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -31,7 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author jose.rubalcaba
  */
 @Component
-public class AdminServiceImpl implements AdminService {
+public class AdminServiceImpl extends AbstractService implements AdminService {
 
     private Logger log = Logger.getLogger("AdminService");
 
@@ -53,10 +54,10 @@ public class AdminServiceImpl implements AdminService {
         ModelAndView mav = new ModelAndView("admin/configuration");
         try {
             Page<CategoryDescription> categories = connectorManager.getCategories(pageNumber);
-            mav.addObject("categories", categories);
-            model.addAttribute("category", new CreateCategoryRequest());
+            mav.addObject(CATEGORIES_REQUEST_ATTRIBUTE, categories);
+            model.addAttribute(CATEGORY_REQUEST_ATTRIBUTE, new CreateCategoryRequest());
             //create a new category 
-            mav.addObject("category", new CreateCategoryRequest());
+            mav.addObject(CATEGORY_REQUEST_ATTRIBUTE, new CreateCategoryRequest());
             return mav;
         } catch (ConnectorManagerException ex) {
             mav.setViewName("");
@@ -70,10 +71,10 @@ public class AdminServiceImpl implements AdminService {
         ModelAndView mav = new ModelAndView("admin/users");
         try {
             Page<UserAccount> page = connectorManager.getUsersByPage(pageNumber);
-            mav.addObject("users", page);
+            mav.addObject(USERS_REQUEST_ATTRIBUTE, page);
         } catch (ConnectorManagerException ex) {
             //redirect to error via attributes
-            atts.addFlashAttribute("error", 
+            atts.addFlashAttribute(ERROR_REQUEST_ATTRIBUTE, 
                     new ApplicationError(ex.getMessage(), "/admin/dare/category")); 
             mav.setViewName("/error/appError");
         }
@@ -85,10 +86,10 @@ public class AdminServiceImpl implements AdminService {
         ModelAndView mav = new ModelAndView("admin/dares");
         try {
             Page<DareDescription> page = connectorManager.getUnapprovedDares(pageNumber);
-            mav.addObject("dares", page);
+            mav.addObject(DARES_REQUEST_ATTRIBUTE, page);
         } catch (ConnectorManagerException ex) {
             //redirect to error via attributes
-            atts.addFlashAttribute("error", 
+            atts.addFlashAttribute(ERROR_REQUEST_ATTRIBUTE, 
                     new ApplicationError("There has been an error, please try again", "/admin/dare/category")); 
             mav.setViewName("/error/appError");
         }
@@ -103,7 +104,7 @@ public class AdminServiceImpl implements AdminService {
             return "redirect:/admin/configuration";
         }catch(ConnectorManagerException ex){
             //redirect to error via attributes
-            atts.addFlashAttribute("error", 
+            atts.addFlashAttribute(ERROR_REQUEST_ATTRIBUTE, 
                     new ApplicationError("There has been an error creating the category, please try again", "/admin/dare/category")); 
             return "redirect:/error/appError"; 
         }

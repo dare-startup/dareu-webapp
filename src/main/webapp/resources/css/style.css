@@ -40,6 +40,11 @@ body > nav > ul > li > div > a{
     margin: 1% auto 2%;
 }
 
+.alert-card{
+    width: 60%; 
+    margin: 1% auto 2%; 
+}
+
 .notification-card{
     padding-top: 1%;
     padding-left: 1%; 

@@ -17,7 +17,8 @@ public enum ProtectedMethodName {
     ACTIVE_DARE("/dare/active"), 
     GET_IMAGE_PROFILE("/account/profile/image"), 
     UPLOAD_DARE_RESPONSE("/dare/response/create"),
-    ME("/account/me");
+    ME("/account/me"), 
+    CHANGE_EMAIL_ADDRESS("/account/changeEmailAddress");
     String contextPath; 
     ProtectedMethodName(String value){
         this.contextPath = value; 

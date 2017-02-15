@@ -5,6 +5,7 @@ import com.dareu.web.conn.ApacheConnectorService;
 import com.dareu.web.conn.ApacheResponseWrapper;
 import com.dareu.web.conn.ProtectedMethodName;
 import com.dareu.web.conn.cxt.JsonParserService;
+import com.dareu.web.dto.request.ChangeEmailAddressRequest;
 import com.dareu.web.dto.request.CreateCategoryRequest;
 import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.request.DareConfirmationRequest;
@@ -326,6 +327,17 @@ public class ConnectorManagerImpl implements ConnectorManager {
         try{
             ApacheResponseWrapper wrapper = connector.performProtectedGetOperation(path, token); 
             return processResponse(wrapper, AccountProfile.class, path);
+        }catch(IOException ex){
+            throw new ConnectorManagerException(ex.getMessage()); 
+        }
+    }
+
+    @Override
+    public UpdatedEntityResponse updateEmailAddress(ChangeEmailAddressRequest request, String token) throws ConnectorManagerException {
+        String path = ProtectedMethodName.CHANGE_EMAIL_ADDRESS.toString();
+        try{
+            ApacheResponseWrapper wrapper = connector.performProtectedPostOperation(path, request, token); 
+            return processResponse(wrapper, UpdatedEntityResponse.class, path); 
         }catch(IOException ex){
             throw new ConnectorManagerException(ex.getMessage()); 
         }

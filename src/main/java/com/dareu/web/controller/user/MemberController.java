@@ -1,5 +1,6 @@
 package com.dareu.web.controller.user;
 
+import com.dareu.web.dto.request.ChangeEmailAddressRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.exception.ApplicationError;
 import com.dareu.web.exception.DareuWebApplicationException;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -51,7 +53,12 @@ public class MemberController{
     }
     
     @RequestMapping(value = "/profile")
-    public ModelAndView profileView()throws DareuWebApplicationException{
-        return memberService.currentUserProfile(); 
+    public ModelAndView profileView(@ModelAttribute(AbstractService.MESSAGE_REQUEST_PARAMETER)String message)throws DareuWebApplicationException{
+        return memberService.currentUserProfile(message); 
+    }
+    
+    @RequestMapping(value = "/profile/changeEmail", method = RequestMethod.POST)
+    public String changeEmailAddress(@ModelAttribute(AbstractService.CHANGE_EMAIL_ADDRESS_MODEL)ChangeEmailAddressRequest request, RedirectAttributes atts){
+        return memberService.changeEmailAddress(request, atts); 
     }
 }

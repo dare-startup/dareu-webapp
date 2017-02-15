@@ -1,5 +1,6 @@
 package com.dareu.web.mgr;
 
+import com.dareu.web.dto.request.ChangeEmailAddressRequest;
 import com.dareu.web.dto.request.CreateCategoryRequest;
 import com.dareu.web.dto.request.CreateDareRequest;
 import com.dareu.web.dto.request.DareConfirmationRequest;
@@ -189,4 +190,13 @@ public interface ConnectorManager {
      * @throws ConnectorManagerException 
      */
     public AccountProfile currentUserProfile(String token)throws ConnectorManagerException;
+    
+    /**
+     * Change
+     * @param request
+     * @param token
+     * @return
+     * @throws ConnectorManagerException 
+     */
+    public UpdatedEntityResponse updateEmailAddress(ChangeEmailAddressRequest request, String token)throws ConnectorManagerException; 
 }

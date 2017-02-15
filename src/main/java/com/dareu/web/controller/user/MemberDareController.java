@@ -47,10 +47,10 @@ public class MemberDareController {
     public ModelAndView currentActiveDare(RedirectAttributes atts)throws DareuWebApplicationException{
         return memberService.currentActiveDare(atts);
     }
-    
+     
     @RequestMapping(value = "profile")
-    public ModelAndView currentProfile()throws DareuWebApplicationException{
-        return memberService.currentUserProfile(); 
+    public ModelAndView currentProfile(@ModelAttribute("message")String message)throws DareuWebApplicationException{
+        return memberService.currentUserProfile(message); 
     }
     
     @RequestMapping(value = "response/upload", method = RequestMethod.POST, consumes = "multipart/form-data")
