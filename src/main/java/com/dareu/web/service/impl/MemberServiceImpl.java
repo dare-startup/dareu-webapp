@@ -59,7 +59,7 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
 
     @Override
     public ModelAndView createDareView(Model model, RedirectAttributes atts) throws DareuWebApplicationException {
-        model.addAttribute(DARES_REQUEST_ATTRIBUTE, new CreateDareRequest());
+        model.addAttribute(DARE_REQUEST_ATTRIBUTE, new CreateDareRequest());
         ModelAndView mav = new ModelAndView(getView(JspView.CREATE_DARE));
 
         //get auth
@@ -69,6 +69,7 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
         Page<CategoryDescription> categories = null;
         Page<FriendSearchDescription> friends = null;
         try {
+            
             categories = connector.getCategories(1);
             mav.addObject(CATEGORIES_REQUEST_ATTRIBUTE, categories);
             //get available friends 

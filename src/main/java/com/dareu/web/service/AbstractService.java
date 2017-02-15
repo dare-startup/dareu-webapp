@@ -23,6 +23,7 @@ public abstract class AbstractService {
     public static final String FRIENDSHIHP_REGISTRATION_REQUEST_ATTRIBUTE = "friendshipRegistration";
     public static final String PAGINATION_DATA_REQUEST_ATTRIBUTE = "paginationData"; 
     public static final String DARES_REQUEST_ATTRIBUTE = "dares"; 
+    public static final String DARE_REQUEST_ATTRIBUTE = "dare"; 
     public static final String REGISTRATION_RESPONSE_REQUEST_ATTRIBUTE = "registrationResponse"; 
     public static final String ERROR_REQUEST_ATTRIBUTE = "error"; 
     public static final String UNACCEPTED_DARE_REQUEST_ATTRIBUTE = "unacceptedDare"; 
