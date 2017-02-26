@@ -10,23 +10,25 @@
         <title>Signin</title>
     </head>
     <body>
-        <%@include file="/shared/nav-bar.jsp"%>
-        <div class="container">
-            <div class="card notification-card elevated">
-                <h4 class="center-text">Sign in to Dare‹</h4>
-                <form action="/dareu/security/authenticate" method="POST">
-                    <div class="form-group short-form-group center">
-                        <label for="emailInput">Email</label>
-                        <input class="form-control" id="nameInput" type="email" placeholder="Email" name="email">
-                    </div>
-                    <div class="form-group short-form-group center">
-                        <label for="passwordInput">Password</label>
-                        <input class="form-control" id="passwordInput" type="password" placeholder="Password" name="password">
-                    </div>
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                    <button type="submit" class="btn btn-info btn-lg center short-form-button elevated">Sign in</button>
-                </form>
+        <section class="signin-section">
+            <%@include file="/shared/nav-bar.jsp"%>  
+            <div class="container">
+                <div class="signin-card">
+                    <h4 class="text-xs-center text-sm-center text-md-center text-lg-center font-weight-bold">Sign in to Dare‹</h4>
+                    <form id="signin-form" action="/dareu/security/authenticate" method="POST">
+                        <div class="form-group">
+                            <label for="emailInput">Email</label>
+                            <input class="form-control" id="nameInput" type="email" placeholder="Email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordInput">Password</label>
+                            <input class="form-control" id="passwordInput" type="password" placeholder="Password" name="password">
+                        </div>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                        <button type="submit" class="btn btn-primary btn-lg center btn-block text-md-center text-lg-center ripple">Sign in</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </section>
     </body>
 </html>

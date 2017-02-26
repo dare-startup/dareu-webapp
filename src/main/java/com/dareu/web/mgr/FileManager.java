@@ -35,4 +35,11 @@ public interface FileManager {
      * @throws IOException
      */
     public InputStream getInputStream(String fileName) throws IOException;
+    
+    /**
+     * Get apk file
+     * @return
+     * @throws IOException 
+     */
+    public InputStream getAndroidApkFile()throws IOException; 
 }

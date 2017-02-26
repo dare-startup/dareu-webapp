@@ -12,20 +12,22 @@
         <title></title>
     </head>
     <body>
-        <%@include file="/shared/nav-bar.jsp" %>
-        <div class="container">
-            <div class="card notification-card elevated">
-                
-                <img src="${pageContext.request.contextPath}/resources/img/success.png" width="100" height="100" class="img img-circle center">
-                <c:choose>
-                    <c:when test="${not empty registrationResponse}">
-                        <h5 class="center-text">${registrationResponse.message}</h5>
-                    </c:when>
-                    <c:otherwise>
-                        <p class="center-text">Could not retrieve success data</p>
-                    </c:otherwise>
-                </c:choose>
+        <section class="success-section">
+            <%@include file="/shared/nav-bar.jsp" %>
+            <div class="container">
+                <div class="card elevated">
+
+                    <img src="${pageContext.request.contextPath}/resources/img/success.png" width="100" height="100" class="img img-circle center">
+                    <c:choose>
+                        <c:when test="${not empty registrationResponse}">
+                            <h5 class="center-text">${registrationResponse.message}</h5>
+                        </c:when>
+                        <c:otherwise>
+                            <p class="center-text">Could not retrieve success data</p>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
-        </div>
+        </section>
     </body>
 </html>

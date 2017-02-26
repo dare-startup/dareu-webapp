@@ -8,10 +8,16 @@ import com.dareu.web.dto.security.PasswordEncryptor;
 import com.dareu.web.conn.ApacheConnectorService;
 import com.dareu.web.service.DefaultAccountService;
 import com.dareu.web.conn.cxt.JsonParserService;
+import com.dareu.web.exception.ApplicationError;
+import com.dareu.web.exception.ApplicationError.ErrorCode;
+import com.dareu.web.exception.DareuWebApplicationException;
+import com.dareu.web.mgr.FileManager;
 import com.dareu.web.service.AbstractService;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
@@ -38,6 +44,9 @@ public class DefaultAccountServiceImpl extends AbstractService implements Defaul
     
     @Autowired
     private PasswordEncryptor encryptor;
+    
+    @Autowired
+    private FileManager fileManager; 
 
     @Override
     public ModelAndView defaultView() {
@@ -114,4 +123,25 @@ public class DefaultAccountServiceImpl extends AbstractService implements Defaul
         }return signin;
     }
     
+    
+    @Override 
+    public void downloadAndroidMobileApplication(HttpServletResponse response)throws DareuWebApplicationException{
+        //get file 
+        try{
+            InputStream stream = fileManager.getAndroidApkFile(); 
+            
+            response.setContentType("application/octet-stream");
+            /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
+            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
+            response.setHeader("Content-Disposition", String.format("inline; filename=\"dareu.apk\""));
+            byte[] buffer = new byte[1024]; 
+            while ((stream.read(buffer)) != -1) {
+                response.getOutputStream().write(buffer);
+            }
+            stream.close();
+            response.getOutputStream().close();
+        }catch(IOException ex){
+            throw new DareuWebApplicationException(new ApplicationError(ErrorCode.IO_ERROR, ex.getMessage(), null)); 
+        }
+    }
 }

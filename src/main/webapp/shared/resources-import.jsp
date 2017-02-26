@@ -4,19 +4,19 @@
     Author     : jose.rubalcaba
 --%>
 <!-- META DATA -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- styles -->
-<link rel="stylesheet" href="/dareu/resources/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/dareu/resources/css/ripple.min.css">
+<link rel="stylesheet" href="/dareu/resources/css/bootstrap.css"/>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.blue_grey-blue.min.css" /> 
-<link rel="stylesheet" href="/dareu/resources/css/style.css"/>
+<link rel="stylesheet" href="/dareu/resources/css/main-styles.css"/>
 
 <!-- scripts -->
 <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js"></script>
-<script type="text/javascript" src="/dareu/resources/js/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="/dareu/resources/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="/dareu/resources/js/bootstrap.min.js"></script>
-<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
 
 <!-- tag libs -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

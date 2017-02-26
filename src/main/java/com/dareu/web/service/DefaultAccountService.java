@@ -1,6 +1,8 @@
 package com.dareu.web.service;
 
 import com.dareu.web.dto.request.SignupRequest;
+import com.dareu.web.exception.DareuWebApplicationException;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,4 +39,11 @@ public interface DefaultAccountService {
      * @return 
      */
     public String signupRequest(SignupRequest request, RedirectAttributes atts);
+    
+    /**
+     * download current android mobile version of dareu
+     * @param response
+     * @throws DareuWebApplicationException 
+     */
+    public void downloadAndroidMobileApplication(HttpServletResponse response)throws DareuWebApplicationException; 
 }

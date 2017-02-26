@@ -1,0 +1,580 @@
+$text: #000000;
+$principal-color: #F05C19;
+$secondary-color: #C04107;
+html {
+    font-size: 15px;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+    color: $text
+}
+.elevated {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    border-radius: 2px;
+}
+
+/* LANDING PAGE */
+
+.welcome-section {
+    background: url("../img/header-wallpaper.jpg") no-repeat center top;
+    color: white;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.arrow-down {
+    animation: animated-arrow-down 2s ease-in-out infinite;
+    text-align: center;
+}
+.arrow-down a {
+    display: inline-block;
+    color: white;
+}
+.arrow-down a i {
+    font-size: 4rem;
+}
+.header {
+    background: $principal-color;
+    color: white;
+    padding: .5rem 0;
+}
+.header .container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.header .logo img {
+    width: 50px;
+    height: 30px;
+}
+.menu-button,
+.search-button {
+    border: 0;
+    font-size: 2rem;
+    margin: 0;
+    padding: 0 .5rem;
+    background: transparent;
+    color: white;
+}
+.menu-button:focus {
+    outline: 0;
+}
+@keyframes animated-arrow-down {
+    from {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+.search-button {
+    margin-right: .8rem;
+    margin-left: auto;
+}
+#search-block {
+    flex: 1 1 100%;
+}
+.search-container-block {
+    display: flex;
+    height: 3rem;
+    margin: 1rem 0;
+}
+.search-container-block input[type="text"] {
+    flex: 1 1 auto;
+    border: 0;
+    border-radius: 5px 0 0 5px;
+    padding: 1rem;
+}
+.search-container-block input[type="submit"] {
+    flex: 0 1 auto;
+    border: 0;
+    border-radius: 0 5px 5px 0;
+    background: white;
+    color: $principal-color;
+    padding: 0 1rem;
+}
+#principal-menu {
+    flex: 1 1 100%;
+}
+#principal-menu ul {
+    padding: 0;
+    list-style: none;
+    margin: 1rem 0 0 0;
+}
+#principal-menu ul li a {
+    display: block;
+    padding: .8rem 0;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    border-top: 1px solid;
+    text-decoration: none;
+}
+#principal-menu ul li a:hover {
+    color: $secondary-color;
+}
+#principal-menu ul li.active a {
+    color: $secondary-color;
+}
+#principal-menu .dropdown-item {
+    margin: 0;
+    color: $principal-color;
+}
+.header-text {
+    text-align: center;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    //padding-top: 10rem;
+}
+.header-text .container {
+    flex: 1 1 auto;
+    padding-top: 2rem;
+}
+.header-text .display-4 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+.btn-primary {
+    color: white;
+    background-color: $principal-color;
+    border-color: transparent;
+    margin-top: 1rem;
+}
+.btn-primary:hover {
+    background-color: $principal-color;
+    border-color: transparent;
+}
+
+/*.btn-primary:active:hover { 
+    background-color: $secondary-color;
+    color: $principal-color;
+    border-color: transparent; 
+}
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color:  white;
+    color: $principal-color;
+    border-color: transparent;
+}*/
+
+.dare-section {
+    background: $principal-color;
+    color: white;
+}
+.dare-section img {
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+}
+.mechanism-section {
+    background: url("../img/gears.jpg") no-repeat center top;
+    color: white;
+    background-size: cover;
+}
+.mechanism-section h2 span {
+    color: $principal-color;
+}
+.mechanism-section ul,
+.mechanism-section ul li {
+    list-style: none;
+    padding: 0;
+}
+.mechanism-section ul li {
+    min-height: 8rem;
+}
+.mechanism-section ul li img {
+    text-align: center;
+    font-size: 4rem;
+    background: white;
+    border-radius: 100%;
+    width: 8rem;
+    height: 8rem;
+    line-height: 8rem;
+    color: $principal-color;
+    padding: .5rem;
+    margin: 1rem;
+    transition: all 1s ease;
+}
+.mechanism-section ul li .material-icons {
+    text-align: center;
+    font-size: 4rem;
+    background: white;
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+    line-height: 8rem;
+    color: $principal-color;
+    margin: 1rem;
+    transition: all 1s ease;
+}
+.mechanism-step {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mechanism-step li {
+    padding: 10rem;
+}
+.step-container li i,
+step-container li img {
+    flex: 0 1 75px;
+    margin: 1rem;
+}
+.mechanism-step li:hover i,
+.mechanism-step li:hover img {
+    transform: rotateY(360deg);
+    transform-style: preserve-3d;
+    background: $secondary-color;
+}
+.step-container {
+    display: flex;
+    flex-direction: column;
+    align-items: centers;
+}
+.step-container h4 {
+    color: white;
+    font-size: 1.2rem;
+}
+.developers-section {
+    background: url("../img/developers.jpg") no-repeat center center;
+    color: white;
+    background-size: cover;
+}
+.developer {
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+}
+.developer img {
+    flex: 0 0 60px;
+    overflow: hidden;
+    margin: 0rem 1rem;
+}
+.developer h4 {
+    flex: 1 1 auto;
+    margin: 0;
+    font-size: 1.3rem;
+    color: $principal-color;
+}
+.developer h4 a {
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+}
+.developer h4 a::after {
+    content: url("../img/arrow_right.svg");
+    font-size: 2rem;
+    margin-left: 2rem;
+    position: relative;
+    left: 0;
+    transition: all .5s ease;
+}
+.developer h4 a:hover::after {
+    opacity: 1;
+    left: -1rem;
+    color: $principal-color;
+}
+.footer-section {
+    background: $principal-color;
+    color: white;
+    text-align: center;
+    font-size: .5rem;
+    position: relative;
+    clear: both;
+    z-index: 3;
+}
+.social-networks {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.go-up i {
+    font-size: 3rem;
+}
+.go-up {
+    transition: all .5s ease;
+    border-radius: 50%;
+    background: $principal-color;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    line-height: 0;
+    color: white;
+    text-decoration: none;
+    z-index: 99999;
+}
+.go-up:hover,
+.go-up:focus {
+    outline: 0;
+    text-decoration: none;
+    color: white;
+    background: $secondary-color;
+}
+.dropdown-item:hover {
+    background-color: transparent;
+}
+
+/* SIGN IN STYLES */
+
+.signin-section {
+    height: 90vh;
+}
+.signin-section > .container {
+    margin-top: 1rem;
+}
+.signin-section .container .card {
+    padding: 1rem;
+}
+
+/* SIGNUP STYLES */
+
+.signup-card {
+    padding: 1rem;
+    margin: 0 auto;
+}
+.signup-section > .container {
+    margin-top: 0;
+}
+#signout-form {
+    padding: 1rem;
+    text-align: center;
+}
+
+/***********************************************
+* CREATE NEW DARE VIEW
+***********************************************/
+
+.new-dare-card {
+    padding: 1rem;
+    margin-top: 1rem;
+}
+#findFriendsSearch {
+    width: 80%;
+    margin: 0 auto;
+}
+.table-date {
+    padding: 0.75rem;
+    vertical-align: middle;
+    text-align: center;
+    border-top: 1px solid #eceeef;
+}
+
+/***********************************************
+* Media queries
+***********************************************/
+
+@media (max-width: 544px) {
+    .text-xs-center {
+        text-align: center !important;
+    }
+}
+@media(min-width: 768px) {
+    #principal-menu {
+        height: auto !important;
+        display: block;
+        flex: 0 1 auto;
+        order: 1;
+        margin-left: auto;
+    }
+    #principal-menu ul {
+        display: flex;
+        margin: 0;
+    }
+    #principal-menu ul li a {
+        margin: 0;
+        padding: 1rem;
+        text-transform: capitalize;
+        margin: 0 1rem;
+        border-top: 0px;
+        border-bottom: 4px solid transparent;
+        transition: all .5s ease;
+    }
+    #principal-menu ul li.active a,
+    #principal-menu ul li a:hover {
+        color: $secondary-color;
+        border-bottom: 4px solid transparent;
+    }
+    .search-button {
+        margin-right: 0;
+        margin-left: 1rem;
+        order: 2;
+    }
+    #search-block {
+        order: 3;
+        position: absolute;
+        width: 20rem;
+        right: 3rem;
+        top: 2.5rem;
+        //transition: all 1s ease;
+    }
+    .developer {
+        flex-direction: column;
+        margin: 0;
+        align-items: center;
+        padding: 0;
+        text-align: center;
+    }
+    .developer img {
+        width: 10rem;
+        flex: 1 1 130px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        margin-right: 0;
+        margin-left: 0;
+        transition: all 1s ease;
+    }
+    .developer:hover img {
+        transform: rotateY(360);
+        transform: rotateY(360deg);
+        transform-style: preserve-3d;
+    }
+    .developer h4 a::after {
+        content: "";
+    }
+    .developer h4 {
+        flex: 0 1 auto;
+        margin: 0 0 1rem 0;
+        font-size: 1.6rem;
+        text-align: center;
+    }
+    .developer p {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+    /*
+    * SIGNIN VIEW
+    */
+    .signin-card {
+        width: 60%;
+        margin: 0 auto;
+    }
+    /* SIGNUP VIEW */
+    .signup-card {
+        width: 60%;
+        margin: 0 auto;
+    }
+    /***********************************************
+    * CREATE NEW DARE VIEW
+    ***********************************************/
+    .new-dare-card {
+        width: 70%;
+        margin: 0 auto;
+    }
+}
+@media(min-width: 992px) {
+    #principal-menu {
+        height: auto !important;
+        display: block;
+        flex: 0 1 auto;
+        order: 1;
+        margin-left: auto;
+    }
+    #principal-menu ul {
+        display: flex;
+        margin: 0;
+    }
+    #principal-menu ul li a {
+        margin: 0;
+        padding: 1rem;
+        text-transform: capitalize;
+        margin: 0 1rem;
+        border-top: 0px;
+        border-bottom: 4px solid transparent;
+        transition: all .5s ease;
+    }
+    #principal-menu ul li.active a,
+    #principal-menu ul li a:hover {
+        color: $secondary-color;
+        border-bottom: 4px solid transparent;
+    }
+    .search-button {
+        margin-right: 0;
+        margin-left: 1rem;
+        order: 2;
+    }
+    #search-block {
+        order: 3;
+        position: absolute;
+        width: 20rem;
+        right: 3rem;
+        top: 2.5rem;
+        transition: all 1s ease;
+    }
+    .developer {
+        flex-direction: column;
+        margin: 0;
+        align-items: center;
+        padding: 0;
+        text-align: center;
+    }
+    .developer img {
+        width: 10rem;
+        flex: 1 1 130px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        margin-right: 0;
+        margin-left: 0;
+        transition: all 1s ease;
+    }
+    .developer:hover img {
+        transform: rotateY(360deg);
+        transform-style: preserve-3d;
+    }
+    .developer h4 a::after {
+        content: "";
+    }
+    .developer h4 {
+        flex: 0 1 auto;
+        margin: 0 0 1rem 0;
+        font-size: 1.6rem;
+        text-align: center;
+    }
+    .developer p {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+    body {
+        font-size: 16px;
+    }
+    /*
+    * SIGNIN VIEW
+    */
+    .signin-card {
+        width: 50%;
+        margin: 0 auto;
+    }
+    /* SIGNUP VIEW*/
+    .signup-card {
+        width: 60%;
+        margin: 0 auto;
+    }
+    /***********************************************
+    * CREATE NEW DARE VIEW
+    ***********************************************/
+    .new-dare-card {
+        width: 70%;
+        margin: 0 auto;
+    }
+}
+@media(min-width: 1200px) {
+    /***********************************************
+    * CREATE NEW DARE VIEW
+    ***********************************************/
+    .new-dare-card {
+        width: 70%;
+        margin: 0 auto;
+    }
+}

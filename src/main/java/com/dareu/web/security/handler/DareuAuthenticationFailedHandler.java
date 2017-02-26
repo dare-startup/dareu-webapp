@@ -19,8 +19,7 @@ public class DareuAuthenticationFailedHandler implements AuthenticationFailureHa
     private static final Logger log = Logger.getLogger(DareuAuthenticationFailedHandler.class.getName());
     
     public void onAuthenticationFailure(HttpServletRequest hsr, HttpServletResponse hsr1, AuthenticationException ae) throws IOException, ServletException {
-        log.info(String.format("Authentication failed: %s", ae.getMessage()));
-        hsr1.sendRedirect(hsr.getContextPath() + "/signin?rety");
+        hsr1.sendRedirect(hsr.getContextPath() + "/signin?retry");
     }
     
 }

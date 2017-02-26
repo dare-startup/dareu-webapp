@@ -19,6 +19,9 @@ public class FileManagerImpl implements FileManager{
 
     private final String tmpFolder = System.getProperty("dareu.multipart.tmp.directory"); 
     
+    @Value("${com.dareu.web.android.current.version}")
+    private String apkFile; 
+    
     public String saveTmpFile(InputStream file, String id) throws IOException { 
         FileOutputStream out = new FileOutputStream(new File(tmpFolder + id)); 
         byte[] bytes = new byte[1024]; 
@@ -45,6 +48,13 @@ public class FileManagerImpl implements FileManager{
         if(file.exists()){
             return new FileInputStream(file);
         }else throw new FileNotFoundException("Could not find file " + tmpFolder + fileName); 
+    }
+
+    public InputStream getAndroidApkFile() throws IOException {
+        File file = new File(apkFile); 
+        if(! file.exists())
+            throw new IOException(apkFile + " does not exists"); 
+        return new FileInputStream(file); 
     }
     
 }

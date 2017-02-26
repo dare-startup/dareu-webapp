@@ -1,7 +1,9 @@
 package com.dareu.web.controller;
 
 import com.dareu.web.dto.request.SignupRequest;
+import com.dareu.web.exception.DareuWebApplicationException;
 import com.dareu.web.service.DefaultAccountService;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,5 +47,10 @@ public class DefaultController {
     @RequestMapping(value = { "/about", "/aboutus" })
     public ModelAndView aboutView(){
         return null; 
+    }
+    
+    @RequestMapping(value = { "/android" })
+    public void downloadApkFile(HttpServletResponse response)throws DareuWebApplicationException{
+        service.downloadAndroidMobileApplication(response);
     }
 }
