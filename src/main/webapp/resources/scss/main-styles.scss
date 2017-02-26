@@ -434,13 +434,12 @@ step-container li img {
         margin-bottom: 1rem;
         margin-right: 0;
         margin-left: 0;
-        transition: all 1s ease;
     }
-    .developer:hover img {
+    /*.developer:hover img {
         transform: rotateY(360);
         transform: rotateY(360deg);
         transform-style: preserve-3d;
-    }
+    }*/
     .developer h4 a::after {
         content: "";
     }
@@ -528,12 +527,12 @@ step-container li img {
         margin-bottom: 1rem;
         margin-right: 0;
         margin-left: 0;
-        transition: all 1s ease;
+        //transition: all 1s ease;
     }
-    .developer:hover img {
+    /*.developer:hover img {
         transform: rotateY(360deg);
         transform-style: preserve-3d;
-    }
+    }*/
     .developer h4 a::after {
         content: "";
     }
