@@ -8,9 +8,17 @@ body {
     font-family: 'Roboto', sans-serif;
     color: $text
 }
+body > section > .container {
+    margin-top: 5rem !important;
+    padding: 1rem 0;
+}
 .elevated {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     border-radius: 2px;
+}
+.nav-menu {
+    background: $secondary-color !important;
+    padding: 1rem 0 !important;
 }
 
 /* LANDING PAGE */
@@ -22,6 +30,7 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-attachment: fixed !important;
 }
 .arrow-down {
     animation: animated-arrow-down 2s ease-in-out infinite;
@@ -125,16 +134,15 @@ body {
     color: $principal-color;
 }
 .header-text {
+    //padding-top: 10rem;
+}
+.header-text {
+    padding-top: 2rem;
     text-align: center;
     flex: 1 1 auto;
     display: flex;
     align-items: center;
     flex-direction: column;
-    //padding-top: 10rem;
-}
-.header-text .container {
-    flex: 1 1 auto;
-    padding-top: 2rem;
 }
 .header-text .display-4 {
     margin-top: 3rem;
@@ -176,6 +184,7 @@ body {
     background: url("../img/gears.jpg") no-repeat center top;
     color: white;
     background-size: cover;
+    background-attachment: fixed !important;
 }
 .mechanism-section h2 span {
     color: $principal-color;
@@ -264,7 +273,7 @@ step-container li img {
     color: $principal-color;
 }
 .developer h4 a {
-    color: white;
+    color: $principal-color;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -309,12 +318,13 @@ step-container li img {
     border-radius: 50%;
     background: $principal-color;
     position: fixed;
-    bottom: 1rem;
-    right: 1rem;
+    bottom: 1.5rem;
+    right: 1.5rem;
     line-height: 0;
     color: white;
     text-decoration: none;
     z-index: 99999;
+    display: none;
 }
 .go-up:hover,
 .go-up:focus {
@@ -342,7 +352,6 @@ step-container li img {
 /* SIGNUP STYLES */
 
 .signup-card {
-    padding: 1rem;
     margin: 0 auto;
 }
 .signup-section > .container {
@@ -444,6 +453,7 @@ step-container li img {
         content: "";
     }
     .developer h4 {
+        color: $principal-color;
         flex: 0 1 auto;
         margin: 0 0 1rem 0;
         font-size: 1.6rem;
@@ -541,6 +551,7 @@ step-container li img {
         margin: 0 0 1rem 0;
         font-size: 1.6rem;
         text-align: center;
+        color: $principal-color;
     }
     .developer p {
         margin-left: 1rem;

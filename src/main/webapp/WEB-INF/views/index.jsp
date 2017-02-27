@@ -18,29 +18,28 @@
         </sec:authorize>
 
 
-        <section class="welcome-section">
+        <section id="welcome-section" class="welcome-section">
             <%@include file="/shared/nav-bar.jsp" %>
-            <div class="header-text text-xs-center">
-                <div class="container">
+            
+                <div class="header-text wow lightSpeedIn container" data-wow-duration="2s">
                     <h2 class="h2 font-weight-bold">Get dared wherever you are</h2>
                     <h3>Create your dares widely, earn rewards, have fun</h3>
                     <a class="btn btn-lg btn-primary" href="#">Sign up now!</a>
                 </div>
                 <div class="arrow-down">
-                    <a href="#dare-section"><i class="material-icons">keyboard_arrow_down</i></a>
+                    <a data-scroll href="#dare-section"><i class="material-icons">keyboard_arrow_down</i></a>
                 </div>
-            </div>
+            
         </section>
         <!-- Dare section (orange) -->
         <section class="dare-section py-3" id="dare-section">
             <div class="container">
-                <div class="row">
                     <div class="col-xs-12 col-md-8 col-xl-9 my-4">
                         <h2 class="h3 text-xs-center text-md-left font-weight-bold">Dare everyone you know</h2>
-                        <p class="my-2">Get to know people, dare them and have lot of fun</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit enim saepe pariatur neque, nihil accusamus minima libero quasi eaque officiis dolorum possimus vitae, placeat explicabo ducimus quas voluptatibus quam veniam?</p>
+                        <p class="my-2 text-xs-center text-md-left">Get to know people, dare them and have lot of fun</p>
+                        <p class="text-xs-center text-md-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit enim saepe pariatur neque, nihil accusamus minima libero quasi eaque officiis dolorum possimus vitae, placeat explicabo ducimus quas voluptatibus quam veniam?</p>
                     </div>
-                    <div class="col-xs-12 col-md-4 col-xl-3 my-4">
+                    <div class="col-xs-12 col-md-4 col-xl-3 my-4 wow tada" data-wow-duration="2s">
                         <h5 class="h4 text-center">Available on</h5>
                         <a href="android" data-toggle="tooltip" data-placenement="top" title="This mobile version is still on development"><img class="my-3" src="${pageContext.request.contextPath}/resources/img/google_play.svg" alt="Play-Services logo"></a>
                     </div>
@@ -51,12 +50,12 @@
         <!-- How does it works -->
         <main class="mechanism-section py-2">
             <div class="container">
-                <h2 class="h2 my-3 text-xs-center text-md-center font-weight-bold">How <span>DareU</span> works?</h2>
-                <p class="text-xs-center text-md-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ratione distinctio ipsam animi placeat voluptas</p>
+                <h2 class="h2 my-3 text-xs-center text-md-center font-weight-bold wow pulse" data-wow-duration="2s">How <span>DareU</span> works?</h2>
+                <p class="text-xs-center text-md-center wow pulse" data-wow-duration="2s">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ratione distinctio ipsam animi placeat voluptas</p>
                 <div class="row">
                     <div class="col-6">
                         <ul class="text-xs-center text-sm-center text-lg-center mechanism-step">
-                            <li>
+                            <li class="wow bounceInLeft" data-wow-delay=".3s">
                                 <i class="material-icons right">people</i>
                                 <div class="step-container ">
                                     <h4 class="font-weight-bold my-2">Add people</h4>
@@ -64,7 +63,7 @@
                                 </div>
 
                             </li>
-                            <li>
+                            <li class="wow bounceInLeft" data-wow-delay=".7s">
                                 <i class="material-icons right">file_upload</i>
                                 <div class="step-container">
                                     <h4 class="font-weight-bold my-2">Upload</h4>
@@ -72,7 +71,7 @@
                                 </div>
 
                             </li>
-                            <li>
+                            <li class="wow bounceInLeft" data-wow-delay="1.1s">
                                 <i class="material-icons right">comment</i>
                                 <div class="step-container">
                                     <h4 class="font-weight-bold my-2">Comment</h4>
@@ -85,14 +84,14 @@
 
                     <div class="col-6">
                         <ul class="text-xs-center text-lg-center mechanism-step">
-                            <li>
+                            <li class="wow bounceInRight" data-wow-delay=".5s">
                                 <img src="${pageContext.request.contextPath}/resources/img/dareu.svg" alt="">
                                 <div class="step-container">
                                     <h4 class="font-weight-bold my-2 text-xs-center text-md-center  text-sm-center">Dare them!</h4>
                                     <p class="hidden-md-down">Some subtitle long description out here look at me</p>
                                 </div>
                             </li>
-                            <li>
+                            <li class="wow bounceInRight" data-wow-delay=".9s">
                                 <i class="material-icons left">thumb_up</i>
                                 <div class="step-container">
                                     <h4 class="text-xs-center text-md-center  text-sm-center font-weight-bold my-2">Get thumbs</h4>
@@ -100,7 +99,7 @@
                                 </div>
 
                             </li>
-                            <li>
+                            <li class="wow bounceInRight" data-wow-delay="1.3s">
                                 <i class="material-icons  left">add_shopping_cart</i>
                                 <div class="step-container">
                                     <h4 class="text-xs-center text-md-center  text-sm-center font-weight-bold my-2">Earn prizes!</h4>
@@ -127,13 +126,13 @@
             <div class="row">
 
 
-                <div class="col-md-6 developer">
+                <div class="col-md-6 developer" >
                     <img src="${pageContext.request.contextPath}/resources/img/alberto.svg" alt="">
                     <h4><a href="#">Alberto Rubalcaba</a></h4>
                     <p class="hidden-sm-down ">Skateboarder, software engineer and beer lover.</p>
                 </div>
 
-                <div class="col-md-6 developer">
+                <div class="col-md-6 developer" >
                     <img src="${pageContext.request.contextPath}/resources/img/hector.svg" alt="">
                     <h4><a href="#">Hector Mendoza</a></h4>
                     <p class="hidden-sm-down">Software engineer, tech, life and world lover.</p>
@@ -141,8 +140,7 @@
             </div>
         </section>
 
-        <a href="#" class="go-up"><i class="material-icons">keyboard_arrow_up</i></a>
+        <a data-scroll href="#welcome-section" class="go-up"><i class="material-icons">keyboard_arrow_up</i></a>
 
     </body>
-
 </html>

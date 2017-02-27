@@ -94,7 +94,7 @@
     </ul>
 </div>
 </nav>--%>
-<header class="header navbar-fixed-top" role="banner">
+<header class="header navbar fixed-top" role="banner" tabindex="1">
     <div class="container">
 
 
