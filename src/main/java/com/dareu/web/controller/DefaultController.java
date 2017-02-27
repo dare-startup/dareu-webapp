@@ -53,4 +53,9 @@ public class DefaultController {
     public void downloadApkFile(HttpServletResponse response)throws DareuWebApplicationException{
         service.downloadAndroidMobileApplication(response);
     }
+    
+    @RequestMapping(value = { "/contact" })
+    public ModelAndView contactView(){
+        return service.contactView(); 
+    }
 }

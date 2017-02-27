@@ -103,6 +103,7 @@ public abstract class AbstractService {
     
     protected enum JspView{
         DEFAULT_INDEX("index"),
+        CONTACT("contact"),
         SIGNIN("signin"), 
         SIGNUP("signup"), 
         CREATE_DARE("user/create-dare"), 

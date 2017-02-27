@@ -8,6 +8,7 @@ import com.dareu.web.dto.security.PasswordEncryptor;
 import com.dareu.web.conn.ApacheConnectorService;
 import com.dareu.web.service.DefaultAccountService;
 import com.dareu.web.conn.cxt.JsonParserService;
+import com.dareu.web.dto.request.ContactRequest;
 import com.dareu.web.exception.ApplicationError;
 import com.dareu.web.exception.ApplicationError.ErrorCode;
 import com.dareu.web.exception.DareuWebApplicationException;
@@ -143,5 +144,11 @@ public class DefaultAccountServiceImpl extends AbstractService implements Defaul
         }catch(IOException ex){
             throw new DareuWebApplicationException(new ApplicationError(ErrorCode.IO_ERROR, ex.getMessage(), null)); 
         }
+    }
+
+    public ModelAndView contactView() {
+        ModelAndView mav = new ModelAndView(getView(JspView.CONTACT));
+        mav.addObject("contactRequest", new ContactRequest());
+        return mav; 
     }
 }

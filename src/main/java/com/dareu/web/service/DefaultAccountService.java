@@ -46,4 +46,10 @@ public interface DefaultAccountService {
      * @throws DareuWebApplicationException 
      */
     public void downloadAndroidMobileApplication(HttpServletResponse response)throws DareuWebApplicationException; 
+
+    /**
+     * Return a contact view
+     * @return 
+     */
+    public ModelAndView contactView();
 }

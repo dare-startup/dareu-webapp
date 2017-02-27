@@ -382,6 +382,22 @@ step-container li img {
 }
 
 /***********************************************
+* CONTACT VIEW
+***********************************************/
+
+.contact-form {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+}
+.contact-happy {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+}
+
+/***********************************************
 * Media queries
 ***********************************************/
 
@@ -586,6 +602,10 @@ step-container li img {
     * CREATE NEW DARE VIEW
     ***********************************************/
     .new-dare-card {
+        width: 70%;
+        margin: 0 auto;
+    }
+    .contact-form {
         width: 70%;
         margin: 0 auto;
     }

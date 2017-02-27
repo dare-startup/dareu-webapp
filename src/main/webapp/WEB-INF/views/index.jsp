@@ -24,7 +24,7 @@
                 <div class="header-text wow lightSpeedIn container" data-wow-duration="2s">
                     <h2 class="h2 font-weight-bold">Get dared wherever you are</h2>
                     <h3>Create your dares widely, earn rewards, have fun</h3>
-                    <a class="btn btn-lg btn-primary" href="#">Sign up now!</a>
+                    <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/signup">Sign up now!</a>
                 </div>
                 <div class="arrow-down">
                     <a data-scroll href="#dare-section"><i class="material-icons">keyboard_arrow_down</i></a>
