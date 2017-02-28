@@ -51,7 +51,10 @@ public class ApplicationError {
     
     public static enum ErrorCode{
         NETWORK_CONNECTION("network_error"), 
-        IO_ERROR("io_error"); 
+        IO_ERROR("io_error"), 
+        VALIDATION_ERROR("validation_error"), 
+        INTERNAL_ERROR("internal_error"), 
+        ; 
         String value; 
         ErrorCode(String value){
             this.value = value; 

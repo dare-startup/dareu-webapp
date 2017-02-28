@@ -88,7 +88,8 @@ public abstract class AbstractService {
         REDIRECT_MEMBER_SUCESS("redirect:/member/success"), 
         REDIRECT_INDEX("redirect:/"), 
         REDIRECT_UPLOAD_RESPONSE("redirect:/member/dare/response/upload"), 
-        REDIRECT_PROFILE("redirect:/member/profile"); 
+        REDIRECT_PROFILE("redirect:/member/profile"), 
+        REDIRECT_CONTACT("redirect:/contact"); 
         
         String path; 
         Redirect(String value){
@@ -111,7 +112,8 @@ public abstract class AbstractService {
         DISCOVER_DARES("user/discover-dares"), 
         DISCOVER_RESPONSES("user/discover-responses"), 
         TRENDING("user/trending"), 
-        DISCOVER_SPONSORS("user/discover-sponsors");
+        DISCOVER_SPONSORS("user/discover-sponsors"), 
+        ABOUT("about");
         String viewName; 
         JspView(String value){
             this.viewName = value; 

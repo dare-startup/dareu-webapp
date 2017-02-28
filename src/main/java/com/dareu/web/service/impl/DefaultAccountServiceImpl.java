@@ -9,6 +9,7 @@ import com.dareu.web.conn.ApacheConnectorService;
 import com.dareu.web.service.DefaultAccountService;
 import com.dareu.web.conn.cxt.JsonParserService;
 import com.dareu.web.dto.request.ContactRequest;
+import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.exception.ApplicationError;
 import com.dareu.web.exception.ApplicationError.ErrorCode;
 import com.dareu.web.exception.DareuWebApplicationException;
@@ -146,9 +147,54 @@ public class DefaultAccountServiceImpl extends AbstractService implements Defaul
         }
     }
 
-    public ModelAndView contactView() {
+    public ModelAndView contactView(EntityRegistrationResponse registrationResponse) {
         ModelAndView mav = new ModelAndView(getView(JspView.CONTACT));
         mav.addObject("contactRequest", new ContactRequest());
+        if(registrationResponse != null && registrationResponse.getId() != null)
+            mav.addObject("sentRequest", registrationResponse); 
+        return mav; 
+    }
+
+    public String contactMessage(ContactRequest request, RedirectAttributes atts) throws DareuWebApplicationException{
+        DareuWebApplicationException exc = new DareuWebApplicationException(new ApplicationError(
+                    ErrorCode.VALIDATION_ERROR, "Must provide all fields to send request", 
+                    getRedirect(Redirect.REDIRECT_CONTACT))); 
+        if(request == null)
+            throw exc; 
+        if(request.getComment() == null || request.getComment().isEmpty())
+            throw exc; 
+        if(request.getEmail()== null || request.getEmail().isEmpty())
+            throw exc; 
+        if(request.getName() == null || request.getName().isEmpty())
+            throw exc; 
+        
+        try{
+            ApacheResponseWrapper wrapper = 
+                    connector.performPublicPostOperation(PublicMethodName.CONTACT.toString(), request); 
+            switch(wrapper.getStatusCode()){
+                case 200: 
+                    EntityRegistrationResponse response = 
+                            jsonParser.parseJson(wrapper.getJsonResponse(), EntityRegistrationResponse.class); 
+                    atts.addFlashAttribute("sentRequest", response); 
+                    break; 
+                case 500: 
+                    atts.addFlashAttribute("error", getFriendlyMessage(ErrorCode.IO_ERROR)); 
+                    break; 
+                case 404: 
+                    atts.addFlashAttribute("error", getFriendlyMessage(ErrorCode.IO_ERROR)); 
+                    break; 
+                default: 
+                    break; 
+            }
+            return getRedirect(Redirect.REDIRECT_CONTACT); 
+        }catch(IOException ex){
+            atts.addFlashAttribute("error", getFriendlyMessage(ErrorCode.IO_ERROR)); 
+            return getRedirect(Redirect.ERROR_REDIRECT); 
+        }
+    }
+
+    public ModelAndView aboutView() {
+        ModelAndView mav = new ModelAndView(getView(JspView.ABOUT)); 
         return mav; 
     }
 }

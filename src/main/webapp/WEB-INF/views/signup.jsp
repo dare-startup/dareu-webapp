@@ -15,7 +15,7 @@
             <div class="container">
             <div class="signup-card">
                 <h4 class="text-xs-center text-sm-center text-md-center text-lg-center font-weight-bold">Sign up to Dare‹</h4>
-                <form:form action="${pageContext.request.contextPath}/signup" method="POST" commandName="signup">
+                <form:form cssClass="signup-form" action="${pageContext.request.contextPath}/signup" method="POST" commandName="signup">
                     <div class="form-group">
                         <form:label path="name">Name</form:label>
                         <form:input cssClass="form-control" path="name" type="text"></form:input>

@@ -21,7 +21,7 @@
         <section id="welcome-section" class="welcome-section">
             <%@include file="/shared/nav-bar.jsp" %>
             
-                <div class="header-text wow lightSpeedIn container" data-wow-duration="2s">
+                <div class="header-text wow lightSpeedIn container">
                     <h2 class="h2 font-weight-bold">Get dared wherever you are</h2>
                     <h3>Create your dares widely, earn rewards, have fun</h3>
                     <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/signup">Sign up now!</a>

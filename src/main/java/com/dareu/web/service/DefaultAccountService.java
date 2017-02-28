@@ -1,6 +1,8 @@
 package com.dareu.web.service;
 
+import com.dareu.web.dto.request.ContactRequest;
 import com.dareu.web.dto.request.SignupRequest;
+import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.exception.DareuWebApplicationException;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.ui.Model;
@@ -51,5 +53,19 @@ public interface DefaultAccountService {
      * Return a contact view
      * @return 
      */
-    public ModelAndView contactView();
+    public ModelAndView contactView(EntityRegistrationResponse registrationResponse);
+
+    /**
+     * Saves a contact message 
+     * @param request
+     * @param atts
+     * @return 
+     */
+    public String contactMessage(ContactRequest request, RedirectAttributes atts);
+
+    /**
+     * Return an about view
+     * @return 
+     */
+    public ModelAndView aboutView();
 }

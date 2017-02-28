@@ -1,6 +1,8 @@
 package com.dareu.web.controller;
 
+import com.dareu.web.dto.request.ContactRequest;
 import com.dareu.web.dto.request.SignupRequest;
+import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.exception.DareuWebApplicationException;
 import com.dareu.web.service.DefaultAccountService;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +48,7 @@ public class DefaultController {
     
     @RequestMapping(value = { "/about", "/aboutus" })
     public ModelAndView aboutView(){
-        return null; 
+        return service.aboutView(); 
     }
     
     @RequestMapping(value = { "/android" })
@@ -55,7 +57,13 @@ public class DefaultController {
     }
     
     @RequestMapping(value = { "/contact" })
-    public ModelAndView contactView(){
-        return service.contactView(); 
+    public ModelAndView contactView(@ModelAttribute("sentRequest")EntityRegistrationResponse registrationResponse){
+        return service.contactView(registrationResponse); 
+    }
+    
+    @RequestMapping(value = {"/contact"}, method = RequestMethod.POST)
+    public String sendContactMessage(@ModelAttribute("contactRequest")ContactRequest request, RedirectAttributes atts)
+                throws DareuWebApplicationException{
+        return service.contactMessage(request, atts); 
     }
 }

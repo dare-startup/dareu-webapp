@@ -5,7 +5,8 @@ package com.dareu.web.conn;
  * @author jose.rubalcaba
  */
 public enum PublicMethodName {
-    SIGNUP("/open/registerUser"); 
+    SIGNUP("/open/registerUser"), 
+    CONTACT("/open/contact"); 
     
     String contextPath;
     PublicMethodName(String value){

@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="signin-card">
                     <h4 class="text-xs-center text-sm-center text-md-center text-lg-center font-weight-bold">Sign in to Dare‹</h4>
-                    <form id="signin-form" action="/dareu/security/authenticate" method="POST">
+                    <form id="signin-form" action="/dareu/security/authenticate" method="POST" class='signin-form'>
                         <div class="form-group">
                             <label for="emailInput">Email</label>
                             <input class="form-control" id="nameInput" type="email" placeholder="Email" name="email">

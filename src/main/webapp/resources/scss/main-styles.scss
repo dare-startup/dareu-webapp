@@ -16,10 +16,6 @@ body > section > .container {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     border-radius: 2px;
 }
-.nav-menu {
-    background: $secondary-color !important;
-    padding: 1rem 0 !important;
-}
 
 /* LANDING PAGE */
 
@@ -148,29 +144,6 @@ body > section > .container {
     margin-top: 3rem;
     margin-bottom: 3rem;
 }
-.btn-primary {
-    color: white;
-    background-color: $principal-color;
-    border-color: transparent;
-    margin-top: 1rem;
-}
-.btn-primary:hover {
-    background-color: $principal-color;
-    border-color: transparent;
-}
-
-/*.btn-primary:active:hover { 
-    background-color: $secondary-color;
-    color: $principal-color;
-    border-color: transparent; 
-}
-.btn-primary:hover,
-.btn-primary:focus {
-    background-color:  white;
-    color: $principal-color;
-    border-color: transparent;
-}*/
-
 .dare-section {
     background: $principal-color;
     color: white;
@@ -348,11 +321,15 @@ step-container li img {
 .signin-section .container .card {
     padding: 1rem;
 }
+.signin-form {
+    padding: 1rem;
+}
 
 /* SIGNUP STYLES */
 
 .signup-card {
     margin: 0 auto;
+    padding: 1rem;
 }
 .signup-section > .container {
     margin-top: 0;
@@ -360,6 +337,9 @@ step-container li img {
 #signout-form {
     padding: 1rem;
     text-align: center;
+}
+#signup-form {
+    padding: 1rem;
 }
 
 /***********************************************
@@ -395,6 +375,88 @@ step-container li img {
     padding: 1rem;
     flex-direction: column;
     align-items: center;
+}
+
+/***********************************************
+* ALERTS
+***********************************************/
+
+.alert {
+    margin: 0 1rem;
+}
+
+/***********************************************
+* DISCOVER USERS VIEW 
+***********************************************/
+
+.user-card-menu {
+    display: flex;
+    align-items: center;
+}
+.user-card-menu .material-icons {
+    color: $principal-color;
+    flex: 0 0 20px;
+}
+.user-card-menu menu-dropdown button {
+    border-color: transparent;
+    background: transparent;
+    color: white;
+    border-color: transparent;
+}
+.user-card-menu button > i {
+    border-color: transparent;
+    background: transparent;
+    color: $principal-color;
+}
+.user-card-data img {
+    width: 20px;
+}
+.user-card-data span {
+    color: $principal-color;
+}
+.user-card-menu h5 {
+    flex: 2 1 auto;
+}
+.user-card-menu button.dropdown-toggle {
+    padding: 0;
+    flex: 0 0 auto;
+    border-color: transparent;
+}
+.user-card-menu button.dropdown-toggle::after {
+    content: none;
+}
+
+/***********************************************
+* BUTTONS
+***********************************************/
+
+.btn-primary {
+    color: white;
+    background-color: $principal-color;
+    border-color: transparent;
+}
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:hover {
+    border-color: transparent;
+    background-color: $principal-color;
+    border-color: transparent;
+}
+.btn-info:active,
+.btn-info:focus,
+.btn-info:hover {
+    border-color: transparent;
+    color: $principal-color;
+    background-color: white;
+    border-color: transparent;
+}
+.btn-info {
+    color: $principal-color;
+    background-color: white;
+    border-color: transparent;
+}
+menu-dropdown.show {
+    background: white;
 }
 
 /***********************************************
@@ -484,6 +546,7 @@ step-container li img {
     * SIGNIN VIEW
     */
     .signin-card {
+        padding: 1rem;
         width: 60%;
         margin: 0 auto;
     }
@@ -498,6 +561,37 @@ step-container li img {
     .new-dare-card {
         width: 70%;
         margin: 0 auto;
+    }
+    /***********************************************
+    * CONTACT VIEW
+    ***********************************************/
+    .contact-form {
+        display: flex;
+        padding: 1rem;
+        flex-direction: column;
+    }
+    .contact-happy {
+        display: flex;
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+    /***********************************************
+    * DISCOVER USERS VIEW 
+    ***********************************************/
+    .user-card {
+        width: 70%;
+        margin: 0 auto;
+    }
+    .user-card > img {
+        width: 90px;
+    }
+    user-card-menu > h5 {
+        margin-bottom: 1rem;
+        font-size: 20px;
+    }
+    .user-card-data > p {
+        font-size: 18px;
     }
 }
 @media(min-width: 992px) {
@@ -586,6 +680,7 @@ step-container li img {
     }
     /* SIGNUP VIEW*/
     .signup-card {
+        padding: 1rem;
         width: 60%;
         margin: 0 auto;
     }
@@ -594,6 +689,13 @@ step-container li img {
     ***********************************************/
     .new-dare-card {
         width: 70%;
+        margin: 0 auto;
+    }
+    /***********************************************
+    * DISCOVER USERS VIEW 
+    ***********************************************/
+    .user-card {
+        width: 60%;
         margin: 0 auto;
     }
 }
@@ -606,7 +708,7 @@ step-container li img {
         margin: 0 auto;
     }
     .contact-form {
-        width: 70%;
+        width: 100%;
         margin: 0 auto;
     }
 }

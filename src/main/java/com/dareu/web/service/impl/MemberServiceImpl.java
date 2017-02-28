@@ -94,7 +94,6 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
             if (registration != null && registration.getId() != null) {
                 mav.addObject(FRIENDSHIHP_REGISTRATION_REQUEST_ATTRIBUTE, registration);
             }
-
             //get pagination data 
             PaginationData paginationData = paginationService.getPaginationData(page);
             mav.addObject(PAGINATION_DATA_REQUEST_ATTRIBUTE, paginationData);
