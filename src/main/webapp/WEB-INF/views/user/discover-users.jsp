@@ -73,7 +73,7 @@
                                             <p class="m-0 text-xs-start">
                                                 <img src="${pageContext.request.contextPath}/resources/img/dareu.svg" class="mr-1"> <span>${user.dares}</span> <span>dares      </span>
                                                 <img src="${pageContext.request.contextPath}/resources/img/video_upload.svg" class="mx-1"> <span>${user.responses}</span> <span>uploads </span>
-                                                <img class="hidden-sm-down mx-1" src="${pageContext.request.contextPath}/resources/img/score.svg"> <span class="hidden-sm-down">${user.uscore}</span><span class="hidden-sm-down">points</span>
+                                                <img class="hidden-sm-down mx-1" src="${pageContext.request.contextPath}/resources/img/score.svg"> <span class="hidden-sm-down">${user.uscore} </span><span class="hidden-sm-down">points</span>
                                             </p>
                                         </div>
 

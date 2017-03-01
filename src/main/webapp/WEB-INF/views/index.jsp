@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col-6">
                         <ul class="text-xs-center text-sm-center text-lg-center mechanism-step">
-                            <li class="wow bounceInLeft" data-wow-delay=".3s">
+                            <li>
                                 <i class="material-icons right">people</i>
                                 <div class="step-container ">
                                     <h4 class="font-weight-bold my-2">Add people</h4>
@@ -63,7 +63,7 @@
                                 </div>
 
                             </li>
-                            <li class="wow bounceInLeft" data-wow-delay=".7s">
+                            <li>
                                 <i class="material-icons right">file_upload</i>
                                 <div class="step-container">
                                     <h4 class="font-weight-bold my-2">Upload</h4>
@@ -71,7 +71,7 @@
                                 </div>
 
                             </li>
-                            <li class="wow bounceInLeft" data-wow-delay="1.1s">
+                            <li>
                                 <i class="material-icons right">comment</i>
                                 <div class="step-container">
                                     <h4 class="font-weight-bold my-2">Comment</h4>
@@ -84,14 +84,14 @@
 
                     <div class="col-6">
                         <ul class="text-xs-center text-lg-center mechanism-step">
-                            <li class="wow bounceInRight" data-wow-delay=".5s">
+                            <li>
                                 <img src="${pageContext.request.contextPath}/resources/img/dareu.svg" alt="">
                                 <div class="step-container">
                                     <h4 class="font-weight-bold my-2 text-xs-center text-md-center  text-sm-center">Dare them!</h4>
                                     <p class="hidden-md-down">Some subtitle long description out here look at me</p>
                                 </div>
                             </li>
-                            <li class="wow bounceInRight" data-wow-delay=".9s">
+                            <li>
                                 <i class="material-icons left">thumb_up</i>
                                 <div class="step-container">
                                     <h4 class="text-xs-center text-md-center  text-sm-center font-weight-bold my-2">Get thumbs</h4>
@@ -99,7 +99,7 @@
                                 </div>
 
                             </li>
-                            <li class="wow bounceInRight" data-wow-delay="1.3s">
+                            <li>
                                 <i class="material-icons  left">add_shopping_cart</i>
                                 <div class="step-container">
                                     <h4 class="text-xs-center text-md-center  text-sm-center font-weight-bold my-2">Earn prizes!</h4>

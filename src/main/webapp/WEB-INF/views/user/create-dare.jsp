@@ -87,7 +87,7 @@
                                 <tbody data-bind="foreach: friendDescriptions ">
                                     <tr>
                                         <td class="table-data">
-                                            <img class="image-profile" data-bind="attr: { src: imageUrl, id: id}" width="50" height="50">
+                                            <img class="rounded-circle image-profile" data-bind="attr: { src: imageUrl, id: id}" width="50" height="50">
                                         </td>
                                         <td class="table-data" data-bind="text: name"></td>
                                         <td class="table-data">
