@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @EnableWebMvc()
 @ComponentScan(basePackages = {"com.dareu.web", "com.dareu.web.service", "com.dareu.data.repository", 
-                        "com.dareu.web.controller" })
+                        "com.dareu.web.controller", "com.dareu.web.client" })
 public class MvcConfig extends WebMvcConfigurerAdapter {
 
     @Bean
@@ -71,18 +71,5 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-
-    /**@Bean(name = "filterMultipartResolver")
-    public MultipartResolver multipartResolver(){
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver(); 
-        resolver.setMaxUploadSize(20971520);//20MB
-        resolver.setMaxInMemorySize(1048576);//1MB
-        
-        return resolver; 
-    }**/
-    /**@Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-        return new PersistenceExceptionTranslationPostProcessor();
-    }**/
 
 }
