@@ -211,6 +211,7 @@ public class MemberServiceImpl extends AbstractService implements MemberService 
             }
 
         } catch (IOException ex) {
+            log.severe(ex.getMessage());
             throw new DareuWebApplicationException(new ApplicationError(ApplicationError.ErrorCode.NETWORK_CONNECTION,
                     "Could not connect to server, please try again", contextPath));
         }
