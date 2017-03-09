@@ -1,12 +1,9 @@
 package com.dareu.web.security;
 
-import com.dareu.web.conn.AdminMethodName;
-import com.dareu.web.conn.ApacheResponseWrapper;
+import com.dareu.web.client.SuperAdminClientService;
 import com.dareu.web.dto.response.entity.UserAccount;
 import com.dareu.web.dto.security.PasswordEncryptor;
 import com.dareu.web.dto.security.SecurityRole;
-import com.dareu.web.conn.ApacheConnectorService;
-import com.dareu.web.conn.cxt.JsonParserService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import retrofit2.Response;
 
 /**
  *
@@ -26,11 +24,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class DareuUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private ApacheConnectorService service;
-
-    @Autowired
-    private JsonParserService jsonParser;
+    @Value("${com.dareu.web.admin.token}")
+    private String administratorToken;
 
     @Value("${com.dareu.web.admin.username}")
     private String adminEmail;
@@ -39,8 +34,11 @@ public class DareuUserDetailsService implements UserDetailsService {
     private String adminPassword;
 
     @Autowired
-    private PasswordEncryptor encryptor; 
-    
+    private PasswordEncryptor encryptor;
+
+    @Autowired
+    private SuperAdminClientService superAdminClientService;
+
     private static final Logger log = Logger.getLogger(DareuUserDetailsService.class.getName());
 
     @Override
@@ -57,38 +55,34 @@ public class DareuUserDetailsService implements UserDetailsService {
             return details;
         } else {
             //load user by email 
-            //SigninResponse user = null;
-            ApacheResponseWrapper wrapper = null;
-            try {
-                wrapper = service.performSuperAdminGetOperation(
-                        String.format(AdminMethodName.USER_BY_EMAIL.toString(), string));
-                if (wrapper.getStatusCode() == 200) {
-                    //parse json 
-                    UserAccount account = jsonParser.parseJson(wrapper.getJsonResponse(), UserAccount.class);
 
-                    
-                    details.setUsername(string);
-                    details.setPassword(account.getPassword());
-                    details.setAuthorities(getUserAuthorities(account));
-                    details.setIsAccountNonExpired(true);
-                    details.setIsAccountNonLocked(true);
-                    details.setIsEnabled(true);
-                    details.setIsCredentialsNonExpired(true);
-                    details.setToken(account.getToken()); 
-                    details.setId(account.getId());
-                    return details;
-                } else if(wrapper.getStatusCode() == 500){
-                    log.severe(String.format("Could not fetch user:\n%s", wrapper.getJsonResponse()));
-                    throw new UsernameNotFoundException("There has been an error, try again");
-                }else if(wrapper.getStatusCode() == 404){
-                    log.severe("Username and/or password are incorrect"); 
-                    throw new UsernameNotFoundException("Username and/or password are incorrect"); 
+            try {
+                Response<UserAccount> response = superAdminClientService.findUserByEmail(string, administratorToken)
+                        .execute();
+                switch (response.code()) {
+                    case 200:
+                        details.setUsername(string);
+                        details.setPassword(response.body().getPassword());
+                        details.setAuthorities(getUserAuthorities(response.body()));
+                        details.setIsAccountNonExpired(true);
+                        details.setIsAccountNonLocked(true);
+                        details.setIsEnabled(true);
+                        details.setIsCredentialsNonExpired(true);
+                        details.setToken(response.body().getToken());
+                        details.setId(response.body().getId());
+                        return details;
+                    case 404:
+                        log.severe("Username and/or password are incorrect"); 
+                        throw new UsernameNotFoundException("Username and/or password are incorrect");
+                    case 500:
+                        log.severe(String.format("Could not fetch user:\n%s", response.errorBody().string())); 
+                        throw new UsernameNotFoundException("There has been an error, try again");
                 }
             } catch (IOException ex) {
                 throw new UsernameNotFoundException("Username and/or password are incorrect");
             }
         }
-        return null; 
+        return null;
     }
 
     private List<GrantedAuthority> getAdminAuthorities() {

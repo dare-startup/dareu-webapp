@@ -1,25 +1,17 @@
 package com.dareu.web.service.impl;
 
-import com.dareu.web.conn.AdminMethodName;
-import com.dareu.web.conn.ApacheResponseWrapper;
+import com.dareu.web.client.SuperAdminClientService;
 import com.dareu.web.dto.request.CreateCategoryRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
 import com.dareu.web.dto.response.entity.CategoryDescription;
 import com.dareu.web.dto.response.entity.DareDescription;
 import com.dareu.web.dto.response.entity.Page;
 import com.dareu.web.dto.response.entity.UserAccount;
-import com.dareu.web.security.DareuUserDetails;
 import com.dareu.web.service.AdminService;
-import com.dareu.web.conn.ApacheConnectorService;
-import com.dareu.web.conn.cxt.JsonParserService;
+import com.dareu.web.dto.client.DareClientService;
 import com.dareu.web.exception.ApplicationError;
-import com.dareu.web.exception.ConnectorManagerException;
-import com.dareu.web.mgr.ConnectorManager;
 import com.dareu.web.service.AbstractService;
-import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.List;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,7 +29,10 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
     private Logger log = Logger.getLogger("AdminService");
 
     @Autowired
-    private ConnectorManager connectorManager;
+    private DareClientService dareClientService;
+    
+    @Autowired
+    private SuperAdminClientService superAdminClientService;
 
     public AdminServiceImpl() {
 
@@ -53,13 +48,15 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
         //creates a view model 
         ModelAndView mav = new ModelAndView("admin/configuration");
         try {
-            Page<CategoryDescription> categories = connectorManager.getCategories(pageNumber);
+            Page<CategoryDescription> categories = dareClientService.getCategories(pageNumber, getDetails().getToken())
+                    .execute()
+                    .body();
             mav.addObject(CATEGORIES_REQUEST_ATTRIBUTE, categories);
             model.addAttribute(CATEGORY_REQUEST_ATTRIBUTE, new CreateCategoryRequest());
             //create a new category 
             mav.addObject(CATEGORY_REQUEST_ATTRIBUTE, new CreateCategoryRequest());
             return mav;
-        } catch (ConnectorManagerException ex) {
+        } catch (IOException ex) {
             mav.setViewName("");
             log.severe("Exception: " + ex.getMessage());
         }
@@ -70,9 +67,11 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
     public ModelAndView usersView(int pageNumber, RedirectAttributes atts) {
         ModelAndView mav = new ModelAndView("admin/users");
         try {
-            Page<UserAccount> page = connectorManager.getUsersByPage(pageNumber);
+            Page<UserAccount> page = superAdminClientService.findUsers(pageNumber, getDetails().getToken())
+                    .execute()
+                    .body();
             mav.addObject(USERS_REQUEST_ATTRIBUTE, page);
-        } catch (ConnectorManagerException ex) {
+        } catch (IOException ex) {
             //redirect to error via attributes
             atts.addFlashAttribute(ERROR_REQUEST_ATTRIBUTE, 
                     new ApplicationError(ex.getMessage(), "/admin/dare/category")); 
@@ -85,9 +84,11 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
     public ModelAndView daresView(int pageNumber, RedirectAttributes atts) {
         ModelAndView mav = new ModelAndView("admin/dares");
         try {
-            Page<DareDescription> page = connectorManager.getUnapprovedDares(pageNumber);
+            Page<DareDescription> page = superAdminClientService.findUnapprovedDares(pageNumber, getDetails().getToken())
+                    .execute()
+                    .body();
             mav.addObject(DARES_REQUEST_ATTRIBUTE, page);
-        } catch (ConnectorManagerException ex) {
+        } catch (IOException ex) {
             //redirect to error via attributes
             atts.addFlashAttribute(ERROR_REQUEST_ATTRIBUTE, 
                     new ApplicationError("There has been an error, please try again", "/admin/dare/category")); 
@@ -100,9 +101,11 @@ public class AdminServiceImpl extends AbstractService implements AdminService {
     public String createCategory(CreateCategoryRequest category, RedirectAttributes atts) {
         //create the new category
         try{
-            EntityRegistrationResponse response = connectorManager.createCategory(category); 
+            EntityRegistrationResponse response = superAdminClientService.createCategory(category, getDetails().getToken())
+                    .execute()
+                    .body();
             return "redirect:/admin/configuration";
-        }catch(ConnectorManagerException ex){
+        }catch(IOException ex){
             //redirect to error via attributes
             atts.addFlashAttribute(ERROR_REQUEST_ATTRIBUTE, 
                     new ApplicationError("There has been an error creating the category, please try again", "/admin/dare/category")); 

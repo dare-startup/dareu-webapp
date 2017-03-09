@@ -84,11 +84,11 @@
             <version>3.2.3.RELEASE</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.2</version>
-        </dependency>
+        </dependency>-->
         
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -114,17 +114,11 @@
             <version>2.2.0</version>
         </dependency>
         
-        <dependency>
+        <!--<dependency>
             <groupId>com.squareup.okhttp</groupId>
             <artifactId>okhttp</artifactId>
             <version>2.5.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.squareup.retrofit2</groupId>
-            <artifactId>converter-gson</artifactId>
-            <version>2.1.0</version>
-        </dependency>
+        </dependency>-->
 
 
         <dependency>

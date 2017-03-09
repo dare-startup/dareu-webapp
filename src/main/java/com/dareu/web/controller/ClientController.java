@@ -27,9 +27,4 @@ public class ClientController {
                         @RequestParam("query")String query){
         return restService.findFriends(pageNumber, query);
     }
-    
-    @RequestMapping(value = "profile/image", produces = { "image/jpeg" })
-    public @ResponseBody byte[] getProfileImage(@RequestParam("userId")String userId){
-        return restService.getProfileImage(userId); 
-    }
 }

@@ -145,7 +145,7 @@ public interface MemberService {
      * @param atts
      * @return 
      */
-    public String uploadDareResponse(MultipartFile file, String comment, String dareId, RedirectAttributes atts)throws DareuWebApplicationException;
+    //public String uploadDareResponse(MultipartFile file, String comment, String dareId, RedirectAttributes atts)throws DareuWebApplicationException;
 
     /**
      * get the upload response view 

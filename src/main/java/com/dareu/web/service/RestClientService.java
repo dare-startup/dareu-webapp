@@ -17,12 +17,5 @@ public interface RestClientService {
      * @return 
      */
     public Page<FriendSearchDescription> findFriends(int pageNumber, String query);
-
-    /**
-     * 
-     * @param userId
-     * @return 
-     */
-    public byte[] getProfileImage(String userId);
     
 }

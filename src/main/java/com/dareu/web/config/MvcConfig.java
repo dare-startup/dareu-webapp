@@ -1,5 +1,10 @@
 package com.dareu.web.config;
 
+import com.dareu.web.client.SuperAdminClientService;
+import com.dareu.web.dto.client.AccountClientService;
+import com.dareu.web.dto.client.DareClientService;
+import com.dareu.web.dto.client.OpenClientService;
+import com.dareu.web.dto.client.factory.RetroFactory;
 import com.dareu.web.dto.security.PasswordEncryptor;
 import com.dareu.web.dto.security.impl.PasswordEncryptorImpl;
 import org.springframework.context.annotation.Bean;
@@ -70,6 +75,26 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
+    }
+    
+    @Bean
+    public AccountClientService accountClientServiceBean(){
+        return RetroFactory.getInstance().create(AccountClientService.class);
+    }
+    
+    @Bean
+    public DareClientService dareClientServiceBean(){
+        return RetroFactory.getInstance().create(DareClientService.class);
+    }
+    
+    @Bean
+    public OpenClientService openClientServiceBean(){
+        return RetroFactory.getInstance().create(OpenClientService.class);
+    }
+    
+    @Bean
+    public SuperAdminClientService superAdminClientServiceBean(){
+        return RetroFactory.getInstance().create(SuperAdminClientService.class);
     }
 
 }

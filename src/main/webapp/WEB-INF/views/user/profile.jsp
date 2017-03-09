@@ -20,14 +20,7 @@
             </c:if>
             <h5 style="margin-left: 20% !important; margin-bottom: 0;">Personal data</h5>
             <div class="card notification-card elevated">
-                <c:choose>
-                    <c:when test="${profile.profileImageAvailable}">
-                        <img class="card-img-top center rounded-circle" width="150" height="150" src="${pageContext.request.contextPath}/rest/client/profile/image?userId=">
-                    </c:when>
-                    <c:otherwise>
-                        <img class="card-img-top center rounded-circle" width="150" height="150" src="${pageContext.request.contextPath}/resources/img/account.png">
-                    </c:otherwise>
-                </c:choose>
+                <img class="card-img-top center rounded-circle" width="150" height="150" src="${profile.imageUrl}">
                 <h5 class="center-text">${profile.name}</h5>
                 <p class="center-text">${profile.email} <span><button type="button" data-toggle="modal" data-target="#changeEmailModal" class="btn btn-secondary material-button"><i class="material-icons">edit</i></button></span></p>
                 <div class="row" style="margin: 0 auto;">

@@ -49,14 +49,7 @@
                                 <input name="friendId" type="hidden" data-bind="value: selectedUserId"/>
                             </div>
                             <input id="csrfToken" type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                        <c:choose>
-                            <c:when test="${not empty friends.items}">
-                                <button type="submit" class="btn btn-primary btn-lg btn-block ripple">Create</button>
-                            </c:when>
-                            <c:otherwise>
-                                <button type="submit" class="btn btn-primary btn-lg btn-block" disabled>Create</button>
-                            </c:otherwise>
-                        </c:choose>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block ripple">Create</button>
                     </form:form>
                 </div>
             </div>

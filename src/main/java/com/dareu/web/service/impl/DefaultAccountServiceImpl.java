@@ -1,13 +1,9 @@
 package com.dareu.web.service.impl;
 
-import com.dareu.web.conn.ApacheResponseWrapper;
-import com.dareu.web.conn.PublicMethodName;
 import com.dareu.web.dto.request.SignupRequest;
 import com.dareu.web.dto.response.AuthenticationResponse;
 import com.dareu.web.dto.security.PasswordEncryptor;
-import com.dareu.web.conn.ApacheConnectorService;
 import com.dareu.web.service.DefaultAccountService;
-import com.dareu.web.conn.cxt.JsonParserService;
 import com.dareu.web.dto.client.OpenClientService;
 import com.dareu.web.dto.request.ContactRequest;
 import com.dareu.web.dto.response.EntityRegistrationResponse;
@@ -26,7 +22,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import retrofit2.Call;
 import retrofit2.Response;
 
 /**
@@ -37,12 +32,6 @@ import retrofit2.Response;
 public class DefaultAccountServiceImpl extends AbstractService implements DefaultAccountService {
 
     private static final Logger log = Logger.getLogger(DefaultAccountServiceImpl.class.getName());
-
-    @Autowired
-    private ApacheConnectorService connector;
-
-    @Autowired
-    private JsonParserService jsonParser;
 
     @Autowired
     private HttpServletRequest servletRequest;
@@ -142,6 +131,7 @@ public class DefaultAccountServiceImpl extends AbstractService implements Defaul
         }
     }
 
+    @Override
     public ModelAndView contactView(EntityRegistrationResponse registrationResponse) {
         ModelAndView mav = new ModelAndView(getView(JspView.CONTACT));
         mav.addObject("contactRequest", new ContactRequest());
@@ -151,6 +141,7 @@ public class DefaultAccountServiceImpl extends AbstractService implements Defaul
         return mav;
     }
 
+    @Override
     public String contactMessage(ContactRequest request, RedirectAttributes atts) throws DareuWebApplicationException {
         DareuWebApplicationException exc = new DareuWebApplicationException(new ApplicationError(
                 ErrorCode.VALIDATION_ERROR, "Must provide all fields to send request",
@@ -169,13 +160,13 @@ public class DefaultAccountServiceImpl extends AbstractService implements Defaul
         }
 
         try {
-            ApacheResponseWrapper wrapper
-                    = connector.performPublicPostOperation(PublicMethodName.CONTACT.toString(), request);
-            switch (wrapper.getStatusCode()) {
+            Response<EntityRegistrationResponse> response = openClientService.contactMessage(request)
+                    .execute();
+            switch (response.code()) {
                 case 200:
-                    EntityRegistrationResponse response
-                            = jsonParser.parseJson(wrapper.getJsonResponse(), EntityRegistrationResponse.class);
-                    atts.addFlashAttribute("sentRequest", response);
+                    EntityRegistrationResponse responseBody = 
+                            response.body();
+                    atts.addFlashAttribute("sentRequest", responseBody);
                     break;
                 case 500:
                     atts.addFlashAttribute("error", getFriendlyMessage(ErrorCode.IO_ERROR));

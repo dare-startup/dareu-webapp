@@ -21,14 +21,7 @@
                         <%-- Create cards --%>
                         <c:forEach items="${users.items}" var="user" varStatus="i">
                             <div class="media user-card my-3">
-                                <c:choose>
-                                    <c:when test="${user.profileImageAvailable}">
-                                    <img class="d-flex align-self-center mx-3" width="60" src="${pageContext.request.contextPath}/rest/client/profile/image?userId=${user.id}">
-                                </c:when>
-                                <c:otherwise>
-                                    <img class="d-flex align-self-center mx-3" width="60" src="${pageContext.request.contextPath}/resources/img/account.svg">
-                                </c:otherwise>
-                                </c:choose>
+                                <img class="d-flex align-self-center mx-3" width="60" src="${user.imageUrl}">
                                 <div class="media-body py-3 user-card-body">
                                     <div class="user-card-menu">
                                         <h5 class="h5 mt-0 text-xs-start font-weight-bold mb-0">${user.name}</h5>

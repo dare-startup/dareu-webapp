@@ -53,11 +53,11 @@ public class MemberDareController {
         return memberService.currentUserProfile(message); 
     }
     
-    @RequestMapping(value = "response/upload", method = RequestMethod.POST, consumes = "multipart/form-data")
+    /**@RequestMapping(value = "response/upload", method = RequestMethod.POST, consumes = "multipart/form-data")
     public String uploadDareResponse(@RequestPart("file")MultipartFile file, @RequestParam("dareId") String dareId, @RequestParam("comment")String comment, RedirectAttributes atts)
     throws DareuWebApplicationException{
         return memberService.uploadDareResponse(file, comment, dareId, atts); 
-    }
+    }**/
     
     @RequestMapping(value = "response/upload")
     public ModelAndView uploadDareResponseView(@ModelAttribute("dareId")String dareId)throws DareuWebApplicationException{
