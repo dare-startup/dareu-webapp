@@ -24,15 +24,7 @@
                     <div class="card notification-card center text-center elevated">
                     <div class="row">
                         <div class="col-xs-3 col-md-3 col-lg-3" style="padding: 1.25rem 1.25rem 0 1.25rem;">
-                            <c:choose>
-                                <c:when test="${unacceptedDare.challenger.profileImageAvailable}">
-                                    <img class="card-img-top center" width="100" height="100" src="${pageContext.request.contextPath}/rest/client/profile/image?userId=${unacceptedDare.challenger.id}">
-                                </c:when>
-                                <c:otherwise>
-                                    <img class="card-img-top center" width="100" height="100" src="${pageContext.request.contextPath}/resources/img/account.png">
-                                </c:otherwise>
-                            </c:choose>
-
+                            <img class="card-img-top center" width="100" height="100" src="${unacceptedDare.challenger.imageUrl}">
                         </div>
                         <div class="col-xs-8 col-md-8 col-lg-8" style="padding:1.25rem 0 0 0;">
                             <h4 class="card-title" style="margin:0;"><a ref="#">${unacceptedDare.challenger.name}</a></h4>
