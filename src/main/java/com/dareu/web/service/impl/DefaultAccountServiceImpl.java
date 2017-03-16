@@ -82,7 +82,6 @@ public class DefaultAccountServiceImpl extends AbstractService implements Defaul
             atts.addFlashAttribute("error", "No birthday was provided");
             return signup;
         } else {
-            //connect to web service 
             try {
 
                 Response<AuthenticationResponse> response = openClientService.signup(request)
@@ -116,9 +115,10 @@ public class DefaultAccountServiceImpl extends AbstractService implements Defaul
         try {
             InputStream stream = fileManager.getAndroidApkFile();
 
-            response.setContentType("application/octet-stream");
-            /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser 
-             while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
+            response.setContentType("application/vnd.android.package-archive");
+            /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser]
+                right on browser
+                while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
             response.setHeader("Content-Disposition", String.format("inline; filename=\"dareu.apk\""));
             byte[] buffer = new byte[1024];
             while ((stream.read(buffer)) != -1) {
