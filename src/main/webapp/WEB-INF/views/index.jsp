@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-xs-12 col-md-4 col-xl-3 my-4 wow tada" data-wow-duration="2s">
                         <h5 class="h4 text-center">Available on</h5>
-                        <a href="https://drive.google.com/file/d/0B3ywFpms_fF6MkpkR2dTRUJVaE0/view?usp=sharing" data-toggle="tooltip" data-placenement="top" title="This mobile version is still on development"><img class="my-3" src="${pageContext.request.contextPath}/resources/img/google_play.svg" alt="Play-Services logo"></a>
+                        <a href="https://drive.google.com/file/d/0B3ywFpms_fF6MFRZdHpfdzc1eG8/view?usp=sharing" data-toggle="tooltip" data-placenement="top" title="This mobile version is still on development"><img class="my-3" src="${pageContext.request.contextPath}/resources/img/google_play.svg" alt="Play-Services logo"></a>
                     </div>
                 </div>
             </div>
