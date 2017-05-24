@@ -1,0 +1,18 @@
+include layout/navbar
+include layout/global_imports
+
+doctype html
+html 
+  head 
+    
+    title Hello
+  body
+    section#welcome-section.welcome-section
+      div.header-text.wow.lightSpeedIn.container
+        h2.h2.font-weight-bold Get dared wherever you are
+        h3 Create your dares widely, earn rewards, have fun
+        a(href='/signup').btn.btn-lg.btn-primary Sign up now
+      div.arrow-down
+        a(data-scroll, href='#dare-section')
+          i.material-icons keyboard_arrow_down
+  

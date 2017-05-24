@@ -1,0 +1,17 @@
+header(role='banner', tabIndex='1').header.navbar.fixed-top
+  div.container
+    a(href='#').logo
+      img(src='/images/icon.png', alt='Logo')
+    //- menu buttons
+    button(type='button', data-toggle='collapse', aria-expanded='false').search-button menu-button
+      i.material-icons.ripple search
+    button(type='button', data-target='#principal-menu',data-toggle='collapse', aria-expanded='false').menu-button hidden-md-up
+      i.material-icons.ripple menu
+    
+    //- search block
+    form(action='#', id='search-block').collapse
+      div.search-container-block
+        input(type='text', placeholder='Search...')
+        input(type='submit', value='Search')
+        
+    
