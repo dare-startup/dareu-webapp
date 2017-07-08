@@ -1,0 +1,57 @@
+
+.signin-section > .container {
+    margin-top: 1rem;
+}
+.signin-section .container .card {
+    padding: 1rem;
+}
+.signin-form {
+    padding: 1rem;
+}
+
+@media(min-width: 420px){
+  .signin-card {
+      padding: 1rem;
+      width: 90%;
+      margin: 0 auto;
+  }
+}
+
+@media(min-width: 546px){
+  .signin-card {
+      padding: 1rem;
+      width: 90%;
+      margin: 0 auto;
+  }
+}
+
+@media(min-width: 586px){
+  .signin-card {
+      padding: 1rem;
+      width: 80%;
+      margin: 0 auto;
+  }
+}
+
+@media(min-width: 768px) {
+  .signin-card {
+      padding: 1rem;
+      width: 60%;
+      margin: 0 auto;
+  }
+}
+
+@media(min-width: 992px) {
+  .signin-card {
+      width: 50%;
+      margin: 0 auto;
+  }
+}
+
+
+@media(min-width: 1200px){
+  .signin-card {
+      width: 40%;
+      margin: 0 auto;
+  }
+}

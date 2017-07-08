@@ -1,0 +1,63 @@
+<section class="admin-config-section">
+  <app-admin-navbar></app-admin-navbar>
+  <div class="container">
+    <div class="categories-card">
+      <h3 class="text-center">Available categories</h3>
+      <p class="text-center">Need to add a new category? <button class="btn btn-info" (click)="addCategory()" data-target="#categoryModal" data-toggle="modal">Add category</button></p>
+      <div class="alert alert-warning hidden-md-up">
+        <p>We detected that you are using a smartphone or tablet to access this site, if you need to update any configuration, you need to do it through a web browser</p>
+      </div>
+
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <td class="text-center">Name</td>
+            <td class="text-center">Description</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories?.items">
+            <td class="text-center">{{category.name}}</td>
+            <td class="text-center">{{category.description}}</td>
+            <td><button class="btn btn-warning btn-sm text-center hidden-md-down" data-toggle="modal" data-target="#categoryModal" (click)="editCategory(category)">Edit</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert alert-success" *ngIf="categoryOperationSuccess fade">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="dismiss()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <p>Created category {{currentCategory?.name}} with the following description: </p>
+        <p>{{currentCategory?.description}}</p>
+      </div>
+    </div>
+    <div class="modal fade" id="categoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel" *ngIf="!isUpdating">Create a dare category</h4>
+                            <h4 class="modal-title" id="myModalLabel" *ngIf="isUpdating">Update a dare category</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form [formGroup]="categoryRequest" method="POST">
+                                <input type="hidden" name="id" [formControl]="categoryRequest.controls['id']" value="{{categoryRequest.controls['id']}}">
+                                <div class="form-group">
+                                    <label path="name">Name</label>
+                                    <input [formControl]="categoryRequest.controls['name']" class="form-control"  type="text">
+                                </div>
+                                    <div class="form-group">
+                                    <label path="description">Description</label>
+                                    <textarea [formControl]="categoryRequest.controls['description']" class="form-control"></textarea>
+                                    </div>
+
+                                <button type="button" class="btn btn-primary" *ngIf="isUpdating" (click)="onSubmit(categoryRequest.value)" data-dismiss="categoryModal" [disabled]="!categoryRequest.valid">Update</button>
+                                <button type="button" class="btn btn-primary" *ngIf="!isUpdating" (click)="onSubmit(categoryRequest.value)" data-dismiss="categoryModal" [disabled]="!categoryRequest.valid">Create</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  </div>
+</section>

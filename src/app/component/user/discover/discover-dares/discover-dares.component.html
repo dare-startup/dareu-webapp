@@ -1,0 +1,9 @@
+<section style="margin-top:5rem !important;">
+  <app-user-navbar></app-user-navbar>
+  <div class="container">
+    <app-dares-grid *ngIf="firstPage?.length > 0 || secondPage?.length > 0"
+                    [firstPage]="firstPage"
+                    [secondPage]="secondPage">
+    </app-dares-grid>
+  </div>
+</section>

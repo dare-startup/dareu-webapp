@@ -1,0 +1,13 @@
+.admin-config-section{
+  margin-top: 5rem !important;
+  padding: 1rem 0;
+}
+
+@media(min-width:772px){
+  .categories-card{
+    width:70%;
+    margin: 0 auto;
+  }
+
+
+}

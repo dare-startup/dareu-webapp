@@ -1,1 +1,208 @@
-/* You can add global styles to this file, and also import other style files */
+body > section > .container {
+  margin-top: 5rem !important;
+  padding: 1rem 0; }
+
+.elevated {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 3px 3px rgba(0, 0, 0, 0.23);
+  border-radius: 1px; }
+
+.btn-primary:disabled {
+  background-color: white;
+  color: #F05C19;
+  border-color: transparent; }
+
+.btn-primary:disabled:hover {
+  color: white; }
+
+html {
+  font-size: 15px; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #000000;
+  background-color: #fcfcfc; }
+
+/* LANDING PAGE */
+.menu-button,
+.search-button {
+  border: 0;
+  font-size: 2rem;
+  margin: 0;
+  padding: 0 .5rem;
+  background: transparent;
+  color: white;
+  margin-right: .8rem;
+  margin-left: auto; }
+
+.menu-button:focus {
+  outline: 0; }
+
+.search-button {
+  margin-right: .8rem;
+  margin-left: auto; }
+
+#search-block {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 100%;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%; }
+
+.search-container-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 3rem;
+  margin: 1rem 0; }
+
+.search-container-block input[type="text"] {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  border: 0;
+  border-radius: 5px 0 0 5px;
+  padding: 1rem; }
+
+.search-container-block input[type="submit"] {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 auto;
+      -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+  border: 0;
+  border-radius: 0 5px 5px 0;
+  background: white;
+  color: #F05C19;
+  padding: 0 1rem; }
+
+.dropdown-item:hover {
+  background-color: transparent; }
+
+/***********************************************
+* CREATE NEW DARE VIEW
+***********************************************/
+.new-dare-card {
+  padding: 1rem;
+  margin-top: 1rem; }
+
+#findFriendsSearch {
+  width: 80%;
+  margin: 0 auto; }
+
+.table-date {
+  padding: 0.75rem;
+  vertical-align: middle;
+  text-align: center;
+  border-top: 1px solid #eceeef; }
+
+/***********************************************
+* ALERTS
+***********************************************/
+.alert {
+  margin: 0 1rem; }
+
+/***********************************************
+* BUTTONS
+***********************************************/
+.btn-primary {
+  color: white;
+  background-color: #F05C19;
+  border-color: transparent; }
+
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:hover {
+  border-color: transparent;
+  background-color: #F05C19;
+  border-color: transparent; }
+
+.btn-info:active,
+.btn-info:focus,
+.btn-info:hover {
+  border-color: transparent;
+  color: #F05C19;
+  background-color: white;
+  border-color: transparent; }
+
+.btn-info {
+  color: #F05C19;
+  background-color: white;
+  border-color: transparent; }
+
+menu-dropdown.show {
+  background: white; }
+
+/***********************************************
+* Media queries
+***********************************************/
+@media (max-width: 544px) {
+  .text-xs-center {
+    text-align: center !important; } }
+@media (min-width: 768px) {
+  .search-button {
+    margin-right: 0;
+    margin-left: 1rem;
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+        -ms-flex-order: 2;
+            order: 2; }
+
+  #search-block {
+    -webkit-box-ordinal-group: 4;
+    -webkit-order: 3;
+        -ms-flex-order: 3;
+            order: 3;
+    position: absolute;
+    width: 20rem;
+    right: 3rem;
+    top: 2.5rem; }
+
+  /***********************************************
+  * CREATE NEW DARE VIEW
+  ***********************************************/
+  .new-dare-card {
+    width: 70%;
+    margin: 0 auto; } }
+@media (min-width: 992px) {
+  .search-button {
+    margin-right: 0;
+    margin-left: 1rem;
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+        -ms-flex-order: 2;
+            order: 2; }
+
+  #search-block {
+    -webkit-box-ordinal-group: 4;
+    -webkit-order: 3;
+        -ms-flex-order: 3;
+            order: 3;
+    position: absolute;
+    width: 20rem;
+    right: 3rem;
+    top: 2.5rem;
+    -webkit-transition: all 1s ease;
+            transition: all 1s ease; }
+
+  body {
+    font-size: 16px; }
+
+  /***********************************************
+  * CREATE NEW DARE VIEW
+  ***********************************************/
+  .new-dare-card {
+    width: 70%;
+    margin: 0 auto; } }
+@media (min-width: 1200px) {
+  /***********************************************
+  * CREATE NEW DARE VIEW
+  ***********************************************/
+  .new-dare-card {
+    width: 70%;
+    margin: 0 auto; }
+
+  .contact-form {
+    width: 100%;
+    margin: 0 auto; } }
+
+/*# sourceMappingURL=styles.css.map */

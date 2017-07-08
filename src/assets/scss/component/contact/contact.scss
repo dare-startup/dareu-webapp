@@ -1,0 +1,17 @@
+#contact-section{
+  margin-top: 7rem !important;
+}
+
+  @media(min-width: 768px) {
+    .contact-form {
+        display: flex;
+        padding: 1rem;
+        flex-direction: column;
+    }
+    .contact-happy {
+        display: flex;
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+    }
+  }

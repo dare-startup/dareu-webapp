@@ -1,0 +1,19 @@
+<section style="margin-top:5rem !important;">
+  <app-user-navbar></app-user-navbar>
+  <div class="container">
+    <!--TODO: SET AN ALERT OR SOMETHING-->
+    <div class="no-users-found">
+      <h4 *ngIf="firstPage?.length == 0" class="text-center">No discoverable users were found</h4>
+      <h5 class="go-back text-center"><a *ngIf="firstPage?.length == 0"  routerLink="">Return to main page</a></h5>
+    </div>
+    <app-users-grid *ngIf="firstPage?.length > 0 || secondPage?.length > 0"
+                    [firstPage]="firstPage"
+                    [secondPage]="secondPage">
+    </app-users-grid>
+    <app-pagination *ngIf="firstPage?.length > 0 || secondPage?.length > 0"
+                    [pageNumber]="currentItems?.pageNumber"
+                    [pagesAvailable]="currentItems?.pagesAvailable"
+                    [currentUrl]="'/user/discover/users'">
+    </app-pagination>
+  </div>
+</section>
