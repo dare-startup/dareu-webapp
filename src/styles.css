@@ -11,6 +11,10 @@ body > section > .container {
   color: #F05C19;
   border-color: transparent; }
 
+.title {
+  margin-top: 1rem;
+  margin-bottom: 1rem; }
+
 .btn-primary:disabled:hover {
   color: white; }
 

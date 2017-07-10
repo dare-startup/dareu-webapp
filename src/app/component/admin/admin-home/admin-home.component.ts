@@ -5,6 +5,7 @@ import { Logger } from "angular2-logger/core";
 import { ActivatedRoute, Params } from '@angular/router';
 import { ContactMessageDescription } from '../../../model/response/contact-message-description';
 import { Page } from '../../../model/response/page';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-home',
@@ -13,12 +14,22 @@ import { Page } from '../../../model/response/page';
 })
 export class AdminHomeComponent implements OnInit {
 
+  public currentContactMessage:ContactMessageDescription;
   public show:boolean = false;
   public contactMessages:Page<ContactMessageDescription>;
+  public contactMessageResponse = this.formBuilder.group({
+    id: [''],
+    body: ['', Validators.required]
+  });
 
   constructor(private adminBackendService:AdminBackendService,
               private logger:Logger,
-              private activatedRoute:ActivatedRoute) { }
+              private activatedRoute:ActivatedRoute,
+              private formBuilder:FormBuilder) { }
+
+  replyContactMessage(contactMessage){
+    this.currentContactMessage = contactMessage;
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -30,10 +41,9 @@ export class AdminHomeComponent implements OnInit {
       }
       this.adminBackendService.pendingContactMessages(pageNumber)
       .subscribe(contactMessagesResponse => {
-        this.logger.info(contactMessagesResponse);
         if(contactMessagesResponse.items.length > 0){
           this.show = true;
-          this.contactMessages = contactMessagesResponse; 
+          this.contactMessages = contactMessagesResponse;
         }
       }, err => {
         this.logger.info(err);
