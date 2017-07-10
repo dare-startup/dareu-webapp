@@ -3,11 +3,17 @@
   padding: 1rem 0;
 }
 
+.table-fixed {
+  .tbody{
+    height: 10rem;
+    overflow-y: auto;
+  }
+}
+
+
 @media(min-width:772px){
   .categories-card{
     width:70%;
     margin: 0 auto;
   }
-
-
 }

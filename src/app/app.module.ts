@@ -90,7 +90,12 @@ const applicationRoutes: Routes = [
       { path: 'dares', component: AdminDaresComponent },
       { path: 'users', component: AdminUsersComponent },
       { path: 'sponsors', component: AdminSponsorsComponent },
-      { path: 'config', component: AdminConfigComponent },
+      { path: 'config',
+        children: [
+          { path: 'categories', component: AdminCategoriesComponent }
+        ]
+
+      },
     ]
   },
   //default paths

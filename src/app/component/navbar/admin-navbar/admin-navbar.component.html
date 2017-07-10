@@ -13,8 +13,32 @@
             <ul>
                 <li class="ripple"><a routerLink="/admin/dares">Dares</a></li>
                 <li class="ripple"><a routerLink="/admin/users">Users</a></li>
-                <li class="ripple"><a routerLink="/admin/sponsors">Sponsors</a></li>
-                <li class="ripple"><a routerLink="/admin/config">App Config</a></li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sponsors
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/admin/sponsor/create">Create sponsor</a>
+                    <a class="dropdown-item" href="/admin/sponsor/search">Search sponsor</a>
+                    <a class="dropdown-item" href="/admin/sponsor/billing">Check sponsor billing status</a>
+                    <!--<a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>-->
+                  </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Config
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/admin/config/categories">Categories</a>
+                    <a class="dropdown-item" href="/user">Change to user view</a>
+                    <a class="dropdown-item" href="/sponsor">Change to sponsor view</a>
+                    <a class="dropdown-item" href="/">Sign out</a>
+                    <!--<a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>-->
+                  </div>
+                </li>
             </ul>
         </nav>
     </div>

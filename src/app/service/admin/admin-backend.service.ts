@@ -14,6 +14,7 @@ export class AdminBackendService {
   private categoriesPath = "dare/category?pageNumber=";
   private createCategoryPath = "admin/dare/category/create";
   private updateCategoryPath = "admin/dare/category/update";
+  private pendingContactMessagesPath = "admin/global/pending/contact?pageNumber=";
 
   constructor(private authenticationService:AuthenticationService,
               private logger: Logger,
@@ -38,6 +39,12 @@ export class AdminBackendService {
     let url = ServerUtilities.HOST + this.updateCategoryPath;
     let jsonBody = JSON.stringify(request);
     return this.httpClient.put(url, jsonBody, this.authenticationService.getPOSTRequestOptions(true))
+      .map(this.serverUtilities.extractData);
+  }
+
+  pendingContactMessages(pageNumber:number){
+    let url = ServerUtilities.HOST + this.pendingContactMessagesPath + pageNumber;
+    return this.httpClient.get(url, this.authenticationService.getRequestOptions(true))
       .map(this.serverUtilities.extractData);
   }
 

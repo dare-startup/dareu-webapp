@@ -1,6 +1,19 @@
 <section class="admin-home-section">
   <app-admin-navbar></app-admin-navbar>
-  <div class="container">
-    <h4 class="text-center">Some admin metrics goes here yo!</h4>
+  <div class="container" *ngIf="show">
+    <h4 class="text-center">Pending contact messages</h4>
+    <div class="contact-message card" *ngFor="let contact of contactMessages.items">
+      <div class="contact-message-header">
+        <h4 class="contact-message-header-name">{{contact.name}}</h4>
+        <h5 class="hidden-sm-down date-header">{{contact.date}}</h5>
+      </div>
+      <div class="contact-message-body">
+        <p>{{contact.comment}}</p>
+      </div>
+      <div class="contact-message-footer">
+        <button class="btn btn-info" type="button">Reply message</button>
+        <button class="btn btn-primary" type="button">Discard</button>
+      </div>
+    </div>
   </div>
 </section>
