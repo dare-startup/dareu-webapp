@@ -1,0 +1,32 @@
+.signup-section{
+  margin-top: 5rem !important;
+}
+.signup-card {
+    margin: 0 auto;
+    padding: 1rem;
+}
+.signup-section > .container {
+    margin-top: 0;
+}
+#signout-form {
+    padding: 1rem;
+    text-align: center;
+}
+#signup-form {
+    padding: 1rem;
+}
+
+@media(min-width: 768px) {
+  .signup-card {
+      width: 60%;
+      margin: 0 auto;
+  }
+}
+
+  @media(min-width: 992px) {
+    .signup-card {
+        padding: 1rem;
+        width: 60%;
+        margin: 0 auto;
+    }
+  }

@@ -1,0 +1,127 @@
+@import "../../styles";
+
+#principal-menu {
+    flex: 1 1 100%;
+}
+#principal-menu ul {
+    padding: 0;
+    list-style: none;
+    margin: 1rem 0 0 0;
+}
+#principal-menu ul li a {
+    display: block;
+    padding: .8rem 0;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+#principal-menu ul li a:hover {
+
+}
+#principal-menu ul li.active a {
+
+}
+#principal-menu .dropdown-item {
+    margin: 0;
+    color: $principal-color;
+}
+
+.dropdown-menu{
+  padding: 0;
+  border-color: white;
+}
+
+.dropdown-menu > a.dropdown-item{
+  color: white !important;
+  background-color: $principal-color;
+}
+
+.header {
+    background: $principal-color;
+    color: white;
+    padding: .5rem 0;
+}
+.header .container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.header .logo img {
+    width: 50px;
+    height: 30px;
+}
+
+.header-text {
+    padding-top: 2rem;
+    text-align: center;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.header-text .display-4 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 544px) {
+  header > div {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media(min-width: 768px) {
+    #principal-menu {
+        height: auto !important;
+        display: block;
+        flex: 0 1 auto;
+        order: 1;
+        margin-left: auto;
+    }
+    #principal-menu ul {
+        display: flex;
+        margin: 0;
+    }
+    #principal-menu ul li a {
+        margin: 0;
+        padding: 1rem;
+        text-transform: capitalize;
+        border-top: 0px;
+        border-bottom: 4px solid transparent;
+        transition: all .5s ease;
+    }
+    #principal-menu ul li.active a,
+    #principal-menu ul li a:hover {
+        color: white;
+        border-bottom: 4px solid transparent;
+    }
+  }
+
+  @media(min-width: 992px) {
+      #principal-menu {
+          height: auto !important;
+          display: block;
+          flex: 0 1 auto;
+          order: 1;
+          margin-left: auto;
+      }
+      #principal-menu ul {
+          display: flex;
+          margin: 0;
+      }
+      #principal-menu ul li a {
+          margin: 0;
+          padding: 1rem;
+          text-transform: capitalize;
+          border-top: 0px;
+          border-bottom: 4px solid transparent;
+          transition: all .5s ease;
+      }
+      #principal-menu ul li.active a,
+      #principal-menu ul li a:hover {
+          color: white;
+          border-bottom: 4px solid transparent;
+      }
+    }

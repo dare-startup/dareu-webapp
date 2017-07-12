@@ -1,0 +1,244 @@
+@import '../../styles';
+
+.welcome-section {
+    background: url("/assets/img/header-wallpaper.jpg") no-repeat center top;
+    color: white;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-attachment: fixed !important;
+}
+
+.arrow-down {
+    animation: animated-arrow-down 2s ease-in-out infinite;
+    text-align: center;
+}
+
+.arrow-down a {
+    display: inline-block;
+    color: white;
+}
+.arrow-down a i {
+    font-size: 4rem;
+}
+
+.go-up i {
+    font-size: 3rem;
+}
+.go-up {
+    transition: all .5s ease;
+    border-radius: 50%;
+    background: $principal-color;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    line-height: 0;
+    color: white;
+    text-decoration: none;
+    z-index: 99999;
+    display: none;
+}
+.go-up:hover,
+.go-up:focus {
+    outline: 0;
+    text-decoration: none;
+    color: white;
+    background: $secondary-color;
+}
+
+@keyframes animated-arrow-down {
+    from {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.dare-section {
+    background: $principal-color;
+    color: white;
+}
+.dare-section img {
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+}
+.mechanism-section {
+    background: url("/assets/img/gears.jpg") no-repeat center top;
+    color: white;
+    background-size: cover;
+    background-attachment: fixed !important;
+}
+.mechanism-section h2 span {
+    color: $principal-color;
+}
+.mechanism-section ul,
+.mechanism-section ul li {
+    list-style: none;
+    padding: 0;
+}
+.mechanism-section ul li {
+    min-height: 8rem;
+}
+.mechanism-section ul li img {
+    text-align: center;
+    font-size: 4rem;
+    background: white;
+    border-radius: 100%;
+    width: 8rem;
+    height: 8rem;
+    line-height: 8rem;
+    color: $principal-color;
+    padding: .5rem;
+    margin: 1rem;
+    transition: all 1s ease;
+}
+.mechanism-section ul li .material-icons {
+    text-align: center;
+    font-size: 4rem;
+    background: white;
+    border-radius: 50%;
+    width: 8rem;
+    height: 8rem;
+    line-height: 8rem;
+    color: $principal-color;
+    margin: 1rem;
+    transition: all 1s ease;
+}
+.mechanism-step {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mechanism-step li {
+    padding: 10rem;
+}
+.step-container li i,
+step-container li img {
+    flex: 0 1 75px;
+    margin: 1rem;
+}
+.mechanism-step li:hover i,
+.mechanism-step li:hover img {
+    transform: rotateY(360deg);
+    transform-style: preserve-3d;
+    background: $secondary-color;
+}
+.step-container {
+    display: flex;
+    flex-direction: column;
+    align-items: centers;
+}
+.step-container h4 {
+    color: white;
+    font-size: 1.2rem;
+}
+.developers-section {
+    background: url("/assets/img/developers.jpg") no-repeat center center;
+    color: white;
+    background-size: cover;
+}
+.developer {
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+}
+.developer img {
+    flex: 0 0 60px;
+    overflow: hidden;
+    margin: 0rem 1rem;
+}
+.developer h4 {
+    flex: 1 1 auto;
+    margin: 0;
+    font-size: 1.3rem;
+    color: $principal-color;
+}
+.developer h4 a {
+    color: $principal-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+}
+.developer h4 a::after {
+    content: url("/assets/img/arrow_right.svg");
+    font-size: 2rem;
+    margin-left: 2rem;
+    position: relative;
+    left: 0;
+    //transition: all .5s ease;
+}
+
+  @media(min-width: 768px) {
+    .developer {
+        flex-direction: column;
+        margin: 0;
+        align-items: center;
+        padding: 0;
+        text-align: center;
+    }
+    .developer img {
+        width: 10rem;
+        flex: 1 1 130px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .developer h4 a::after {
+        content: "";
+    }
+    .developer h4 {
+        color: $principal-color;
+        flex: 0 1 auto;
+        margin: 0 0 1rem 0;
+        font-size: 1.6rem;
+        text-align: center;
+    }
+    .developer p {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+  }
+
+  @media(min-width: 992px) {
+    .developer {
+        flex-direction: column;
+        margin: 0;
+        align-items: center;
+        padding: 0;
+        text-align: center;
+    }
+    .developer img {
+        width: 10rem;
+        flex: 1 1 130px;
+        overflow: hidden;
+        margin-bottom: 1rem;
+        margin-right: 0;
+        margin-left: 0;
+        //transition: all 1s ease;
+    }
+    .developer h4 a::after {
+        content: "";
+    }
+    .developer h4 {
+        flex: 0 1 auto;
+        margin: 0 0 1rem 0;
+        font-size: 1.6rem;
+        text-align: center;
+        color: $principal-color;
+    }
+    .developer p {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+  }

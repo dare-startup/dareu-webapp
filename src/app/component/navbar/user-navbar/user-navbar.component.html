@@ -1,0 +1,60 @@
+<header class="header navbar fixed-top" role="banner" tabindex="1">
+    <div class="container">
+        <a href="/" class="logo">
+            <img src="/assets/img/white-icon.svg" alt="Logo">
+        </a>
+        <!-- menu buttons -->
+        <!--<button type="button" class="search-button menu-button" data-toggle="collapse" data-target="#search-block" aria-expanded="false">
+            <i class="material-icons ripple">search</i>
+        </button>-->
+        <button type="button" class="menu-button hidden-md-up" data-toggle="collapse" data-target="#principal-menu" aria-expanded="false">
+            <i class="material-icons ripple">menu</i>
+        </button>
+
+        <!-- search block -->
+        <!--<form action="#" id="search-block" class="collapse">
+            <div class="search-container-block">
+                <input type="text" placeholder="Search...">
+                <input type="submit" value="Search">
+            </div>
+        </form>-->
+
+        <nav id="principal-menu" class="collapse">
+            <ul>
+                <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://dareu.albertoruvel.com" id="discoverDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Discover</a>
+                        <div class="dropdown-menu" aria-labelledby="discoverDropdown">
+                            <a class="ripple dropdown-item font-weight-bold" routerLink="/user/discover/users">Users</a>
+                            <a class="ripple dropdown-item font-weight-bold" routerLink="/user/discover/dares">Dares</a>
+                        </div>
+                    </li>
+                    <!--<li class="ripple">
+                        <a class="nav-link" routerLink="hot">Hot</a>
+                    </li>
+                    <li class="ripple">
+                        <a routerLink="favorites">Favorites</a>
+                    </li>-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="http://dareu.albertoruvel.com" id="createDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dares</a>
+                        <div class="dropdown-menu" aria-labelledby="createDropdown">
+                            <!--<a class="ripple dropdown-item font-weight-bold" href="user/dare/create">Create Dare</a>-->
+                            <!--<a class="ripple dropdown-item font-weight-bold" href="dare/active">Currently active dare</a>-->
+                        </div>
+                    </li>
+
+
+                    <!--<li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/" id="discoverDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
+                        <div class="dropdown-menu" aria-labelledby="discoverDropdown">
+                            <a class="dropdown-item font-weight-bold" href="settings">Settings</a>
+                            <a class="dropdown-item font-weight-bold" href="profile">Profile</a>
+                            <form id="signout-form" action="security/signout" method="POST">
+                                <button type="submit" class="dropdown-item center-text font-weight-bold">Sign out</button>
+                            </form>
+                        </div>
+                    </li>-->
+
+            </ul>
+        </nav>
+    </div>
+</header>

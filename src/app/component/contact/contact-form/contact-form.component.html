@@ -1,0 +1,22 @@
+<div class="alert alert-warning alert-dismissible fade show" [hidden]="!messageSent">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </button>
+    <strong>Contact message sent</strong> We sent you contact message, wait for our email answer in a bit :).
+</div>
+<form class="contact-form"  method="POST" [formGroup]="contactForm" (ngSubmit)="onContactSubmit(contactForm.value)">
+    <div class="form-group">
+        <label for="inputName" class="form-control-label">Name</label>
+        <input name='name' type="text" class="form-control" id="inputName" placeholder="Your name" [formControl]="contactForm.controls['name']">
+    </div>
+    <div class="form-group">
+        <label for="inputEmail" class="form-control-label">Email</label>
+        <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Your email" [formControl]="contactForm.controls['email']">
+    </div>
+    <div class="form-group">
+        <label for="inputComment" class="form-control-label">Comment/Message</label>
+        <textarea name='comment' lines="5" class="form-control" id="inputComment" placeholder="Your comment/message" [formControl]="contactForm.controls['comment']"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg" [disabled]="!contactForm.valid">Contact now</button>
+</form>
